@@ -1,26 +1,65 @@
-Implement dao layer
-Create controllers
-Create mockmvc tests
+=== DOCUMENTATION ===
 
-Save items
-    - Value pairs
-    - Labels
-        - At least one
-        - Can be more
-        - New ones can be created
+Domains
+    - Items
+        - <UUID> itemId
+        - <<UUID> keyId = <String> value> values
 
-Edit items
-    - Add / remove label
-    - Edit values
-    - Edit label
+    - Key
+        - <UUID> keyId
+        - <String> keyValue
+
+    - Label
+        - <UUID> labelId
+        - <String> labelValue
+
+    - ItemLabelMapping
+        - <UUID> mappingId
+        - <UUID> itemId
+        - <UUID> labelId
+
+Api
+    - endpoints
+        - createItem
+            - uri: /item
+            - method: PUT
+            - params
+                - ItemRequest: requestBody
+            - description: creates a new item with the given values assigned to given labels, also creates the labels and value keys if not exists
+        - updateItem
+            - uri: /item/{itemId}
+            - method: POST
+            - params
+                - ItemRequest: requestBody
+                - itemId: pathVariable
+            - description: updates the given item with the given values assigned to given labels, also creates the labels and value keys if not exists
+    - request params
+        - ItemRequest
+            - fields
+                - <<UUID> keyId = <String> value> existingKeyValueIds
+                - <<String> keyValue = <String> value> newKeyValues
+                - <<UUID> labelId> existingLabelIds
+                - <<String> labelValue> newLabelValues
+            - validation
+                - existingKeyValueIds or newKeyValues must contain at least 1 item
+                - existingLabelIds or newLabelValues must contain at least 1 item
+                - existingKeyValueIds and existingLabelIds must contain valid ids
+                - none of the fields can be null, or contain null.
+
+=== TO DO ===
 
 Delete items
     - Delete one
     - Delete by label
-    - Delete only label
+        - Delete if item contains any of the selected labels
+        - Delete if item contains all of the selected labels
+
+Delete label
+    - Delete one
+    - Bulk delete
 
 Display random items
-    - Only one side should be displayed
-    - Random by left side / random by right side / random by random side
+    - Only one value should be displayed
+    - Select the proper
     - Reveal other side button
     - Select pool by labels

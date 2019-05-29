@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ItemRequest {
-    private Map<String, String> values;
-    private List<UUID> existingLabels;
+    private Map<UUID, String> existingKeyValueIds;
+    private Map<String, String> newKeyValues;
+    private List<UUID> existingLabelIds;
     private List<String> newLabels;
 }

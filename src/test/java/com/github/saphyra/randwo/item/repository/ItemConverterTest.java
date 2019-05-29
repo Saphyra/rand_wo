@@ -18,7 +18,7 @@ import com.github.saphyra.randwo.item.domain.ItemValue;
 @RunWith(MockitoJUnitRunner.class)
 public class ItemConverterTest {
     private static final UUID ITEM_ID = UUID.randomUUID();
-    private static final String KEY = "key";
+    private static final UUID KEY = UUID.randomUUID();
     private static final String VALUE = "value";
     private static final String VALUES_STRING = "values_string";
 

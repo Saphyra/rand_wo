@@ -5,6 +5,7 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="database/change_sets/item.xml"/>
+    <include file="database/change_sets/key.xml"/>
     <include file="database/change_sets/label.xml"/>
     <include file="database/change_sets/item_label_mapping.xml"/>
 </databaseChangeLog>

@@ -19,7 +19,7 @@ import com.github.saphyra.util.IdGenerator;
 @RunWith(MockitoJUnitRunner.class)
 public class ItemFactoryTest {
     private static final UUID ITEM_ID = UUID.randomUUID();
-    private static final String KEY = "key";
+    private static final UUID KEY = UUID.randomUUID();
     private static final String VALUE = "value";
 
     @Mock
@@ -31,7 +31,7 @@ public class ItemFactoryTest {
     @Test
     public void create() {
         //GIVEN
-        Map<String, String> values = new HashMap<>();
+        Map<UUID, String> values = new HashMap<>();
         values.put(KEY, VALUE);
 
         given(idGenerator.randomUUID()).willReturn(ITEM_ID);
