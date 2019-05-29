@@ -1,0 +1,26 @@
+Implement dao layer
+Create controllers
+Create mockmvc tests
+
+Save items
+    - Value pairs
+    - Labels
+        - At least one
+        - Can be more
+        - New ones can be created
+
+Edit items
+    - Add / remove label
+    - Edit values
+    - Edit label
+
+Delete items
+    - Delete one
+    - Delete by label
+    - Delete only label
+
+Display random items
+    - Only one side should be displayed
+    - Random by left side / random by right side / random by random side
+    - Reveal other side button
+    - Select pool by labels

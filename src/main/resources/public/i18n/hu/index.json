@@ -1,0 +1,13 @@
+{
+  "title": "RandWo",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "RandWo"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}

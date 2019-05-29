@@ -1,0 +1,160 @@
+body{
+}
+
+.main-page{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    border: 5px ridge black;
+}
+
+.main-page:not(:first-child){
+    display: none;
+}
+
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
+    border-bottom: 5px ridge black;
+}
+
+header > h1{
+    text-align: center;
+    padding-top: 0.25rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+main{
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 3.1rem;
+    overflow: auto;
+    padding: 0.5rem 0;
+}
+
+footer{
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 5px ridge black;
+    white-space: nowrap;
+    height: 3.1rem;
+}
+
+footer button, footer label{
+    font-size: 1.25rem;
+}
+
+/*================BASE TAGS==================*/
+h1{
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+h2{
+    font-weight: 700;
+    font-size: 2rem;
+}
+h3{
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/*================INPUT/NAVIGATION ELEMENTS==================*/
+a{
+    text-decoration: none;
+    color: black;
+}
+button, .button, a, select, footer label{
+    margin: 0.25rem;
+    background: black;
+    border: 3px outset black;
+    border-radius: 5px;
+    padding: 0.2rem;
+    cursor: pointer;
+    color: black;
+    white-space: nowrap;
+}
+
+footer label *{
+    cursor: pointer;
+}
+
+button:hover, .button:hover, a:hover, footer label:hover{
+    border-color: red;
+}
+button:active, .button:active, a:active, footer label:active{
+    border-color: orange;
+    border-style: inset;
+    outline: none;
+}
+
+input, textarea, div[contenteditable='true']{
+    background: black;
+    border: 3px outset black;
+    border-radius: 5px;
+    padding: 0.2rem;
+    margin: 0.2rem;
+    color: black;
+}
+div[contenteditable='true']{
+    padding-right: 1rem;
+}
+input:focus, textarea:focus, div[contenteditable='true']:focus{
+    border-color: red;
+    border-style: inset;
+    outline: none;
+}
+
+input[type='checkbox']:disabled{
+    opacity: 0.5;
+}
+
+input:disabled, button:disabled, textarea:disabled, .disabled{
+    border-color: rgb(100,100,100) !important;
+    cursor: no-drop
+}
+
+#registration-button{
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+/*================TABLE ELEMENTS==================*/
+.formattedtable th{
+    font-size: 1.5rem;
+}
+.formattedtable th, .formattedtable td{
+    padding: 0.25rem;
+    border: 3px inset black;
+    vertical-align: middle;
+}
+
+.formattedtable tr:nth-child(odd){
+    background-color: rgba(200,200,200,0.1);
+}
+.formattedtable tr:nth-child(even){
+    background-color: rgba(255,255,255,0.25);
+}
+.formattedtable thead tr:first-child{
+    background-color: rgba(0,75,150,0.3);
+}
+.formattedtable tbody tr:hover{
+    background-color: rgba(150,150,150,0.8);
+}
+
+/*=======ADDIITIONAL=======*/
+.notification-container{
+    color: red;
+}

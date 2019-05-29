@@ -1,0 +1,20 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="create-table-item-label-mapping" author="Bernat Bonda">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="item_label_mapping"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="item_label_mapping">
+            <column name="mapping_id" type="uuid"/>
+            <column name="item_id" type="uuid"/>
+            <column name="label_id" type="uuid"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
