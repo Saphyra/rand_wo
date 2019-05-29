@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
+//TODO unit test
 class LabelValidator {
     public static final String NULL_EXISTING_LABEL_IDS = "existing-label-ids";
     public static final String NULL_NEW_LABEL_IDS = "new-label-ids";
