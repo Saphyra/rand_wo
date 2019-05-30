@@ -1,5 +1,7 @@
 package com.github.saphyra.randwo.key.service.create;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.github.saphyra.randwo.key.domain.Key;
@@ -13,11 +15,11 @@ public class CreateKeyService {
     private final KeyFactory keyFactory;
     private final KeyValueValidator keyValueValidator;
 
-    public Key createKey(String keyValue) {
+    public UUID createKey(String keyValue) {
         keyValueValidator.validate(keyValue);
 
         Key key = keyFactory.create(keyValue);
         keyDao.save(key);
-        return key;
+        return key.getKeyId();
     }
 }

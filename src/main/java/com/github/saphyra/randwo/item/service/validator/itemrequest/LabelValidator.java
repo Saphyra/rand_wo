@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-class LabelValidator {
-    public static final String NULL_EXISTING_LABEL_IDS = "existing-label-ids";
-    public static final String NULL_NEW_LABEL_IDS = "new-label-ids";
+public class LabelValidator {
+    public static final String NULL_EXISTING_LABEL_IDS = "existingLabelIds";
+    public static final String NULL_NEW_LABELS = "newLabels";
     public static final String NULL_IN_EXISTING_LABEL_IDS = "null-in-existing-label-ids";
-    public static final String NULL_IN_NEW_LABEL_IDS = "null-in-new-label-ids";
+    public static final String NULL_IN_NEW_LABELS = "null-in-new-labels";
 
     private final CollectionValidator collectionValidator;
     private final LabelDao labelDao;
@@ -31,7 +31,7 @@ class LabelValidator {
         }
 
         if(isNull(newLabels)){
-            throw ExceptionFactory.createNullException(NULL_NEW_LABEL_IDS);
+            throw ExceptionFactory.createNullException(NULL_NEW_LABELS);
         }
 
         if(existingLabelIds.isEmpty() && newLabels.isEmpty()){
@@ -39,7 +39,7 @@ class LabelValidator {
         }
 
         collectionValidator.validateDoesNotContainNull(existingLabelIds, NULL_IN_EXISTING_LABEL_IDS);
-        collectionValidator.validateDoesNotContainNull(newLabels, NULL_IN_NEW_LABEL_IDS);
+        collectionValidator.validateDoesNotContainNull(newLabels, NULL_IN_NEW_LABELS);
 
         existingLabelIds.forEach(this::validateLabelExists);
     }

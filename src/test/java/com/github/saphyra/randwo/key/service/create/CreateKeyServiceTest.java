@@ -3,6 +3,9 @@ package com.github.saphyra.randwo.key.service.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +19,8 @@ import com.github.saphyra.randwo.key.repository.KeyDao;
 @RunWith(MockitoJUnitRunner.class)
 public class CreateKeyServiceTest {
     private static final String KEY_VALUE = "key_value";
+    private static final UUID NEW_KEY_ID = UUID.randomUUID();
+
     @Mock
     private KeyDao keyDao;
 
@@ -35,11 +40,12 @@ public class CreateKeyServiceTest {
     public void createKey() {
         //GIVEN
         given(keyFactory.create(KEY_VALUE)).willReturn(key);
+        given(key.getKeyId()).willReturn(NEW_KEY_ID);
         //WHEN
-        Key result = underTest.createKey(KEY_VALUE);
+        UUID result = underTest.createKey(KEY_VALUE);
         //THEN
         verify(keyValueValidator).validate(KEY_VALUE);
         verify(keyDao).save(key);
-        assertThat(result).isEqualTo(key);
+        assertThat(result).isEqualTo(NEW_KEY_ID);
     }
 }

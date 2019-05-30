@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-class ValueValidator {
+public class ValueValidator {
     public static final String NULL_EXISTING_KEY_VALUES = "existing-key-values";
     public static final String NULL_IN_EXISTING_KEY_VALUES = "null-in-existing-key-values";
     public static final String NULL_NEW_KEY_VALUES = "new-key-values";
@@ -25,8 +25,8 @@ class ValueValidator {
     private final CollectionValidator collectionValidator;
     private final KeyDao keyDao;
 
-    void validate(Map<UUID, String> existingKeyValues, Map<String, String> newKeyValues) {
-        if (isNull(existingKeyValues)) {
+    void validate(Map<UUID, String> existingKeyValueIds, Map<String, String> newKeyValues) {
+        if (isNull(existingKeyValueIds)) {
             throw ExceptionFactory.createNullException(NULL_EXISTING_KEY_VALUES);
         }
 
@@ -34,14 +34,14 @@ class ValueValidator {
             throw ExceptionFactory.createNullException(NULL_NEW_KEY_VALUES);
         }
 
-        if (existingKeyValues.isEmpty() && newKeyValues.isEmpty()) {
+        if (existingKeyValueIds.isEmpty() && newKeyValues.isEmpty()) {
             throw new BadRequestException(new ErrorMessage(ErrorCode.NO_ITEM_VALUES.getErrorCode()), "Item must contain at least one value.");
         }
 
-        collectionValidator.validateDoesNotContainNull(existingKeyValues.values(), NULL_IN_EXISTING_KEY_VALUES);
+        collectionValidator.validateDoesNotContainNull(existingKeyValueIds.values(), NULL_IN_EXISTING_KEY_VALUES);
         collectionValidator.validateDoesNotContainNull(newKeyValues.values(), NULL_IN_NEW_KEY_VALUES);
 
-        existingKeyValues.keySet().forEach(this::validateKeyExists);
+        existingKeyValueIds.keySet().forEach(this::validateKeyExists);
     }
 
     private void validateKeyExists(UUID keyId) {

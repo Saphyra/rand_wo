@@ -24,7 +24,6 @@ import com.github.saphyra.randwo.item.domain.Item;
 import com.github.saphyra.randwo.item.domain.ItemRequest;
 import com.github.saphyra.randwo.item.repository.ItemDao;
 import com.github.saphyra.randwo.item.service.validator.itemrequest.ItemRequestValidator;
-import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.mapping.service.create.MappingCreationService;
 
 
@@ -91,11 +90,10 @@ public class CreateItemServiceTest {
 
         given(newLabelSaverService.saveLabels(newLabels)).willReturn(newLabelIds);
 
-        Key newKey = Key.builder()
-            .keyId(NEW_KEY_ID)
-            .keyValue(VALUE_1)
-            .build();
-        given(newKeySaverService.saveKeys(newKeyValues.keySet())).willReturn(Arrays.asList(newKey));
+        Map<UUID, String> newKeyValuesResult = new HashMap<>();
+        newKeyValuesResult.put(NEW_KEY_ID, VALUE_1);
+
+        given(newKeySaverService.saveKeys(newKeyValues)).willReturn(newKeyValuesResult);
 
         given(itemFactory.create(anyMap())).willReturn(item);
         given(item.getItemId()).willReturn(ITEM_ID);

@@ -3,8 +3,9 @@ package com.github.saphyra.randwo.item.service.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.service.create.CreateKeyService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NewKeySaverServiceTest {
     private static final String NEW_KEY_VALUE = "new_key_value";
+    private static final String VALUE = "value";
+    private static final UUID NEW_KEY_ID = UUID.randomUUID();
 
     @Mock
     private CreateKeyService createKeyService;
@@ -25,17 +27,15 @@ public class NewKeySaverServiceTest {
     @InjectMocks
     private NewKeySaverService underTest;
 
-    @Mock
-    private Key key;
-
     @Test
-    public void saveKeys(){
+    public void saveKeys() {
         //GIVEN
-        List<String> newKeyValues = Arrays.asList(NEW_KEY_VALUE);
-        given(createKeyService.createKey(NEW_KEY_VALUE)).willReturn(key);
+        Map<String, String> newKeyValues = new HashMap<>();
+        newKeyValues.put(NEW_KEY_VALUE, VALUE);
+        given(createKeyService.createKey(NEW_KEY_VALUE)).willReturn(NEW_KEY_ID);
         //WHEN
-        List<Key> result = underTest.saveKeys(newKeyValues);
+        Map<UUID, String> result = underTest.saveKeys(newKeyValues);
         //THEN
-        assertThat(result).containsOnly(key);
+        assertThat(result.get(NEW_KEY_ID)).isEqualTo(VALUE);
     }
 }

@@ -15,7 +15,6 @@ import com.github.saphyra.randwo.item.domain.Item;
 import com.github.saphyra.randwo.item.domain.ItemRequest;
 import com.github.saphyra.randwo.item.repository.ItemDao;
 import com.github.saphyra.randwo.item.service.validator.itemrequest.ItemRequestValidator;
-import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.mapping.service.create.MappingCreationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +35,7 @@ public class CreateItemService {
         itemRequestValidator.validate(itemRequest);
 
         List<UUID> newLabelIds = newLabelSaverService.saveLabels(itemRequest.getNewLabels());
-        List<Key> newKeys = newKeySaverService.saveKeys(itemRequest.getNewKeyValues().keySet());
+        Map<UUID, String> newKeys = newKeySaverService.saveKeys(itemRequest.getNewKeyValues());
 
         Item item = itemFactory.create(map(itemRequest.getExistingKeyValueIds(), newKeys));
 
@@ -48,9 +47,9 @@ public class CreateItemService {
         itemDao.save(item);
     }
 
-    private Map<UUID, String> map(Map<UUID, String> existingKeyValueIds, List<Key> newKeyIds) {
+    private Map<UUID, String> map(Map<UUID, String> existingKeyValueIds, Map<UUID, String> newKeyIds) {
         Map<UUID, String> result = new HashMap<>(existingKeyValueIds);
-        newKeyIds.forEach(key -> result.put(key.getKeyId(), key.getKeyValue()));
+        result.putAll(newKeyIds);
         return result;
     }
 }

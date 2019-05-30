@@ -8,10 +8,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class ItemRequestValidator {
-    public static final String NULL_VALUES = "values";
-    public static final String NULL_EXISTING_LABELS = "existingLabels";
-    public static final String NULL_NEW_LABELS = "newLabels";
-
     private final ValueValidator valueValidator;
     private final LabelValidator labelValidator;
 
