@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class ValueValidator {
     public static final String NULL_EXISTING_KEY_VALUES = "existing-key-values";
     public static final String NULL_IN_EXISTING_KEY_VALUES = "null-in-existing-key-values";
@@ -35,12 +34,12 @@ class ValueValidator {
             throw ExceptionFactory.createNullException(NULL_NEW_KEY_VALUES);
         }
 
-        collectionValidator.validateDoesNotContainNull(existingKeyValues.values(), NULL_IN_EXISTING_KEY_VALUES);
-        collectionValidator.validateDoesNotContainNull(newKeyValues.values(), NULL_IN_NEW_KEY_VALUES);
-
         if (existingKeyValues.isEmpty() && newKeyValues.isEmpty()) {
             throw new BadRequestException(new ErrorMessage(ErrorCode.NO_ITEM_VALUES.getErrorCode()), "Item must contain at least one value.");
         }
+
+        collectionValidator.validateDoesNotContainNull(existingKeyValues.values(), NULL_IN_EXISTING_KEY_VALUES);
+        collectionValidator.validateDoesNotContainNull(newKeyValues.values(), NULL_IN_NEW_KEY_VALUES);
 
         existingKeyValues.keySet().forEach(this::validateKeyExists);
     }
