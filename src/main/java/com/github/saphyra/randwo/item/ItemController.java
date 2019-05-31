@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class ItemController {
         createItemService.createItem(itemRequest);
     }
 
-    @PutMapping(UPDATE_ITEM_MAPPING)
+    @PostMapping(UPDATE_ITEM_MAPPING)
     void updateItem(
         @PathVariable("itemId") UUID itemId,
         @RequestBody @Valid ItemRequest itemRequest

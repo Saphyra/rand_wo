@@ -1,5 +1,6 @@
 package com.github.saphyra.common.testcomponent;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import org.springframework.boot.test.context.TestComponent;
@@ -16,6 +17,13 @@ import lombok.RequiredArgsConstructor;
 public class MockMvcWrapper {
     private final MockMvc mockMvc;
     private final ObjectMapperDelegator objectMapperDelegator;
+
+    public MockHttpServletResponse postRequest(String url, Object requestBody, Object... pathVariables) throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = post(url, pathVariables)
+            .content(objectMapperDelegator.writeValueAsString(requestBody));
+
+        return sendRequest(requestBuilder);
+    }
 
     public MockHttpServletResponse putRequest(String url, Object requestBody) throws Exception {
         MockHttpServletRequestBuilder requestBuilder = put(url)
