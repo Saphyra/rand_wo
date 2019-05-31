@@ -1,4 +1,4 @@
-package com.github.saphyra.randwo.item.service.create;
+package com.github.saphyra.randwo.item.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +11,10 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-class NewKeySaverService {
+public class NewKeySaverService {
     private final CreateKeyService createKeyService;
 
-    Map<UUID, String> saveKeys(Map<String, String> newKeyValues) {
+    public Map<UUID, String> saveKeys(Map<String, String> newKeyValues) {
 
         Map<UUID, String> result = new HashMap<>();
         for (Map.Entry<String, String> newKeyValue : newKeyValues.entrySet()) {

@@ -117,7 +117,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_EXISTING_KEY_VALUES);
@@ -133,7 +133,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_NEW_KEY_VALUES);
@@ -149,7 +149,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.NO_ITEM_VALUES);
     }
@@ -166,7 +166,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_IN_EXISTING_KEY_VALUES);
@@ -184,7 +184,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_IN_NEW_KEY_VALUES);
@@ -200,7 +200,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.KEY_NOT_FOUND);
     }
@@ -217,7 +217,7 @@ public class CreateItemTest {
             .existingLabelIds(null)
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_EXISTING_LABEL_IDS);
@@ -235,7 +235,7 @@ public class CreateItemTest {
             .existingLabelIds(Arrays.asList(EXISTING_LABEL_ID))
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_NEW_LABELS);
@@ -253,7 +253,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.NO_LABELS);
     }
@@ -270,7 +270,7 @@ public class CreateItemTest {
             .existingLabelIds(Arrays.asList(EXISTING_LABEL_ID, null))
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_IN_EXISTING_LABEL_IDS);
@@ -288,7 +288,7 @@ public class CreateItemTest {
             .existingLabelIds(Arrays.asList(EXISTING_LABEL_ID))
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         ErrorResponse response = verifyErrorResponse(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(response.getParams(), NULL_IN_NEW_LABELS);
@@ -306,7 +306,7 @@ public class CreateItemTest {
             .existingLabelIds(Arrays.asList(EXISTING_LABEL_ID))
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.LABEL_NOT_FOUND);
     }
@@ -323,7 +323,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.EMPTY_LABEL_VALUE);
     }
@@ -341,7 +341,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.LABEL_VALUE_ALREADY_EXISTS);
     }
@@ -362,7 +362,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.EMPTY_KEY_VALUE);
     }
@@ -383,7 +383,7 @@ public class CreateItemTest {
             .existingLabelIds(Collections.emptyList())
             .build();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         verifyErrorResponse(result, ErrorCode.KEY_VALUE_ALREADY_EXISTS);
     }
@@ -401,7 +401,7 @@ public class CreateItemTest {
         givenExistingLabel();
         givenExistingKey();
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.SAVE_ITEM_MAPPING, request);
+        MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
         assertThat(result.getStatus()).isEqualTo(HttpStatus.OK.value());
 

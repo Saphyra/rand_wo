@@ -41,6 +41,35 @@ public class ItemLabelMappingRepositoryTest {
     }
 
     @Test
+    public void deleteByItemId() {
+        //GIVEN
+        ItemLabelMappingEntity entity1 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_1)
+            .itemId(ITEM_ID_1)
+            .labelId(LABEL_ID_2)
+            .build();
+        underTest.save(entity1);
+
+        ItemLabelMappingEntity entity2 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_2)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_1)
+            .build();
+        underTest.save(entity2);
+
+        ItemLabelMappingEntity entity3 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_3)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_2)
+            .build();
+        underTest.save(entity3);
+        //WHEN
+        underTest.deleteByItemId(ITEM_ID_2);
+        //THEN
+        assertThat(underTest.findAll()).containsOnly(entity1);
+    }
+
+    @Test
     public void findByItemIdAndLabelId_notFound() {
         //GIVEN
         ItemLabelMappingEntity entity1 = ItemLabelMappingEntity.builder()

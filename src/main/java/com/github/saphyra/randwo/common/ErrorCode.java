@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum ErrorCode {
     EMPTY_KEY_VALUE("empty-key-value"),
     EMPTY_LABEL_VALUE("empty-label-value"),
+    ITEM_NOT_FOUND("item-not-found"),
     KEY_NOT_FOUND("key-not-found"),
     KEY_VALUE_ALREADY_EXISTS("key-value-already-exists"),
     LABEL_NOT_FOUND("label-not-found"),

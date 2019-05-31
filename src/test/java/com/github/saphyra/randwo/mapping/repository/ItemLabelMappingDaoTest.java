@@ -2,6 +2,7 @@ package com.github.saphyra.randwo.mapping.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -33,6 +34,14 @@ public class ItemLabelMappingDaoTest {
 
     @Mock
     private ItemLabelMappingEntity itemLabelMappingEntity;
+
+    @Test
+    public void deleteByItemId(){
+        //WHEN
+        underTest.deleteByItemId(ITEM_ID);
+        //THEN
+        verify(itemLabelMappingRepository).deleteByItemId(ITEM_ID);
+    }
 
     @Test
     public void findByItemIdAndLabelId() {

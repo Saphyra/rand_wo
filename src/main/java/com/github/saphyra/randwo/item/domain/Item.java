@@ -19,5 +19,5 @@ public class Item {
 
     @NonNull
     @Builder.Default
-    private final Map<UUID, String> values = new HashMap<>();
+    private Map<UUID, String> values = new HashMap<>();
 }

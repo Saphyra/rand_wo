@@ -1,18 +1,19 @@
-package com.github.saphyra.randwo.item.service.create;
+package com.github.saphyra.randwo.item.service;
 
-import com.github.saphyra.randwo.label.service.create.CreateLabelService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
+import com.github.saphyra.randwo.label.service.create.CreateLabelService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NewLabelSaverServiceTest {

@@ -1,7 +1,6 @@
 package com.github.saphyra.randwo.item.service.create;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -20,9 +19,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.randwo.common.CollectionAggregator;
 import com.github.saphyra.randwo.item.domain.Item;
 import com.github.saphyra.randwo.item.domain.ItemRequest;
 import com.github.saphyra.randwo.item.repository.ItemDao;
+import com.github.saphyra.randwo.item.service.NewKeySaverService;
+import com.github.saphyra.randwo.item.service.NewLabelSaverService;
 import com.github.saphyra.randwo.item.service.validator.itemrequest.ItemRequestValidator;
 import com.github.saphyra.randwo.mapping.service.create.MappingCreationService;
 
@@ -49,6 +51,9 @@ public class CreateItemServiceTest {
     private ItemFactory itemFactory;
 
     @Mock
+    private CollectionAggregator collectionAggregator;
+
+    @Mock
     private MappingCreationService mappingCreationService;
 
     @Mock
@@ -66,8 +71,8 @@ public class CreateItemServiceTest {
     @Captor
     private ArgumentCaptor<List<UUID>> createMappingArgumentCaptor;
 
-    @Captor
-    private ArgumentCaptor<Map<UUID, String>> valuesArgumentCaptor;
+    @Mock
+    private Map<UUID, String> keyValueMapping;
 
     @Test
     public void createItem() {
@@ -75,15 +80,15 @@ public class CreateItemServiceTest {
         Map<String, String> newKeyValues = new HashMap<>();
         newKeyValues.put(KEY_VALUE, VALUE_1);
 
-        Map<UUID, String> existingKeyValues = new HashMap<>();
-        existingKeyValues.put(EXISTING_KEY_ID, VALUE_2);
+        Map<UUID, String> existingKeyValueIds = new HashMap<>();
+        existingKeyValueIds.put(EXISTING_KEY_ID, VALUE_2);
 
         List<UUID> existingLabelIds = Arrays.asList(EXISTING_LABEL_ID);
         List<UUID> newLabelIds = Arrays.asList(NEW_LABEL_ID);
         List<String> newLabels = Arrays.asList(NEW_LABEL_VALUE);
         ItemRequest request = ItemRequest.builder()
             .newKeyValues(newKeyValues)
-            .existingKeyValueIds(existingKeyValues)
+            .existingKeyValueIds(existingKeyValueIds)
             .existingLabelIds(existingLabelIds)
             .newLabels(newLabels)
             .build();
@@ -95,7 +100,8 @@ public class CreateItemServiceTest {
 
         given(newKeySaverService.saveKeys(newKeyValues)).willReturn(newKeyValuesResult);
 
-        given(itemFactory.create(anyMap())).willReturn(item);
+        given(collectionAggregator.aggregate(existingKeyValueIds, newKeyValuesResult)).willReturn(keyValueMapping);
+        given(itemFactory.create(keyValueMapping)).willReturn(item);
         given(item.getItemId()).willReturn(ITEM_ID);
         //WHEN
         underTest.createItem(request);
@@ -103,10 +109,6 @@ public class CreateItemServiceTest {
         verify(itemRequestValidator).validate(request);
         verify(mappingCreationService).createMapping(eq(ITEM_ID), createMappingArgumentCaptor.capture());
         assertThat(createMappingArgumentCaptor.getValue()).containsOnly(EXISTING_LABEL_ID, NEW_LABEL_ID);
-
-        verify(itemFactory).create(valuesArgumentCaptor.capture());
-        assertThat(valuesArgumentCaptor.getValue().get(EXISTING_KEY_ID)).isEqualTo(VALUE_2);
-        assertThat(valuesArgumentCaptor.getValue().get(NEW_KEY_ID)).isEqualTo(VALUE_1);
 
         verify(itemDao).save(item);
     }
