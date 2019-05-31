@@ -20,19 +20,52 @@ Domains
 
 Api
     - endpoints
-        - createItem
-            - uri: /item
-            - method: PUT
-            - params
-                - ItemRequest: requestBody
-            - description: creates a new item with the given values assigned to given labels, also creates the labels and value keys if not exists
-        - updateItem
-            - uri: /item/{itemId}
-            - method: POST
-            - params
-                - ItemRequest: requestBody
-                - itemId: pathVariable
-            - description: updates the given item with the given values assigned to given labels, also creates the labels and value keys if not exists
+        - item
+            - createItem
+                - uri: /item
+                - method: PUT
+                - params
+                    - <ItemRequest> itemRequest: requestBody
+                - description: creates a new item with the given values assigned to given labels, also creates the labels and value keys if not exists
+            - updateItem
+                - uri: /item/{itemId}
+                - method: POST
+                - params
+                    - <ItemRequest> itemRequest: requestBody
+                    - <UUID> itemId: pathVariable
+                - description: updates the given item with the given values assigned to given labels, also creates the labels and value keys if not exists
+            - deleteItemsById //TODO implement
+                - uri: /item/id
+                - method: DELETE
+                - params
+                    - <<String> itemId>: requestBody
+                        - validation
+                            - must not be null
+                            - must not contain null
+                - description: delete the items with the given ids.
+            - deleteItemsByLabel  //TODO implement
+                - uri: /item/label
+                - method: DELETE
+                - params
+                    - <DeleteItemRequest> deleteItemRequest: requestBody
+                - description: deletes items by label ids
+        - label
+            - deleteLabel //TODO implement
+                - uri: /label
+                - method: DELETE
+                - params
+                    - <<String> labelId>: requestBody
+                        - validation
+                            - must not be null
+                            - must not contain null
+                - description: deletes the labels (and their mappings with items) with the given labelIds.
+            - editLabel //TODO implement
+                - uri: /label/{labelId}
+                - method: POST
+                - params
+                    - <UUID> labelId: pathVariable
+                    - <String> newValue: requestBody
+                - description: updates the value of the given label.
     - request params
         - ItemRequest
             - fields
@@ -45,18 +78,21 @@ Api
                 - existingLabelIds or newLabelValues must contain at least 1 item
                 - existingKeyValueIds and existingLabelIds must contain valid ids
                 - none of the fields can be null, or contain null.
+        - DeleteItemRequest
+            - fields
+                - <<String> labelId> labelIds
+                - <<ItemDeleteMethod> deleteMethod> deleteMethod
+            - validation
+                - none of the fields can be null, or contain null.
+        - ItemDeleteMethod
+            - type: enum
+            - values
+                - CONTAINS: delete the item if it has mapping with ANY of the labels
+                - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
 
 === TO DO ===
-
-Delete items
-    - Delete one
-    - Delete by label
-        - Delete if item contains any of the selected labels
-        - Delete if item contains all of the selected labels
-
-Delete label
-    - Delete one
-    - Bulk delete
+EditKey
+DeleteKey
 
 Display random items
     - Only one value should be displayed
