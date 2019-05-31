@@ -38,7 +38,7 @@ Api
                 - uri: /item/id
                 - method: DELETE
                 - params
-                    - <<String> itemId>: requestBody
+                    - <<UUID> itemId>: requestBody
                         - validation
                             - must not be null
                             - must not contain null
@@ -54,7 +54,7 @@ Api
                 - uri: /label
                 - method: DELETE
                 - params
-                    - <<String> labelId>: requestBody
+                    - <<UUID> labelId>: requestBody
                         - validation
                             - must not be null
                             - must not contain null
@@ -69,7 +69,7 @@ Api
     - request params
         - ItemRequest
             - fields
-                - <<UUID> keyId = <String> value> existingKeyValueIds
+                - <<UUID> keyId = <UUID> value> existingKeyValueIds
                 - <<String> keyValue = <String> value> newKeyValues
                 - <<UUID> labelId> existingLabelIds
                 - <<String> labelValue> newLabelValues
@@ -80,7 +80,7 @@ Api
                 - none of the fields can be null, or contain null.
         - DeleteItemRequest
             - fields
-                - <<String> labelId> labelIds
+                - <<UUID> labelId> labelIds
                 - <<ItemDeleteMethod> deleteMethod> deleteMethod
             - validation
                 - none of the fields can be null, or contain null.
