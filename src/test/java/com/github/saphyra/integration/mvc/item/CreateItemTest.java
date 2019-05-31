@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,7 +48,11 @@ import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
 import com.github.saphyra.randwo.label.domain.Label;
 import com.github.saphyra.randwo.label.repository.LabelDao;
-import com.github.saphyra.randwo.mapping.repository.ItemLabelMappingDao;
+import com.github.saphyra.randwo.mapping.itemlabel.repository.ItemLabelMappingDao;
+import com.github.saphyra.randwo.mapping.itemvalue.domain.ItemValueMapping;
+import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingDao;
+import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingEntity;
+import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -88,9 +93,16 @@ public class CreateItemTest {
     private ItemConverter itemConverter;
 
     @Autowired
-    private ItemLabelMappingDao mappingDao;
+    private ItemLabelMappingDao itemLabelMappingDao;
+
+    @Autowired
+    private ItemValueMappingDao itemValueMappingDao;
+
     private Map<String, String> newKeyValues;
     private Map<UUID, String> existingKeyValueIds;
+
+    @Autowired
+    private ItemValueMappingRepository itemValueMappingRepository;
 
     @Before
     public void setUp() {
@@ -412,15 +424,28 @@ public class CreateItemTest {
         List<ItemEntity> itemEntities = itemRepository.findAll();
         assertThat(itemEntities).hasSize(1);
         Item item = itemConverter.convertEntity(itemEntities.get(0));
-        assertThat(item.getValues().get(key.getKeyId())).isEqualTo(VALUE_1);
-        assertThat(item.getValues().get(EXISTING_KEY_ID)).isEqualTo(VALUE_2);
 
         Optional<Label> labelOptional = labelDao.findByLabelValue(NEW_LABEL_VALUE);
         assertThat(labelOptional).isPresent();
         Label newLabel = labelOptional.get();
 
-        assertThat(mappingDao.findByItemIdAndLabelId(item.getItemId(), EXISTING_LABEL_ID)).isPresent();
-        assertThat(mappingDao.findByItemIdAndLabelId(item.getItemId(), newLabel.getLabelId())).isPresent();
+        assertThat(itemLabelMappingDao.findByItemIdAndLabelId(item.getItemId(), EXISTING_LABEL_ID)).isPresent();
+        assertThat(itemLabelMappingDao.findByItemIdAndLabelId(item.getItemId(), newLabel.getLabelId())).isPresent();
+
+        Optional<ItemValueMapping> valueMappingOptional = itemValueMappingDao.findByItemIdAndKeyId(item.getItemId(), EXISTING_KEY_ID);
+        assertThat(valueMappingOptional).isPresent();
+        ItemValueMapping itemValueMapping = valueMappingOptional.get();
+        assertThat(itemValueMapping.getValue()).isEqualTo(VALUE_2);
+        assertThat(itemValueMapping.getItemId()).isEqualTo(item.getItemId());
+        assertThat(itemValueMapping.getKeyId()).isEqualTo(EXISTING_KEY_ID);
+
+        assertThat(itemValueMappingDao.findByItemIdAndKeyId(item.getItemId(), EXISTING_KEY_ID)).isPresent();
+        assertThat(itemLabelMappingDao.findByItemIdAndLabelId(item.getItemId(), newLabel.getLabelId())).isPresent();
+
+        assertThat(itemValueMappingRepository.findAll().stream()
+            .map(ItemValueMappingEntity::getValue)
+            .collect(Collectors.toList())
+        ).containsOnly(VALUE_1, VALUE_2);
     }
 
     private void verifyResponseParams(Map<String, String> params, String expectedValue) {

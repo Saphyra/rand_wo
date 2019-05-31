@@ -1,6 +1,5 @@
 package com.github.saphyra.randwo.item.service.update;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -24,7 +23,8 @@ import com.github.saphyra.randwo.item.service.ItemQueryService;
 import com.github.saphyra.randwo.item.service.NewKeySaverService;
 import com.github.saphyra.randwo.item.service.NewLabelSaverService;
 import com.github.saphyra.randwo.item.service.validator.itemrequest.ItemRequestValidator;
-import com.github.saphyra.randwo.mapping.service.UpdateMappingService;
+import com.github.saphyra.randwo.mapping.itemlabel.service.UpdateItemLabelMappingService;
+import com.github.saphyra.randwo.mapping.itemvalue.service.UpdateItemValueMappingService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UpdateItemServiceTest {
@@ -37,8 +37,6 @@ public class UpdateItemServiceTest {
     private static final UUID EXISTING_KEY_ID = UUID.randomUUID();
     private static final String EXISTING_VALUE = "existing_value";
     private static final UUID EXISTING_LABEL_ID = UUID.randomUUID();
-    private static final UUID CURRENT_KEY_ID = UUID.randomUUID();
-    private static final String CURRENT_VALUE = "current_value";
 
     @Mock
     private ItemDao itemDao;
@@ -59,7 +57,10 @@ public class UpdateItemServiceTest {
     private NewLabelSaverService newLabelSaverService;
 
     @Mock
-    private UpdateMappingService updateMappingService;
+    private UpdateItemLabelMappingService updateItemLabelMappingService;
+
+    @Mock
+    private UpdateItemValueMappingService updateItemValueMappingService;
 
     @InjectMocks
     private UpdateItemService underTest;
@@ -97,19 +98,16 @@ public class UpdateItemServiceTest {
             .existingKeyValueIds(existingKeyValueIds)
             .build();
 
-        Map<UUID, String> existingValues = new HashMap<>();
-        existingValues.put(CURRENT_KEY_ID, CURRENT_VALUE);
         Item item = Item.builder()
             .itemId(ITEM_ID)
-            .values(existingValues)
             .build();
         given(itemQueryService.findByItemIdValidated(ITEM_ID)).willReturn(item);
         //WHEN
         underTest.updateItem(ITEM_ID, itemRequest);
         //THEN
         verify(itemRequestValidator).validate(itemRequest);
-        verify(updateMappingService).updateMappings(ITEM_ID, aggregatedLabelIds);
+        verify(updateItemLabelMappingService).update(ITEM_ID, aggregatedLabelIds);
+        verify(updateItemValueMappingService).update(ITEM_ID, aggregatedKeyValues);
         verify(itemDao).save(item);
-        assertThat(item.getValues()).isEqualTo(aggregatedKeyValues);
     }
 }

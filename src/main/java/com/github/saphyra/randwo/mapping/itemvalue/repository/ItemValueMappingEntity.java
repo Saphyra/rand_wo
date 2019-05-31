@@ -1,4 +1,4 @@
-package com.github.saphyra.randwo.item.repository;
+package com.github.saphyra.randwo.mapping.itemvalue.repository;
 
 import java.util.UUID;
 
@@ -12,12 +12,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
+@Table(name = "item_value_mapping")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "item")
-public class ItemEntity {
+@Data
+public class ItemValueMappingEntity {
     @Id
+    private UUID mappingId;
+
     private UUID itemId;
+    private UUID keyId;
+    private String value;
 }

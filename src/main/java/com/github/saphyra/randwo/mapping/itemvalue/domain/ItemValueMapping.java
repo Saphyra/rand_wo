@@ -1,4 +1,4 @@
-package com.github.saphyra.randwo.item.domain;
+package com.github.saphyra.randwo.mapping.itemvalue.domain;
 
 import java.util.UUID;
 
@@ -8,10 +8,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
-@Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Data
 @Builder
-public class Item {
+public class ItemValueMapping {
+    @NonNull
+    private final UUID mappingId;
+
     @NonNull
     private final UUID itemId;
+
+    @NonNull
+    private final UUID keyId;
+
+    @NonNull
+    private String value;
 }

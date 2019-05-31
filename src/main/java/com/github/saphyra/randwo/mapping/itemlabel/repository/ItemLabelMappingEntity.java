@@ -1,4 +1,4 @@
-package com.github.saphyra.randwo.item.repository;
+package com.github.saphyra.randwo.mapping.itemlabel.repository;
 
 import java.util.UUID;
 
@@ -12,12 +12,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
+@Table(name = "item_label_mapping")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-@Table(name = "item")
-public class ItemEntity {
+public class ItemLabelMappingEntity {
     @Id
+    private UUID mappingId;
     private UUID itemId;
+    private UUID labelId;
 }

@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,8 +45,12 @@ import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
 import com.github.saphyra.randwo.label.domain.Label;
 import com.github.saphyra.randwo.label.repository.LabelDao;
-import com.github.saphyra.randwo.mapping.domain.ItemLabelMapping;
-import com.github.saphyra.randwo.mapping.repository.ItemLabelMappingDao;
+import com.github.saphyra.randwo.mapping.itemlabel.domain.ItemLabelMapping;
+import com.github.saphyra.randwo.mapping.itemlabel.repository.ItemLabelMappingDao;
+import com.github.saphyra.randwo.mapping.itemvalue.domain.ItemValueMapping;
+import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingDao;
+import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingEntity;
+import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -63,10 +68,9 @@ public class UpdateItem {
     private static final String EXISTING_KEY_VALUE = "existing_key_value";
     private static final String VALUE_1 = "value_1";
     private static final String VALUE_2 = "value_2";
-    private static final String VALUE_3 = "value_3";
     private static final UUID ITEM_ID = UUID.randomUUID();
-    private static final UUID CURRENT_KEY_ID = UUID.randomUUID();
-    private static final UUID EXISTING_MAPPING_ID = UUID.randomUUID();
+    private static final UUID EXISTING_LABEL_MAPPING_ID = UUID.randomUUID();
+    private static final UUID EXISTING_KEY_MAPPING_ID = UUID.randomUUID();
 
     @Autowired
     private MockMvcWrapper mockMvcWrapper;
@@ -87,11 +91,16 @@ public class UpdateItem {
     private ItemDao itemDao;
 
     @Autowired
-    private ItemLabelMappingDao mappingDao;
+    private ItemLabelMappingDao itemLabelMappingDao;
+
+    @Autowired
+    private ItemValueMappingDao itemValueMappingDao;
+
+    @Autowired
+    private ItemValueMappingRepository itemValueMappingRepository;
 
     private Map<String, String> newKeyValues;
     private Map<UUID, String> existingKeyValueIds;
-    private Map<UUID, String> currentValues;
 
     @Before
     public void setUp() {
@@ -100,9 +109,6 @@ public class UpdateItem {
 
         existingKeyValueIds = new HashMap<>();
         existingKeyValueIds.put(EXISTING_KEY_ID, VALUE_2);
-
-        currentValues = new HashMap<>();
-        currentValues.put(CURRENT_KEY_ID, VALUE_3);
     }
 
     @After
@@ -426,7 +432,9 @@ public class UpdateItem {
         givenExistingLabel();
         givenExistingKey();
         givenExistingItem();
-        givenExistingMapping();
+        givenExistingLabelMapping();
+        givenExistingKeyMapping();
+
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
@@ -440,25 +448,31 @@ public class UpdateItem {
         Optional<Item> itemOptional = itemDao.findById(ITEM_ID);
         assertThat(itemOptional).isPresent();
         Item item = itemOptional.get();
-        assertThat(item.getValues().get(key.getKeyId())).isEqualTo(VALUE_1);
-        assertThat(item.getValues().get(EXISTING_KEY_ID)).isEqualTo(VALUE_2);
 
         Optional<Label> labelOptional = labelDao.findByLabelValue(NEW_LABEL_VALUE);
         assertThat(labelOptional).isPresent();
         Label newLabel = labelOptional.get();
 
-        assertThat(mappingDao.findById(EXISTING_MAPPING_ID)).isEmpty();
-        assertThat(mappingDao.findByItemIdAndLabelId(item.getItemId(), EXISTING_LABEL_ID)).isPresent();
-        assertThat(mappingDao.findByItemIdAndLabelId(item.getItemId(), newLabel.getLabelId())).isPresent();
+        assertThat(itemLabelMappingDao.findById(EXISTING_LABEL_MAPPING_ID)).isEmpty();
+        assertThat(itemLabelMappingDao.findByItemIdAndLabelId(item.getItemId(), EXISTING_LABEL_ID)).isPresent();
+        assertThat(itemLabelMappingDao.findByItemIdAndLabelId(item.getItemId(), newLabel.getLabelId())).isPresent();
+
+        assertThat(itemValueMappingDao.findById(EXISTING_KEY_MAPPING_ID)).isEmpty();
+        assertThat(itemValueMappingDao.findByItemIdAndKeyId(ITEM_ID, EXISTING_KEY_ID)).isPresent();
+
+        assertThat(itemValueMappingRepository.findAll().stream()
+            .map(ItemValueMappingEntity::getValue)
+            .collect(Collectors.toList())
+        ).containsOnly(VALUE_1, VALUE_2);
     }
 
-    private void givenExistingMapping() {
+    private void givenExistingLabelMapping() {
         ItemLabelMapping mapping = ItemLabelMapping.builder()
-            .mappingId(EXISTING_MAPPING_ID)
+            .mappingId(EXISTING_LABEL_MAPPING_ID)
             .labelId(EXISTING_LABEL_ID)
             .itemId(ITEM_ID)
             .build();
-        mappingDao.save(mapping);
+        itemLabelMappingDao.save(mapping);
     }
 
 
@@ -486,8 +500,17 @@ public class UpdateItem {
     private void givenExistingItem() {
         Item item = Item.builder()
             .itemId(ITEM_ID)
-            .values(currentValues)
             .build();
         itemDao.save(item);
+    }
+
+    private void givenExistingKeyMapping() {
+        ItemValueMapping mapping = ItemValueMapping.builder()
+            .mappingId(EXISTING_KEY_MAPPING_ID)
+            .keyId(EXISTING_KEY_ID)
+            .itemId(ITEM_ID)
+            .value(EXISTING_KEY_VALUE)
+            .build();
+        itemValueMappingDao.save(mapping);
     }
 }

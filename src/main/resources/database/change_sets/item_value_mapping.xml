@@ -4,15 +4,18 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="create-table-item" author="Bernat Bonda">
+    <changeSet id="create-table-item-value-mapping" author="Bernat Bonda">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="item"/>
+                <tableExists tableName="item_value_mapping"/>
             </not>
         </preConditions>
 
-        <createTable tableName="item">
+        <createTable tableName="item_value_mapping">
+            <column name="mapping_id" type="uuid"/>
             <column name="item_id" type="uuid"/>
+            <column name="key_id" type="uuid"/>
+            <column name="value" type="text"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

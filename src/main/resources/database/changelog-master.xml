@@ -8,4 +8,5 @@
     <include file="database/change_sets/key.xml"/>
     <include file="database/change_sets/label.xml"/>
     <include file="database/change_sets/item_label_mapping.xml"/>
+    <include file="database/change_sets/item_value_mapping.xml"/>
 </databaseChangeLog>

@@ -1,7 +1,5 @@
 package com.github.saphyra.randwo.item.service.create;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -13,8 +11,6 @@ import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -26,7 +22,8 @@ import com.github.saphyra.randwo.item.repository.ItemDao;
 import com.github.saphyra.randwo.item.service.NewKeySaverService;
 import com.github.saphyra.randwo.item.service.NewLabelSaverService;
 import com.github.saphyra.randwo.item.service.validator.itemrequest.ItemRequestValidator;
-import com.github.saphyra.randwo.mapping.service.create.MappingCreationService;
+import com.github.saphyra.randwo.mapping.itemlabel.service.create.CreateItemLabelMappingService;
+import com.github.saphyra.randwo.mapping.itemvalue.service.create.CreateItemValueMappingService;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -54,7 +51,10 @@ public class CreateItemServiceTest {
     private CollectionAggregator collectionAggregator;
 
     @Mock
-    private MappingCreationService mappingCreationService;
+    private CreateItemLabelMappingService createItemLabelMappingService;
+
+    @Mock
+    private  CreateItemValueMappingService createItemValueMappingService;
 
     @Mock
     private NewKeySaverService newKeySaverService;
@@ -68,11 +68,11 @@ public class CreateItemServiceTest {
     @Mock
     private Item item;
 
-    @Captor
-    private ArgumentCaptor<List<UUID>> createMappingArgumentCaptor;
+    @Mock
+    private Map<UUID, String> aggregatedKeyValueMapping;
 
     @Mock
-    private Map<UUID, String> keyValueMapping;
+    List<UUID> aggregatedLabelIds;
 
     @Test
     public void createItem() {
@@ -100,15 +100,17 @@ public class CreateItemServiceTest {
 
         given(newKeySaverService.saveKeys(newKeyValues)).willReturn(newKeyValuesResult);
 
-        given(collectionAggregator.aggregate(existingKeyValueIds, newKeyValuesResult)).willReturn(keyValueMapping);
-        given(itemFactory.create(keyValueMapping)).willReturn(item);
+        given(collectionAggregator.aggregate(existingKeyValueIds, newKeyValuesResult)).willReturn(aggregatedKeyValueMapping);
+        given(collectionAggregator.aggregate(existingLabelIds, newLabelIds)).willReturn(aggregatedLabelIds);
+
+        given(itemFactory.create()).willReturn(item);
         given(item.getItemId()).willReturn(ITEM_ID);
         //WHEN
         underTest.createItem(request);
         //THEN
         verify(itemRequestValidator).validate(request);
-        verify(mappingCreationService).createMapping(eq(ITEM_ID), createMappingArgumentCaptor.capture());
-        assertThat(createMappingArgumentCaptor.getValue()).containsOnly(EXISTING_LABEL_ID, NEW_LABEL_ID);
+        verify(createItemLabelMappingService).create(ITEM_ID, aggregatedLabelIds);
+        verify(createItemValueMappingService).create(ITEM_ID, aggregatedKeyValueMapping);
 
         verify(itemDao).save(item);
     }
