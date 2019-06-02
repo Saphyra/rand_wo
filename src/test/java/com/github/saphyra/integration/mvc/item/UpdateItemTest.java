@@ -57,9 +57,9 @@ import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingRe
 @AutoConfigureMockMvc(secure = false)
 @ContextConfiguration(classes = {
     MvcConfiguration.class,
-    UpdateItem.class
+    UpdateItemTest.class
 })
-public class UpdateItem {
+public class UpdateItemTest {
     private static final String NEW_LABEL_VALUE = "new_label_value";
     private static final UUID EXISTING_LABEL_ID = UUID.randomUUID();
     private static final String EXISTING_LABEL_VALUE = "existing_label_value";

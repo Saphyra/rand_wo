@@ -5,6 +5,7 @@ import static java.util.Objects.isNull;
 import java.util.List;
 import java.util.UUID;
 
+import com.github.saphyra.randwo.common.CollectionValidator;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.exceptionhandling.domain.ErrorMessage;

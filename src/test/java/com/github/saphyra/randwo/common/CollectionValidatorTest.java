@@ -1,4 +1,4 @@
-package com.github.saphyra.randwo.item.service.validator.itemrequest;
+package com.github.saphyra.randwo.common;
 
 import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.saphyra.randwo.common.CollectionValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

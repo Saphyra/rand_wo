@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum ErrorCode {
+    EMPTY_ITEM_IDS("empty-item-ids"),
     EMPTY_KEY_VALUE("empty-key-value"),
     EMPTY_LABEL_VALUE("empty-label-value"),
     ITEM_NOT_FOUND("item-not-found"),
@@ -17,7 +18,9 @@ public enum ErrorCode {
     ITEM_VALUE_MAPPING_ALREADY_EXISTS("item-value-mapping-already-exists"),
     NO_ITEM_VALUES("no-item-values"),
     NO_LABELS("no-labels"),
-    NULL_ITEM_VALUE("empty-item-value"),
+    NULL_ITEM_ID("null-item-id"),
+    NULL_ITEM_VALUE("empty-item-valíe"),
+    REQUEST_BODY_MISSING("request-body-missing"),
     VALUE_IS_NULL("value-is-null");
 
     public static final String PARAMETER_KEY_NULL_VALUE = "parameter-null";

@@ -1,18 +1,20 @@
 package com.github.saphyra.randwo.item;
 
-import static org.mockito.Mockito.verify;
-
-import java.util.UUID;
-
+import com.github.saphyra.randwo.item.domain.ItemRequest;
+import com.github.saphyra.randwo.item.service.create.CreateItemService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemService;
+import com.github.saphyra.randwo.item.service.update.UpdateItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.randwo.item.domain.ItemRequest;
-import com.github.saphyra.randwo.item.service.create.CreateItemService;
-import com.github.saphyra.randwo.item.service.update.UpdateItemService;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ItemControllerTest {
@@ -20,6 +22,9 @@ public class ItemControllerTest {
 
     @Mock
     private CreateItemService createItemService;
+
+    @Mock
+    private DeleteItemService deleteItemService;
 
     @Mock
     private UpdateItemService updateItemService;
@@ -36,6 +41,16 @@ public class ItemControllerTest {
         underTest.createItem(itemRequest);
         //THEN
         verify(createItemService).createItem(itemRequest);
+    }
+
+    @Test
+    public void deleteByIds() {
+        //GIVEN
+        List<UUID> itemIds = Arrays.asList(ITEM_ID);
+        //WHEN
+        underTest.deleteByIds(itemIds);
+        //THEN
+        verify(deleteItemService).deleteItems(itemIds);
     }
 
     @Test

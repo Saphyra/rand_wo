@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.github.saphyra.randwo.common.CollectionValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
