@@ -1,8 +1,10 @@
 package com.github.saphyra.randwo.item;
 
+import com.github.saphyra.randwo.item.domain.DeleteItemRequest;
 import com.github.saphyra.randwo.item.domain.ItemRequest;
 import com.github.saphyra.randwo.item.service.create.CreateItemService;
-import com.github.saphyra.randwo.item.service.delete.DeleteItemService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByItemIdService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByLabelService;
 import com.github.saphyra.randwo.item.service.update.UpdateItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,10 @@ public class ItemControllerTest {
     private CreateItemService createItemService;
 
     @Mock
-    private DeleteItemService deleteItemService;
+    private DeleteItemByItemIdService deleteItemByItemIdService;
+
+    @Mock
+    private DeleteItemByLabelService deleteItemByLabelService;
 
     @Mock
     private UpdateItemService updateItemService;
@@ -35,6 +40,9 @@ public class ItemControllerTest {
     @Mock
     private ItemRequest itemRequest;
 
+    @Mock
+    private DeleteItemRequest deleteItemRequest;
+
     @Test
     public void createItem() {
         //WHEN
@@ -44,13 +52,21 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void deleteByIds() {
+    public void deleteByItemIds() {
         //GIVEN
         List<UUID> itemIds = Arrays.asList(ITEM_ID);
         //WHEN
-        underTest.deleteByIds(itemIds);
+        underTest.deleteByItemIds(itemIds);
         //THEN
-        verify(deleteItemService).deleteItems(itemIds);
+        verify(deleteItemByItemIdService).deleteItems(itemIds);
+    }
+
+    @Test
+    public void deleteByLabelIds() {
+        //WHEN
+        underTest.deleteByLabelIds(deleteItemRequest);
+        //THEN
+        verify(deleteItemByLabelService).deleteItems(deleteItemRequest);
     }
 
     @Test

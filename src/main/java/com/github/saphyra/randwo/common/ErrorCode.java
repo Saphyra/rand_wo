@@ -18,8 +18,10 @@ public enum ErrorCode {
     ITEM_VALUE_MAPPING_ALREADY_EXISTS("item-value-mapping-already-exists"),
     NO_ITEM_VALUES("no-item-values"),
     NO_LABELS("no-labels"),
+    NULL_ITEM_DELETE_METHOD("null-item-delete-method"),
     NULL_ITEM_ID("null-item-id"),
     NULL_ITEM_VALUE("empty-item-valíe"),
+    NULL_LABEL_IDS("null-label-ids"),
     REQUEST_BODY_MISSING("request-body-missing"),
     VALUE_IS_NULL("value-is-null");
 

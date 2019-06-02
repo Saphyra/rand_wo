@@ -3,9 +3,6 @@ package com.github.saphyra.randwo.item.service.delete;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
-import com.github.saphyra.randwo.item.repository.ItemDao;
-import com.github.saphyra.randwo.mapping.itemlabel.repository.ItemLabelMappingDao;
-import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,23 +19,17 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DeleteItemServiceTest {
+public class DeleteItemByItemIdServiceTest {
     private static final UUID ITEM_ID = UUID.randomUUID();
 
     @Mock
     private CollectionValidator collectionValidator;
 
     @Mock
-    private ItemDao itemDao;
-
-    @Mock
-    private ItemLabelMappingDao itemLabelMappingDao;
-
-    @Mock
-    private ItemValueMappingDao itemValueMappingDao;
+    private DeleteItemService deleteItemService;
 
     @InjectMocks
-    private DeleteItemService underTest;
+    private DeleteItemByItemIdService underTest;
 
     @Test
     public void deleteItems_emptyItemIds() {
@@ -58,8 +49,6 @@ public class DeleteItemServiceTest {
         underTest.deleteItems(itemIds);
         //THEN
         verify(collectionValidator).validateDoesNotContainNull(itemIds, ErrorCode.NULL_ITEM_ID.getErrorCode());
-        verify(itemDao).deleteById(ITEM_ID);
-        verify(itemLabelMappingDao).deleteByItemId(ITEM_ID);
-        verify(itemValueMappingDao).deleteByItemId(ITEM_ID);
+        verify(deleteItemService).delete(ITEM_ID);
     }
 }

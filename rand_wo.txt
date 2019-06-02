@@ -34,7 +34,7 @@ Api
                     - <ItemRequest> itemRequest: requestBody
                     - <UUID> itemId: pathVariable
                 - description: updates the given item with the given values assigned to given labels, also creates the labels and value keys if not exists
-            - deleteItemsById //TODO implement
+            - deleteItemsById
                 - uri: /item/id
                 - method: DELETE
                 - params
@@ -43,7 +43,7 @@ Api
                             - must not be null
                             - must not contain null
                 - description: delete the items with the given ids.
-            - deleteItemsByLabel  //TODO implement
+            - deleteItemsByLabel
                 - uri: /item/label
                 - method: DELETE
                 - params

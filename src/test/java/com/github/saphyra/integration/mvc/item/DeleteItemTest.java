@@ -87,7 +87,7 @@ public class DeleteItemTest {
     @Test
     public void nullItemIds() throws Exception {
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_IDS_MAPPING, null);
+        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_ITEM_IDS_MAPPING, null);
         //THEN
         responseValidator.verifyBadRequest(result, ErrorCode.REQUEST_BODY_MISSING);
     }
@@ -95,7 +95,7 @@ public class DeleteItemTest {
     @Test
     public void emptyItemIds() throws Exception {
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_IDS_MAPPING, Collections.emptyList());
+        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_ITEM_IDS_MAPPING, Collections.emptyList());
         //THEN
         responseValidator.verifyBadRequest(result, ErrorCode.EMPTY_ITEM_IDS);
     }
@@ -103,7 +103,7 @@ public class DeleteItemTest {
     @Test
     public void nullInItemIds() throws Exception {
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_IDS_MAPPING, Arrays.asList(ITEM_ID_1, null));
+        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_ITEM_IDS_MAPPING, Arrays.asList(ITEM_ID_1, null));
         //THEN
         ErrorResponse errorResponse = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
         verifyResponseParams(errorResponse.getParams(), ErrorCode.NULL_ITEM_ID.getErrorCode());
@@ -112,7 +112,7 @@ public class DeleteItemTest {
     @Test
     public void successfulDeletion() throws Exception {
         //WHEN
-        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_IDS_MAPPING, Arrays.asList(ITEM_ID_1, ITEM_ID_2));
+        MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_ITEM_IDS_MAPPING, Arrays.asList(ITEM_ID_1, ITEM_ID_2));
         //THEN
         assertThat(result.getStatus()).isEqualTo(HttpStatus.OK.value());
 

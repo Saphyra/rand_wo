@@ -1,8 +1,10 @@
 package com.github.saphyra.randwo.item;
 
+import com.github.saphyra.randwo.item.domain.DeleteItemRequest;
 import com.github.saphyra.randwo.item.domain.ItemRequest;
 import com.github.saphyra.randwo.item.service.create.CreateItemService;
-import com.github.saphyra.randwo.item.service.delete.DeleteItemService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByItemIdService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByLabelService;
 import com.github.saphyra.randwo.item.service.update.UpdateItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,23 +24,31 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ItemController {
     public static final String CREATE_ITEM_MAPPING = "/item";
-    public static final String DELETE_BY_IDS_MAPPING = "/item";
+    public static final String DELETE_BY_ITEM_IDS_MAPPING = "/item/id";
+    public static final String DELETE_BY_LABEL_IDS_MAPPING = "/item/label";
     public static final String UPDATE_ITEM_MAPPING = "/item/{itemId}";
 
     private final CreateItemService createItemService;
-    private final DeleteItemService deleteItemService;
+    private final DeleteItemByItemIdService deleteItemByItemIdService;
+    private final DeleteItemByLabelService deleteItemByLabelService;
     private final UpdateItemService updateItemService;
 
     @PutMapping(CREATE_ITEM_MAPPING)
-    void createItem(@RequestBody @Valid ItemRequest itemRequest) {
+    void createItem(@RequestBody ItemRequest itemRequest) {
         log.info("Creating item {}", itemRequest);
         createItemService.createItem(itemRequest);
     }
 
-    @DeleteMapping(DELETE_BY_IDS_MAPPING)
-    public void deleteByIds(@RequestBody List<UUID> itemIds){
-        log.info("Deleting items with itemId {}", itemIds);
-        deleteItemService.deleteItems(itemIds);
+    @DeleteMapping(DELETE_BY_ITEM_IDS_MAPPING)
+    public void deleteByItemIds(@RequestBody List<UUID> itemIds) {
+        log.info("Deleting items with itemIds {}", itemIds);
+        deleteItemByItemIdService.deleteItems(itemIds);
+    }
+
+    @DeleteMapping(DELETE_BY_LABEL_IDS_MAPPING)
+    public void deleteByLabelIds(@RequestBody DeleteItemRequest request){
+        log.info("Deleting items based on request: {}", request);
+        deleteItemByLabelService.deleteItems(request);
     }
 
     @PostMapping(UPDATE_ITEM_MAPPING)
