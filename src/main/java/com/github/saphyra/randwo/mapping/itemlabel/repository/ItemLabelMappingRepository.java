@@ -1,12 +1,12 @@
 package com.github.saphyra.randwo.mapping.itemlabel.repository;
 
-import com.github.saphyra.randwo.mapping.itemlabel.domain.ItemLabelMapping;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ItemLabelMappingRepository extends JpaRepository<ItemLabelMappingEntity, UUID> {
     @Transactional
@@ -14,5 +14,5 @@ public interface ItemLabelMappingRepository extends JpaRepository<ItemLabelMappi
 
     Optional<ItemLabelMappingEntity> findByItemIdAndLabelId(UUID itemId, UUID labelId);
 
-    List<ItemLabelMapping> getByLabelId(UUID labelId);
+    List<ItemLabelMappingEntity> getByLabelId(UUID labelId);
 }

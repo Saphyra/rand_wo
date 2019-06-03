@@ -20,7 +20,7 @@ public enum ErrorCode {
     NO_LABELS("no-labels"),
     NULL_ITEM_DELETE_METHOD("null-item-delete-method"),
     NULL_ITEM_ID("null-item-id"),
-    NULL_ITEM_VALUE("empty-item-valíe"),
+    NULL_ITEM_VALUE("empty-item-value"),
     NULL_LABEL_IDS("null-label-ids"),
     REQUEST_BODY_MISSING("request-body-missing"),
     VALUE_IS_NULL("value-is-null");

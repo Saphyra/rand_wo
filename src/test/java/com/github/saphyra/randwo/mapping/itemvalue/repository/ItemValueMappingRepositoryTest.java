@@ -28,7 +28,6 @@ public class ItemValueMappingRepositoryTest {
     private static final UUID ITEM_ID_1 = UUID.randomUUID();
     private static final UUID ITEM_ID_2 = UUID.randomUUID();
     private static final UUID KEY_ID_1 = UUID.randomUUID();
-    private static final UUID KEY_ID_2 = UUID.randomUUID();
 
     @Autowired
     private ItemValueMappingRepository underTest;

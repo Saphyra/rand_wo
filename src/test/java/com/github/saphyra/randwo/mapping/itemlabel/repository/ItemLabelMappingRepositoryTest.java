@@ -2,6 +2,7 @@ package com.github.saphyra.randwo.mapping.itemlabel.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -132,5 +133,34 @@ public class ItemLabelMappingRepositoryTest {
         Optional<ItemLabelMappingEntity> result = underTest.findByItemIdAndLabelId(ITEM_ID_1, LABEL_ID_1);
         //THEN
         assertThat(result).contains(entity4);
+    }
+
+    @Test
+    public void getByLabelId() {
+        //GIVEN
+        ItemLabelMappingEntity entity1 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_1)
+            .itemId(ITEM_ID_1)
+            .labelId(LABEL_ID_1)
+            .build();
+        underTest.save(entity1);
+
+        ItemLabelMappingEntity entity2 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_2)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_1)
+            .build();
+        underTest.save(entity2);
+
+        ItemLabelMappingEntity entity3 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_3)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_2)
+            .build();
+        underTest.save(entity3);
+        //WHEN
+        List<ItemLabelMappingEntity> result = underTest.getByLabelId(LABEL_ID_1);
+        //THEN
+        assertThat(result).containsOnly(entity1, entity2);
     }
 }

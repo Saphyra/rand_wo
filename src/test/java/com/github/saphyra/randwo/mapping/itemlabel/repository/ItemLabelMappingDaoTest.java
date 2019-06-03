@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,7 +38,7 @@ public class ItemLabelMappingDaoTest {
     private ItemLabelMappingEntity itemLabelMappingEntity;
 
     @Test
-    public void deleteByItemId(){
+    public void deleteByItemId() {
         //WHEN
         underTest.deleteByItemId(ITEM_ID);
         //THEN
@@ -54,5 +56,19 @@ public class ItemLabelMappingDaoTest {
         Optional<ItemLabelMapping> result = underTest.findByItemIdAndLabelId(ITEM_ID, LABEL_ID);
         //THEN
         assertThat(result).contains(this.itemLabelMapping);
+    }
+
+    @Test
+    public void getByLabelId() {
+        //GIVEN
+        List<ItemLabelMappingEntity> entities = Arrays.asList(itemLabelMappingEntity);
+        given(itemLabelMappingRepository.getByLabelId(LABEL_ID)).willReturn(entities);
+
+        List<ItemLabelMapping> mappings = Arrays.asList(itemLabelMapping);
+        given(itemLabelMappingConverter.convertEntity(entities)).willReturn(mappings);
+        //WHEN
+        List<ItemLabelMapping> result = underTest.getByLabelId(LABEL_ID);
+        //THEN
+        assertThat(result).isEqualTo(mappings);
     }
 }
