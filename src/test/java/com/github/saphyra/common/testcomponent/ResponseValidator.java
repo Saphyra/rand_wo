@@ -3,6 +3,7 @@ package com.github.saphyra.common.testcomponent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 import org.springframework.boot.test.context.TestComponent;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,10 @@ public class ResponseValidator {
         ErrorResponse response = objectMapperDelegator.readValue(result.getContentAsString(), ErrorResponse.class);
         assertThat(response.getErrorCode()).isEqualTo(errorCode.getErrorCode());
         return response;
+    }
+
+    public void verifyResponseParams(Map<String, String> params, String key,  String expectedValue) {
+        assertThat(params).containsKey(key);
+        assertThat(params.get(key)).isEqualTo(expectedValue);
     }
 }

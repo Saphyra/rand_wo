@@ -1,5 +1,25 @@
 package com.github.saphyra.integration.mvc.item;
 
+import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.UUID;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.github.saphyra.common.configuration.MvcConfiguration;
 import com.github.saphyra.common.testcomponent.DatabaseCleanup;
 import com.github.saphyra.common.testcomponent.MockMvcWrapper;
@@ -13,34 +33,15 @@ import com.github.saphyra.randwo.mapping.itemlabel.domain.ItemLabelMapping;
 import com.github.saphyra.randwo.mapping.itemlabel.repository.ItemLabelMappingDao;
 import com.github.saphyra.randwo.mapping.itemvalue.domain.ItemValueMapping;
 import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingDao;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.UUID;
-
-import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
 @AutoConfigureMockMvc(secure = false)
 @ContextConfiguration(classes = {
     MvcConfiguration.class,
-    DeleteItemTest.class
+    DeleteItemsByItemIdTest.class
 })
-public class DeleteItemTest {
+public class DeleteItemsByItemIdTest {
     private static final UUID ITEM_ID_1 = UUID.randomUUID();
     private static final UUID ITEM_ID_2 = UUID.randomUUID();
     private static final UUID ITEM_ID_3 = UUID.randomUUID();
