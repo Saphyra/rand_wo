@@ -1,14 +1,6 @@
 package com.github.saphyra.integration.mvc.item;
 
 import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_EXISTING_LABEL_IDS;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_IN_EXISTING_LABEL_IDS;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_IN_NEW_LABELS;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_NEW_LABELS;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_EXISTING_KEY_VALUES;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_IN_EXISTING_KEY_VALUES;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_IN_NEW_KEY_VALUES;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_NEW_KEY_VALUES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -129,7 +121,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_EXISTING_KEY_VALUES);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_EXISTING_KEY_VALUES);
     }
 
     @Test
@@ -145,7 +137,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_NEW_KEY_VALUES);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_NEW_KEY_VALUES);
     }
 
     @Test
@@ -178,7 +170,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_IN_EXISTING_KEY_VALUES);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_EXISTING_KEY_VALUES);
     }
 
     @Test
@@ -196,7 +188,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_IN_NEW_KEY_VALUES);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_NEW_KEY_VALUES);
     }
 
     @Test
@@ -229,7 +221,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_EXISTING_LABEL_IDS);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_EXISTING_LABEL_IDS);
     }
 
     @Test
@@ -247,7 +239,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_NEW_LABELS);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_NEW_LABELS);
     }
 
     @Test
@@ -282,7 +274,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_IN_EXISTING_LABEL_IDS);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_EXISTING_LABEL_IDS);
     }
 
     @Test
@@ -300,7 +292,7 @@ public class UpdateItemTest {
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
         ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), NULL_IN_NEW_LABELS);
+        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_NEW_LABELS);
     }
 
     @Test
@@ -476,9 +468,9 @@ public class UpdateItemTest {
     }
 
 
-    private void verifyResponseParams(Map<String, String> params, String expectedValue) {
+    private void verifyResponseParams(Map<String, String> params, ErrorCode expectedValue) {
         assertThat(params).containsKey(PARAMETER_KEY_NULL_VALUE);
-        assertThat(params.get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(expectedValue);
+        assertThat(params.get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(expectedValue.getErrorCode());
     }
 
     private void givenExistingKey() {

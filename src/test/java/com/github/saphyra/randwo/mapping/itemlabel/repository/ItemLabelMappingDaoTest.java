@@ -46,6 +46,14 @@ public class ItemLabelMappingDaoTest {
     }
 
     @Test
+    public void deleteByLabelId() {
+        //WHEN
+        underTest.deleteByLabelId(LABEL_ID);
+        //THEN
+        verify(itemLabelMappingRepository).deleteByLabelId(LABEL_ID);
+    }
+
+    @Test
     public void findByItemIdAndLabelId() {
         //GIVEN
         Optional<ItemLabelMappingEntity> entityOptional = Optional.of(this.itemLabelMappingEntity);
@@ -56,6 +64,19 @@ public class ItemLabelMappingDaoTest {
         Optional<ItemLabelMapping> result = underTest.findByItemIdAndLabelId(ITEM_ID, LABEL_ID);
         //THEN
         assertThat(result).contains(this.itemLabelMapping);
+    }
+
+    @Test
+    public void getByItemId() {
+        //GIVEN
+        List<ItemLabelMappingEntity> mappingEntities = Arrays.asList(itemLabelMappingEntity);
+        given(itemLabelMappingRepository.getByItemId(ITEM_ID)).willReturn(mappingEntities);
+
+        given(itemLabelMappingConverter.convertEntity(mappingEntities)).willReturn(Arrays.asList(itemLabelMapping));
+        //WHEN
+        List<ItemLabelMapping> result = underTest.getByItemId(ITEM_ID);
+        //THEN
+        assertThat(result).contains(itemLabelMapping);
     }
 
     @Test

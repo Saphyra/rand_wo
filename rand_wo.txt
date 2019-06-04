@@ -50,7 +50,7 @@ Api
                     - <DeleteItemRequest> deleteItemRequest: requestBody
                 - description: deletes items by label ids
         - label
-            - deleteLabel //TODO implement
+            - deleteLabel
                 - uri: /label
                 - method: DELETE
                 - params

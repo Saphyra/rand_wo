@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class DeleteItemRequestValidator {
-    public static final String NULL_IN_LABEL_IDS = "null-in-label-ids";
-
     private final CollectionValidator collectionValidator;
 
     public void validate(DeleteItemRequest request) {
@@ -23,7 +21,7 @@ public class DeleteItemRequestValidator {
             throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_LABEL_IDS.getErrorCode()), "LabelIds is null.");
         }
 
-        collectionValidator.validateDoesNotContainNull(request.getLabelIds(), NULL_IN_LABEL_IDS);
+        collectionValidator.validateDoesNotContainNull(request.getLabelIds(), ErrorCode.NULL_IN_LABEL_IDS);
 
         if(request.getLabelIds().isEmpty()){
             throw new BadRequestException(new ErrorMessage(ErrorCode.NO_LABELS.getErrorCode()), "LabelIds is empty.");

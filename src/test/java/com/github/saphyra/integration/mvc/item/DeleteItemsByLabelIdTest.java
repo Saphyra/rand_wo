@@ -1,7 +1,6 @@
 package com.github.saphyra.integration.mvc.item;
 
 import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
-import static com.github.saphyra.randwo.item.service.validator.DeleteItemRequestValidator.NULL_IN_LABEL_IDS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -102,7 +101,7 @@ public class DeleteItemsByLabelIdTest {
         MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_LABEL_IDS_MAPPING, request);
         //THEN
         ErrorResponse errorResponse = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        responseValidator.verifyResponseParams(errorResponse.getParams(), PARAMETER_KEY_NULL_VALUE, NULL_IN_LABEL_IDS);
+        responseValidator.verifyResponseParams(errorResponse.getParams(), PARAMETER_KEY_NULL_VALUE, ErrorCode.NULL_IN_LABEL_IDS.getErrorCode());
     }
 
     @Test

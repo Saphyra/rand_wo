@@ -1,10 +1,6 @@
 package com.github.saphyra.randwo.item.service.validator.itemrequest;
 
 import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_EXISTING_KEY_VALUES;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_IN_EXISTING_KEY_VALUES;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_IN_NEW_KEY_VALUES;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.ValueValidator.NULL_NEW_KEY_VALUES;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
@@ -15,7 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.github.saphyra.randwo.common.CollectionValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
@@ -67,7 +63,7 @@ public class ValueValidatorTest {
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
         assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.VALUE_IS_NULL.getErrorCode());
-        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(NULL_EXISTING_KEY_VALUES);
+        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(ErrorCode.NULL_EXISTING_KEY_VALUES.getErrorCode());
     }
 
     @Test
@@ -78,7 +74,7 @@ public class ValueValidatorTest {
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
         assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.VALUE_IS_NULL.getErrorCode());
-        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(NULL_NEW_KEY_VALUES);
+        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(ErrorCode.NULL_NEW_KEY_VALUES.getErrorCode());
     }
 
     @Test
@@ -101,8 +97,8 @@ public class ValueValidatorTest {
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
         assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.KEY_NOT_FOUND.getErrorCode());
-        verify(collectionValidator).validateDoesNotContainNull(existingKeyValues.values(), NULL_IN_EXISTING_KEY_VALUES);
-        verify(collectionValidator).validateDoesNotContainNull(newKeyValues.values(), NULL_IN_NEW_KEY_VALUES);
+        verify(collectionValidator).validateDoesNotContainNull(existingKeyValues.values(), ErrorCode.NULL_IN_EXISTING_KEY_VALUES);
+        verify(collectionValidator).validateDoesNotContainNull(newKeyValues.values(), ErrorCode.NULL_IN_NEW_KEY_VALUES);
     }
 
     @Test
@@ -112,7 +108,7 @@ public class ValueValidatorTest {
         //WHEN
         underTest.validate(existingKeyValues, newKeyValues);
         //THEN
-        verify(collectionValidator).validateDoesNotContainNull(existingKeyValues.values(), NULL_IN_EXISTING_KEY_VALUES);
-        verify(collectionValidator).validateDoesNotContainNull(newKeyValues.values(), NULL_IN_NEW_KEY_VALUES);
+        verify(collectionValidator).validateDoesNotContainNull(existingKeyValues.values(), ErrorCode.NULL_IN_EXISTING_KEY_VALUES);
+        verify(collectionValidator).validateDoesNotContainNull(newKeyValues.values(), ErrorCode.NULL_IN_NEW_KEY_VALUES);
     }
 }

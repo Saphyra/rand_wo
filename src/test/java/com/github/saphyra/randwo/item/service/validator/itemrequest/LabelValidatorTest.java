@@ -1,10 +1,6 @@
 package com.github.saphyra.randwo.item.service.validator.itemrequest;
 
 import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_EXISTING_LABEL_IDS;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_IN_EXISTING_LABEL_IDS;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_IN_NEW_LABELS;
-import static com.github.saphyra.randwo.item.service.validator.itemrequest.LabelValidator.NULL_NEW_LABELS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
@@ -16,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.github.saphyra.randwo.common.CollectionValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.label.domain.Label;
 import com.github.saphyra.randwo.label.repository.LabelDao;
@@ -55,7 +51,7 @@ public class LabelValidatorTest {
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
         assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.VALUE_IS_NULL.getErrorCode());
-        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(NULL_EXISTING_LABEL_IDS);
+        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(ErrorCode.NULL_EXISTING_LABEL_IDS.getErrorCode());
     }
 
     @Test
@@ -66,7 +62,7 @@ public class LabelValidatorTest {
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
         assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.VALUE_IS_NULL.getErrorCode());
-        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(NULL_NEW_LABELS);
+        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(ErrorCode.NULL_NEW_LABELS.getErrorCode());
     }
 
     @Test
@@ -88,8 +84,8 @@ public class LabelValidatorTest {
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
         assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.LABEL_NOT_FOUND.getErrorCode());
-        verify(collectionValidator).validateDoesNotContainNull(EXISTING_LABEL_IDS, NULL_IN_EXISTING_LABEL_IDS);
-        verify(collectionValidator).validateDoesNotContainNull(NEW_LABELS, NULL_IN_NEW_LABELS);
+        verify(collectionValidator).validateDoesNotContainNull(EXISTING_LABEL_IDS, ErrorCode.NULL_IN_EXISTING_LABEL_IDS);
+        verify(collectionValidator).validateDoesNotContainNull(NEW_LABELS, ErrorCode.NULL_IN_NEW_LABELS);
     }
 
     @Test
@@ -99,7 +95,7 @@ public class LabelValidatorTest {
         //WHEN
         underTest.validate(EXISTING_LABEL_IDS, NEW_LABELS);
         //THEN
-        verify(collectionValidator).validateDoesNotContainNull(EXISTING_LABEL_IDS, NULL_IN_EXISTING_LABEL_IDS);
-        verify(collectionValidator).validateDoesNotContainNull(NEW_LABELS, NULL_IN_NEW_LABELS);
+        verify(collectionValidator).validateDoesNotContainNull(EXISTING_LABEL_IDS, ErrorCode.NULL_IN_EXISTING_LABEL_IDS);
+        verify(collectionValidator).validateDoesNotContainNull(NEW_LABELS, ErrorCode.NULL_IN_NEW_LABELS);
     }
 }

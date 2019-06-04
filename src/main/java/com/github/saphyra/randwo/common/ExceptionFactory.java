@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ExceptionFactory {
-    public static BadRequestException createNullException(String nullValue) {
+    public static BadRequestException createNullException(ErrorCode nullValue) {
         Map<String, String> parameters = new HashMap<>();
-        parameters.put(PARAMETER_KEY_NULL_VALUE, nullValue);
+        parameters.put(PARAMETER_KEY_NULL_VALUE, nullValue.getErrorCode());
         ErrorMessage errorMessage = new ErrorMessage(ErrorCode.VALUE_IS_NULL.getErrorCode(), parameters);
         return new BadRequestException(errorMessage, String.format("%s is null.", nullValue));
     }

@@ -20,8 +20,16 @@ public class ItemLabelMappingDao extends AbstractDao<ItemLabelMappingEntity, Ite
         repository.deleteByItemId(itemId);
     }
 
+    public void deleteByLabelId(UUID labelId) {
+        repository.deleteByLabelId(labelId);
+    }
+
     public Optional<ItemLabelMapping> findByItemIdAndLabelId(UUID itemId, UUID labelId) {
         return converter.convertEntity(repository.findByItemIdAndLabelId(itemId, labelId));
+    }
+
+    public List<ItemLabelMapping> getByItemId(UUID itemId) {
+        return converter.convertEntity(repository.getByItemId(itemId));
     }
 
     public List<ItemLabelMapping> getByLabelId(UUID labelId) {

@@ -1,6 +1,5 @@
 package com.github.saphyra.randwo.item.service.validator;
 
-import static com.github.saphyra.randwo.item.service.validator.DeleteItemRequestValidator.NULL_IN_LABEL_IDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
@@ -88,6 +87,6 @@ public class DeleteItemRequestValidatorTest {
         //WHEN
         underTest.validate(request);
         //THEN
-        verify(collectionValidator).validateDoesNotContainNull(labelIds, NULL_IN_LABEL_IDS);
+        verify(collectionValidator).validateDoesNotContainNull(labelIds, ErrorCode.NULL_IN_LABEL_IDS);
     }
 }

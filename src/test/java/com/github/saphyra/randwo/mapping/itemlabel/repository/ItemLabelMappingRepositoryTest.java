@@ -71,6 +71,35 @@ public class ItemLabelMappingRepositoryTest {
     }
 
     @Test
+    public void deleteByLabelId() {
+        //GIVEN
+        ItemLabelMappingEntity entity1 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_1)
+            .itemId(ITEM_ID_1)
+            .labelId(LABEL_ID_2)
+            .build();
+        underTest.save(entity1);
+
+        ItemLabelMappingEntity entity2 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_2)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_1)
+            .build();
+        underTest.save(entity2);
+
+        ItemLabelMappingEntity entity3 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_3)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_2)
+            .build();
+        underTest.save(entity3);
+        //WHEN
+        underTest.deleteByLabelId(LABEL_ID_2);
+        //THEN
+        assertThat(underTest.findAll()).containsOnly(entity2);
+    }
+
+    @Test
     public void findByItemIdAndLabelId_notFound() {
         //GIVEN
         ItemLabelMappingEntity entity1 = ItemLabelMappingEntity.builder()
@@ -133,6 +162,35 @@ public class ItemLabelMappingRepositoryTest {
         Optional<ItemLabelMappingEntity> result = underTest.findByItemIdAndLabelId(ITEM_ID_1, LABEL_ID_1);
         //THEN
         assertThat(result).contains(entity4);
+    }
+
+    @Test
+    public void getByItemId() {
+        //GIVEN
+        ItemLabelMappingEntity entity1 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_1)
+            .itemId(ITEM_ID_1)
+            .labelId(LABEL_ID_2)
+            .build();
+        underTest.save(entity1);
+
+        ItemLabelMappingEntity entity2 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_2)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_1)
+            .build();
+        underTest.save(entity2);
+
+        ItemLabelMappingEntity entity3 = ItemLabelMappingEntity.builder()
+            .mappingId(MAPPING_ID_3)
+            .itemId(ITEM_ID_2)
+            .labelId(LABEL_ID_2)
+            .build();
+        underTest.save(entity3);
+        //WHEN
+        List<ItemLabelMappingEntity> result = underTest.getByItemId(ITEM_ID_2);
+        //THEN
+        assertThat(result).containsOnly(entity2, entity3);
     }
 
     @Test

@@ -12,7 +12,12 @@ public interface ItemLabelMappingRepository extends JpaRepository<ItemLabelMappi
     @Transactional
     void deleteByItemId(UUID itemId);
 
+    @Transactional
+    void deleteByLabelId(UUID labelId);
+
     Optional<ItemLabelMappingEntity> findByItemIdAndLabelId(UUID itemId, UUID labelId);
+
+    List<ItemLabelMappingEntity> getByItemId(UUID itemId);
 
     List<ItemLabelMappingEntity> getByLabelId(UUID labelId);
 }
