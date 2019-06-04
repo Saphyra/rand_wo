@@ -58,7 +58,9 @@ Api
                         - validation
                             - must not be null
                             - must not contain null
-                - description: deletes the labels (and their mappings with items) with the given labelIds.
+                - description:
+                    - deletes the labels (and their mappings with items) with the given labelIds.
+                    - can be deleted only when there are no items with only this label
             - editLabel
                 - uri: /label/{labelId}
                 - method: POST
@@ -66,6 +68,25 @@ Api
                     - <UUID> labelId: pathVariable
                     - <String> newValue: requestBody
                 - description: updates the value of the given label.
+        - key
+            - deleteKey //TODO implement
+                - uri: /key
+                - method: DELETE
+                - params
+                    - <<UUID> keyId>: requestBody
+                        - validation
+                            - must not be null
+                            - must not contain null
+                - description:
+                    - deletes the keys (and their mappings with items) with the given keyIds.
+                    - can be deleted only when there are n items with only this key.
+            - updateKey //TODO implement
+                - uri: /key/{keyId}
+                - method: POST
+                - params
+                    - <UUID> keyId: pathVariable
+                    - <String> newValue: requestBody
+                - description: updates the value of the given key.
     - request params
         - ItemRequest
             - fields
@@ -91,9 +112,6 @@ Api
                 - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
 
 === TO DO ===
-EditKey
-DeleteKey
-
 Display random items
     - Only one value should be displayed
     - Select the proper
