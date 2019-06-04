@@ -2,6 +2,8 @@ package com.github.saphyra.randwo.label.service.create;
 
 import com.github.saphyra.randwo.label.domain.Label;
 import com.github.saphyra.randwo.label.repository.LabelDao;
+import com.github.saphyra.randwo.label.service.LabelValueValidator;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -59,7 +59,7 @@ Api
                             - must not be null
                             - must not contain null
                 - description: deletes the labels (and their mappings with items) with the given labelIds.
-            - editLabel //TODO implement
+            - editLabel
                 - uri: /label/{labelId}
                 - method: POST
                 - params

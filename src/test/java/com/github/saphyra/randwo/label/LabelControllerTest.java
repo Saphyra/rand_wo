@@ -13,13 +13,18 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.randwo.label.service.delete.DeleteLabelService;
+import com.github.saphyra.randwo.label.service.update.UpdateLabelService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LabelControllerTest {
     private static final UUID LABEL_ID = UUID.randomUUID();
+    private static final String NEW_VALUE = "new_value";
 
     @Mock
     private DeleteLabelService deleteLabelService;
+
+    @Mock
+    private UpdateLabelService updateLabelService;
 
     @InjectMocks
     private LabelController underTest;
@@ -32,5 +37,13 @@ public class LabelControllerTest {
         underTest.deleteLabels(labelIds);
         //THEN
         verify(deleteLabelService).deleteLabels(labelIds);
+    }
+
+    @Test
+    public void updateLabel() {
+        //WHEN
+        underTest.updateLabel(LABEL_ID, NEW_VALUE);
+        //THEN
+        verify(updateLabelService).update(LABEL_ID, NEW_VALUE);
     }
 }

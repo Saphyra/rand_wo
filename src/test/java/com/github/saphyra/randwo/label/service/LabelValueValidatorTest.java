@@ -1,21 +1,22 @@
-package com.github.saphyra.randwo.label.service.create;
+package com.github.saphyra.randwo.label.service;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.randwo.common.ErrorCode;
-import com.github.saphyra.randwo.label.domain.Label;
-import com.github.saphyra.randwo.label.repository.LabelDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.randwo.common.ErrorCode;
+import com.github.saphyra.randwo.label.domain.Label;
+import com.github.saphyra.randwo.label.repository.LabelDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LabelValueValidatorTest {

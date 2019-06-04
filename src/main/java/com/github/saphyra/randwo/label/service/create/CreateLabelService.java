@@ -1,11 +1,13 @@
 package com.github.saphyra.randwo.label.service.create;
 
-import com.github.saphyra.randwo.label.domain.Label;
-import com.github.saphyra.randwo.label.repository.LabelDao;
-import lombok.RequiredArgsConstructor;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import com.github.saphyra.randwo.label.domain.Label;
+import com.github.saphyra.randwo.label.repository.LabelDao;
+import com.github.saphyra.randwo.label.service.LabelValueValidator;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

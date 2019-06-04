@@ -1,16 +1,17 @@
 package com.github.saphyra.common.testcomponent;
 
-import com.github.saphyra.randwo.common.ObjectMapperDelegator;
-import lombok.RequiredArgsConstructor;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+
 import org.springframework.boot.test.context.TestComponent;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import com.github.saphyra.randwo.common.ObjectMapperDelegator;
+import lombok.RequiredArgsConstructor;
 
 @TestComponent
 @RequiredArgsConstructor
@@ -20,14 +21,14 @@ public class MockMvcWrapper {
 
     public MockHttpServletResponse deleteRequest(String url, Object requestBody) throws Exception {
         MockHttpServletRequestBuilder requestBuilder = delete(url)
-            .content(objectMapperDelegator.writeValueAsString(requestBody));
+            .content(writeValueAsString(requestBody));
 
         return sendRequest(requestBuilder);
     }
 
     public MockHttpServletResponse postRequest(String url, Object requestBody, Object... pathVariables) throws Exception {
         MockHttpServletRequestBuilder requestBuilder = post(url, pathVariables)
-            .content(objectMapperDelegator.writeValueAsString(requestBody));
+            .content(writeValueAsString(requestBody));
 
         return sendRequest(requestBuilder);
     }
@@ -45,5 +46,16 @@ public class MockMvcWrapper {
         return mockMvc.perform(requestBuilder)
             .andReturn()
             .getResponse();
+    }
+
+    private String writeValueAsString(Object o) {
+        if (o == null) {
+            return "";
+        }
+        if (o instanceof String) {
+            return (String) o;
+        }
+
+        return objectMapperDelegator.writeValueAsString(o);
     }
 }
