@@ -1,4 +1,4 @@
-package com.github.saphyra.randwo.key.service.create;
+package com.github.saphyra.randwo.key.service;
 
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
@@ -12,10 +12,10 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-class KeyValueValidator {
+public class KeyValueValidator {
     private final KeyDao keyDao;
 
-    void validate(String keyValue) {
+    public void validate(String keyValue) {
         if (isBlank(keyValue)) {
             throw new BadRequestException(new ErrorMessage(ErrorCode.EMPTY_KEY_VALUE.getErrorCode()), "Key value must not be empty.");
         }

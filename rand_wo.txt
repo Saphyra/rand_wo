@@ -80,7 +80,7 @@ Api
                 - description:
                     - deletes the keys (and their mappings with items) with the given keyIds.
                     - can be deleted only when there are n items with only this key.
-            - updateKey //TODO implement
+            - updateKey
                 - uri: /key/{keyId}
                 - method: POST
                 - params

@@ -23,7 +23,6 @@ import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.label.LabelController;
 import com.github.saphyra.randwo.label.domain.Label;
 import com.github.saphyra.randwo.label.repository.LabelDao;
-import com.github.saphyra.randwo.mapping.itemlabel.repository.ItemLabelMappingDao;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -48,9 +47,6 @@ public class UpdateLabelTest {
 
     @Autowired
     private LabelDao labelDao;
-
-    @Autowired
-    private ItemLabelMappingDao itemLabelMappingDao;
 
     @After
     public void cleanUp() {

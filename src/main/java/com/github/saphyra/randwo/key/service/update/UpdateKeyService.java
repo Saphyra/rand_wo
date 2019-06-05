@@ -1,4 +1,4 @@
-package com.github.saphyra.randwo.key.service.create;
+package com.github.saphyra.randwo.key.service.update;
 
 import java.util.UUID;
 
@@ -6,21 +6,22 @@ import org.springframework.stereotype.Service;
 
 import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
+import com.github.saphyra.randwo.key.service.KeyQueryService;
 import com.github.saphyra.randwo.key.service.KeyValueValidator;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CreateKeyService {
+public class UpdateKeyService {
     private final KeyDao keyDao;
-    private final KeyFactory keyFactory;
+    private final KeyQueryService keyQueryService;
     private final KeyValueValidator keyValueValidator;
 
-    public UUID createKey(String keyValue) {
-        keyValueValidator.validate(keyValue);
+    public void updateKey(UUID keyId, String newValue) {
+        keyValueValidator.validate(newValue);
 
-        Key key = keyFactory.create(keyValue);
+        Key key = keyQueryService.findByKeyIdValidated(keyId);
+        key.setKeyValue(newValue);
         keyDao.save(key);
-        return key.getKeyId();
     }
 }

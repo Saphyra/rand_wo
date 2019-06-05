@@ -1,6 +1,5 @@
-package com.github.saphyra.randwo.key.service.create;
+package com.github.saphyra.randwo.key.service.update;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -14,38 +13,37 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
+import com.github.saphyra.randwo.key.service.KeyQueryService;
 import com.github.saphyra.randwo.key.service.KeyValueValidator;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CreateKeyServiceTest {
-    private static final String KEY_VALUE = "key_value";
-    private static final UUID NEW_KEY_ID = UUID.randomUUID();
-
+public class UpdateKeyServiceTest {
+    private static final UUID KEY_ID = UUID.randomUUID();
+    private static final String NEW_KEY_VALUE = "new_key_value";
     @Mock
     private KeyDao keyDao;
 
     @Mock
-    private KeyFactory keyFactory;
+    private KeyQueryService keyQueryService;
 
     @Mock
     private KeyValueValidator keyValueValidator;
 
     @InjectMocks
-    private CreateKeyService underTest;
+    private UpdateKeyService underTest;
 
     @Mock
     private Key key;
 
     @Test
-    public void createKey() {
+    public void updateKey() {
         //GIVEN
-        given(keyFactory.create(KEY_VALUE)).willReturn(key);
-        given(key.getKeyId()).willReturn(NEW_KEY_ID);
+        given(keyQueryService.findByKeyIdValidated(KEY_ID)).willReturn(key);
         //WHEN
-        UUID result = underTest.createKey(KEY_VALUE);
+        underTest.updateKey(KEY_ID, NEW_KEY_VALUE);
         //THEN
-        verify(keyValueValidator).validate(KEY_VALUE);
+        verify(keyValueValidator).validate(NEW_KEY_VALUE);
+        verify(key).setKeyValue(NEW_KEY_VALUE);
         verify(keyDao).save(key);
-        assertThat(result).isEqualTo(NEW_KEY_ID);
     }
 }
