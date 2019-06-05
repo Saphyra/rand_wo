@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,6 +46,14 @@ public class ItemValueMappingDaoTest {
     }
 
     @Test
+    public void deleteByKeyId() {
+        //WHEN
+        underTest.deleteByKeyId(KEY_ID);
+        //THEN
+        verify(repository).deleteByKeyId(KEY_ID);
+    }
+
+    @Test
     public void findByItemIdAndKeyId() {
         //GIVEN
         Optional<ItemValueMappingEntity> entityOptional = Optional.of(this.itemValueMappingEntity);
@@ -54,5 +64,33 @@ public class ItemValueMappingDaoTest {
         Optional<ItemValueMapping> result = underTest.findByItemIdAndKeyId(ITEM_ID, KEY_ID);
         //THEN
         assertThat(result).contains(itemValueMapping);
+    }
+
+    @Test
+    public void getByItemId() {
+        //GIVEN
+        List<ItemValueMappingEntity> entities = Arrays.asList(itemValueMappingEntity);
+        given(repository.getByItemId(ITEM_ID)).willReturn(entities);
+
+        List<ItemValueMapping> domains = Arrays.asList(itemValueMapping);
+        given(converter.convertEntity(entities)).willReturn(domains);
+        //WHEN
+        List<ItemValueMapping> result = underTest.getByItemId(ITEM_ID);
+        //THEN
+        assertThat(result).isEqualTo(domains);
+    }
+
+    @Test
+    public void getByKeyId() {
+        //GIVEN
+        List<ItemValueMappingEntity> entities = Arrays.asList(itemValueMappingEntity);
+        given(repository.getByKeyId(KEY_ID)).willReturn(entities);
+
+        List<ItemValueMapping> domains = Arrays.asList(itemValueMapping);
+        given(converter.convertEntity(entities)).willReturn(domains);
+        //WHEN
+        List<ItemValueMapping> result = underTest.getByKeyId(KEY_ID);
+        //THEN
+        assertThat(result).isEqualTo(domains);
     }
 }

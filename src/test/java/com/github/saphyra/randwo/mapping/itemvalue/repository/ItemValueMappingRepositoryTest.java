@@ -2,6 +2,7 @@ package com.github.saphyra.randwo.mapping.itemvalue.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ public class ItemValueMappingRepositoryTest {
     private static final UUID ITEM_ID_1 = UUID.randomUUID();
     private static final UUID ITEM_ID_2 = UUID.randomUUID();
     private static final UUID KEY_ID_1 = UUID.randomUUID();
+    private static final UUID KEY_ID_2 = UUID.randomUUID();
 
     @Autowired
     private ItemValueMappingRepository underTest;
@@ -59,6 +61,35 @@ public class ItemValueMappingRepositoryTest {
     }
 
     @Test
+    public void deleteByKeyId() {
+        //GIVEN
+        ItemValueMappingEntity entity1 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_1)
+            .itemId(ITEM_ID_1)
+            .keyId(KEY_ID_1)
+            .build();
+        underTest.save(entity1);
+
+        ItemValueMappingEntity entity2 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_2)
+            .itemId(ITEM_ID_1)
+            .keyId(KEY_ID_1)
+            .build();
+        underTest.save(entity2);
+
+        ItemValueMappingEntity entity3 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_3)
+            .itemId(ITEM_ID_2)
+            .keyId(KEY_ID_2)
+            .build();
+        underTest.save(entity3);
+        //WHEN
+        underTest.deleteByKeyId(KEY_ID_1);
+        //THEN
+        assertThat(underTest.findAll()).containsOnly(entity3);
+    }
+
+    @Test
     public void findByItemIdAndKeyId() {
         //GIVEN
         ItemValueMappingEntity entity1 = ItemValueMappingEntity.builder()
@@ -77,5 +108,63 @@ public class ItemValueMappingRepositoryTest {
         Optional<ItemValueMappingEntity> result = underTest.findByItemIdAndKeyId(ITEM_ID_1, KEY_ID_1);
         //THEN
         assertThat(result).contains(entity1);
+    }
+
+    @Test
+    public void getByItemId() {
+        //GIVEN
+        ItemValueMappingEntity entity1 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_1)
+            .itemId(ITEM_ID_1)
+            .keyId(KEY_ID_1)
+            .build();
+        underTest.save(entity1);
+
+        ItemValueMappingEntity entity2 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_2)
+            .itemId(ITEM_ID_1)
+            .keyId(KEY_ID_1)
+            .build();
+        underTest.save(entity2);
+
+        ItemValueMappingEntity entity3 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_3)
+            .itemId(ITEM_ID_2)
+            .keyId(KEY_ID_2)
+            .build();
+        underTest.save(entity3);
+        //WHEN
+        List<ItemValueMappingEntity> result = underTest.getByItemId(ITEM_ID_1);
+        //THEN
+        assertThat(result).containsOnly(entity1, entity2);
+    }
+
+    @Test
+    public void getByKeyId() {
+        //GIVEN
+        ItemValueMappingEntity entity1 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_1)
+            .itemId(ITEM_ID_1)
+            .keyId(KEY_ID_1)
+            .build();
+        underTest.save(entity1);
+
+        ItemValueMappingEntity entity2 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_2)
+            .itemId(ITEM_ID_1)
+            .keyId(KEY_ID_1)
+            .build();
+        underTest.save(entity2);
+
+        ItemValueMappingEntity entity3 = ItemValueMappingEntity.builder()
+            .mappingId(MAPPING_ID_3)
+            .itemId(ITEM_ID_2)
+            .keyId(KEY_ID_2)
+            .build();
+        underTest.save(entity3);
+        //WHEN
+        List<ItemValueMappingEntity> result = underTest.getByKeyId(KEY_ID_1);
+        //THEN
+        assertThat(result).containsOnly(entity1, entity2);
     }
 }

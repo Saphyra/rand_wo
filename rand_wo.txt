@@ -69,7 +69,7 @@ Api
                     - <String> newValue: requestBody
                 - description: updates the value of the given label.
         - key
-            - deleteKey //TODO implement
+            - deleteKey
                 - uri: /key
                 - method: DELETE
                 - params

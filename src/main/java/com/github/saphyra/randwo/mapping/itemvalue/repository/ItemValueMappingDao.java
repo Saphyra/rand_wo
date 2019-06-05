@@ -1,5 +1,6 @@
 package com.github.saphyra.randwo.mapping.itemvalue.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,7 +19,19 @@ public class ItemValueMappingDao extends AbstractDao<ItemValueMappingEntity, Ite
         repository.deleteByItemId(itemId);
     }
 
+    public void deleteByKeyId(UUID keyId) {
+        repository.deleteByKeyId(keyId);
+    }
+
     public Optional<ItemValueMapping> findByItemIdAndKeyId(UUID itemId, UUID keyId) {
         return converter.convertEntity(repository.findByItemIdAndKeyId(itemId, keyId));
+    }
+
+    public List<ItemValueMapping> getByItemId(UUID itemId) {
+        return converter.convertEntity(repository.getByItemId(itemId));
+    }
+
+    public List<ItemValueMapping> getByKeyId(UUID keyId) {
+        return converter.convertEntity(repository.getByKeyId(keyId));
     }
 }

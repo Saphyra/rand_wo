@@ -22,7 +22,10 @@ class LabelDeletionValidator {
 
     private void validateSize(ItemLabelMapping itemLabelMapping) {
         if (itemLabelMappingDao.getByItemId(itemLabelMapping.getItemId()).size() == 1) {
-            throw new UnprocessableEntityException(new ErrorMessage(ErrorCode.ITEM_HAS_ONLY_ONE_LABEL.getErrorCode()), "Label with id " + itemLabelMapping.getLabelId() + " cannot be deleted because there are items with only this label.");
+            throw new UnprocessableEntityException(
+                new ErrorMessage(ErrorCode.ITEM_HAS_ONLY_ONE_LABEL.getErrorCode()),
+                "Label with id " + itemLabelMapping.getLabelId() + " cannot be deleted because there are items with only this label."
+            );
         }
     }
 }
