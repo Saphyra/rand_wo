@@ -3,7 +3,6 @@
 Domains
     - Items
         - <UUID> itemId
-        - <<UUID> keyId = <String> value> values
 
     - Key
         - <UUID> keyId
@@ -17,6 +16,12 @@ Domains
         - <UUID> mappingId
         - <UUID> itemId
         - <UUID> labelId
+
+    - ItemValueMapping
+        - <UUID> mappingId
+        - <UUID> itemId
+        - <UUID> keyId
+        - <String> value
 
 Api
     - endpoints
@@ -111,9 +116,49 @@ Api
                 - CONTAINS: delete the item if it has mapping with ANY of the labels
                 - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
 
-=== TO DO ===
-Display random items
-    - Only one value should be displayed
-    - Select the proper
-    - Reveal other side button
-    - Select pool by labels
+FrontEnd
+    - index
+        - Link to other pages
+    - create_item
+        - list of existing labels
+        - added labels
+        - new labels
+        - list of existing columns
+        - new columns
+        - values for columns
+    - delete_items_by_label
+        - select labels
+        - select method
+    - list_items
+        - list all items
+        - filter by
+            - column name
+            - label
+            - value
+            - or / all
+        - link to edit item
+        - delete items
+        - select all button
+    - edit_item
+        - create item page prefilled
+    - view_labels
+        - displaying number of items assigned
+        - link to view items of label
+        - filter by
+            - label
+        - link to edit label
+        - delete labels
+        - only deletable labels can be selected
+        - select all button
+    - edit_label
+    - view_keys
+        - display number of items containing
+        - link to view items of key (given key at first)
+    - edit_key
+    - random_items
+        - Select labels
+            - and / or
+        - Select columns displayed
+        - Select shown column(s)
+            - select all button
+        - "Reveal" button for hidden columns
