@@ -117,48 +117,55 @@ Api
                 - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
 
 FrontEnd
+    - common
+        - footer
+            - Home button
+            - Language selection button
     - index
-        - Link to other pages
+        - Link to other pages //TODO implement
     - create_item
-        - list of existing labels
-        - added labels
-        - new labels
-        - list of existing columns
-        - new columns
-        - values for columns
+        - list of existing labels //TODO implement
+        - added labels //TODO implement
+        - new labels //TODO implement
+        - list of existing columns //TODO implement
+        - new columns //TODO implement
+        - values for columns //TODO implement
     - delete_items_by_label
-        - select labels
-        - select method
+        - select labels //TODO implement
+        - select method //TODO implement
     - list_items
-        - list all items
-        - filter by
+        - link to create_item page //TODO implement
+        - list all items //TODO implement
+        - filter by //TODO implement
             - column name
             - label
             - value
             - or / all
-        - link to edit item
-        - delete items
-        - select all button
+        - link to edit item //TODO implement
+        - delete items //TODO implement
+        - select all button //TODO implement
     - edit_item
-        - create item page prefilled
+        - create item page prefilled //TODO implement
     - view_labels
-        - displaying number of items assigned
-        - link to view items of label
-        - filter by
+        - displaying number of items assigned //TODO implement
+        - link to view items of label //TODO implement
+        - filter by //TODO implement
             - label
-        - link to edit label
-        - delete labels
-        - only deletable labels can be selected
-        - select all button
-    - edit_label
+        - link to edit label //TODO implement
+        - delete labels //TODO implement
+        - only deletable labels can be selected //TODO implement
+        - select all button //TODO implement
+    - edit_label //TODO implement
     - view_keys
-        - display number of items containing
-        - link to view items of key (given key at first)
-    - edit_key
+        - display number of items containing //TODO implement
+        - link to view items of key (given key at first) //TODO implement
+    - edit_key //TODO implement
     - random_items
-        - Select labels
+        - Select labels //TODO implement
             - and / or
-        - Select columns displayed
-        - Select shown column(s)
+        - Select columns displayed //TODO implement
+        - Select shown column(s) //TODO implement
             - select all button
-        - "Reveal" button for hidden columns
+        - "Reveal" button for hidden columns //TODO implement
+        - Link to edit page //TODO implement
+        - Delete item button //TODO implement

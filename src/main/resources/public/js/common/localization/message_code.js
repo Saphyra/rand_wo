@@ -12,9 +12,8 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(){
-            loadLocalization("message_codes", addMessageCodes)
-        },
-        true
+            localizationLoader.loadLocalization("message_codes", addMessageCodes)
+        }
     ));
     
     function addMessageCodes(codes){

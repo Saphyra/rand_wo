@@ -10,23 +10,33 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(pageName){
-            loadLocalization(pageName.getPayload(), fillPageWithText);
-        },
-        true
+            localizationLoader.loadLocalization("common", fillPageWithText);
+            localizationLoader.loadLocalization(
+                pageName.getPayload(),
+                function(content){
+                    document.title = content.title;
+                    fillPageWithText(content.staticText);
+                    additionalContent = content.additionalContent;;
+                }
+            );
+
+            eventProcessor.processEvent(new Event(events.LOCALIZATION_LOADED));
+        }
     ));
-    
-    function fillPageWithText(content){
-        document.title = content.title;
-        for(let id in content.staticText){
+
+    function setTitle(title){
+        document.title = title;
+    }
+
+    function fillPageWithText(texts){
+        for(let id in texts){
             const element = document.getElementById(id);
             if(element){
-                const localizations = content.staticText[id];
+                const localizations = texts[id];
                 for(let lindex in localizations){
                     element[localizations[lindex].key] = localizations[lindex].message;
                 }
-            }else logService.log("Element not found with id " + id, "warn");
+            }else logService.logToConsole("Element not found with id " + id);
         }
-        additionalContent = content.additionalContent;
-        eventProcessor.processEvent(new Event(events.LOCALIZATION_LOADED));
     }
 })();

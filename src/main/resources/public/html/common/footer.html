@@ -1,0 +1,14 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<BODY>
+<SPAN th:fragment="footer">
+    <BUTTON th:if="${page.name} != 'index'" id="home-button"></BUTTON>
+    <SPAN id="select-language-container">
+        <BUTTON id="select-language-button"></BUTTON>
+        <DIV id="selectable-languages-wrapper">
+            <DIV class="button" id="language-hu" onclick="eventProcessor.processEvent(new Event(events.SELECT_LANGUAGE, 'hu'))"></DIV>
+            <DIV class="button" id="language-en" onclick="eventProcessor.processEvent(new Event(events.SELECT_LANGUAGE, 'en'))"></DIV>
+        </DIV>
+    </SPAN>
+</SPAN>
+</BODY>
+</HTML>

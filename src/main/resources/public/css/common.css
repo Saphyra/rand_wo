@@ -52,6 +52,14 @@ footer{
     height: 3.1rem;
 }
 
+footer span:nth-child(1){
+    float: left;
+}
+
+footer span:nth-child(2){
+    float: right;
+}
+
 footer button, footer label{
     font-size: 1.25rem;
 }
@@ -77,7 +85,6 @@ a{
 }
 button, .button, a, select, footer label{
     margin: 0.25rem;
-    background: black;
     border: 3px outset black;
     border-radius: 5px;
     padding: 0.2rem;
@@ -156,4 +163,25 @@ input:disabled, button:disabled, textarea:disabled, .disabled{
 /*=======ADDIITIONAL=======*/
 .notification-container{
     color: red;
+}
+
+/*======LANGUAGE SELECTION=======*/
+footer span:nth-child(2){
+    position: relative;
+}
+
+#selectable-languages-wrapper{
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    text-align: right;
+    display: none;
+}
+
+#select-language-container:hover #selectable-languages-wrapper{
+    display: block;
+}
+
+#selectable-languages-wrapper .button{
+    text-align: right
 }

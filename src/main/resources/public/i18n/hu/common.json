@@ -1,0 +1,26 @@
+{
+  "home-button": [
+    {
+      "key": "innerHTML",
+      "message": "Kezdőlap"
+    }
+  ],
+  "select-language-button": [
+    {
+      "key": "innerHTML",
+      "message": "Nyelv"
+    }
+  ],
+  "language-hu": [
+    {
+      "key": "innerHTML",
+      "message": "Magyar"
+    }
+  ],
+  "language-en": [
+    {
+      "key": "innerHTML",
+      "message": "Angol"
+    }
+  ]
+}

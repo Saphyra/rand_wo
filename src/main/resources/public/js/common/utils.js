@@ -4,10 +4,6 @@ function throwException(name, message){
     throw {name: name, message: message};
 }
 
-function getLanguage(){
-    return navigator.language.toLowerCase().split("-")[0];
-}
-
 function getActualTimeStamp(){
     return Math.floor(new Date().getTime() / 1000);
 }
