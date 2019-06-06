@@ -1,6 +1,7 @@
 package com.github.saphyra.common.testcomponent;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
@@ -23,6 +24,11 @@ public class MockMvcWrapper {
         MockHttpServletRequestBuilder requestBuilder = delete(url)
             .content(writeValueAsString(requestBody));
 
+        return sendRequest(requestBuilder);
+    }
+
+    public MockHttpServletResponse getRequest(String url, Object... key) throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = get(url, key);
         return sendRequest(requestBuilder);
     }
 

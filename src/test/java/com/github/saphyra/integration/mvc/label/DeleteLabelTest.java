@@ -44,6 +44,7 @@ public class DeleteLabelTest {
     private static final UUID MAPPING_ID_1 = UUID.randomUUID();
     private static final UUID MAPPING_ID_2 = UUID.randomUUID();
     private static final UUID ITEM_ID = UUID.randomUUID();
+
     @Autowired
     private MockMvcWrapper mockMvcWrapper;
 

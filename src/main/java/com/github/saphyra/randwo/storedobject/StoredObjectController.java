@@ -16,10 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-//TODO API test
 public class StoredObjectController {
-    public static final String GET_OBJECT_MAPPING = "stored-object/{key}";
-    public static final String SAVE_OBJECT_MAPPING = "stored-object";
+    public static final String GET_OBJECT_MAPPING = "/stored-object/{key}";
+    public static final String SAVE_OBJECT_MAPPING = "/stored-object";
 
     private final SaveObjectService saveObjectService;
     private final StoredObjectQueryService storedObjectQueryService;
