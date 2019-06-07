@@ -1,6 +1,6 @@
 (function NotificationService(){
     window.notificationService = new function(){
-        scriptLoader.loadScript("js/common/animation/animationfacade.js");
+        scriptLoader.loadScript("/js/common/animation/animationfacade.js");
         
         this.showSuccess = showSuccess;
         this.showError = showError;

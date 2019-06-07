@@ -1,12 +1,12 @@
 <HTML xmlns:th="http://www.thymeleaf.org">
-<HEAD th:insert="common/head.html :: head(${page.name})"></HEAD>
+<HEAD th:insert="/common/head.html :: head(${page.name})"></HEAD>
 <BODY>
 <DIV class="main-page">
-    <HEADER th:replace="common/header.html :: header"/>
-    <MAIN th:replace="${page.templateLocation} :: main"/>
+    <HEADER th:replace="/common/header.html :: header"/>
+    <MAIN th:replace="~{|/${page.name}/page.html| :: main}"></MAIN>
     <FOOTER>
-        <SPAN th:replace="${page.templateLocation} :: footer"></SPAN>
-        <SPAN th:replace="common/footer.html :: footer"></SPAN>
+        <SPAN th:replace="~{|/${page.name}/page.html| :: footer}"></SPAN>
+        <SPAN th:replace="/common/footer.html :: footer"></SPAN>
     </FOOTER>
 </DIV>
 </BODY>

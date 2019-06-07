@@ -1,5 +1,6 @@
 (function LocalizationLoader(){
     const DEFAULT_LOCALE = "hu";
+
     window.localizationLoader = new function(){
         this.loadLocalization = loadLocalization
     }
@@ -29,7 +30,7 @@
         }
 
         function getPath(locale, fileName){
-            return "i18n/" + locale + "/" + fileName + ".json";
+            return "/i18n/" + locale + "/" + fileName + ".json";
         }
     }
 })();

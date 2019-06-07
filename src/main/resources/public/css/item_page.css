@@ -1,0 +1,125 @@
+#label-section{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 50%;
+    border-right: 3px ridge black;
+}
+
+    #labels-wrapper{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 2.5rem;
+    }
+
+        #current-labels-container{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            border-right: 1px ridge black;
+            padding: 0.25rem;
+        }
+
+            #no-added-labels{
+                text-align: center;
+                font-size: 1.5rem;
+            }
+
+        #add-label-container{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 50%;
+            overflow-x: auto;
+        }
+
+            #create-label-container{
+                text-align: center;
+                border-bottom: 1px ridge black;
+            }
+
+            #no-saved-labels{
+                text-align: center;
+                font-size: 1.5rem;
+            }
+
+            #existing-labels-container{
+                position: absolute;
+                top: 2.25rem;
+                left: 0;
+                right: 0;
+                bottom: 2.25rem;
+            }
+
+            #search-in-saved-labels-container{
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+                border-top: 1px ridge black;
+            }
+
+#key-section{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50%;
+    width: 50%;
+}
+
+    #keys-wrapper{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 2.5rem;
+    }
+
+        #create-key-container{
+            text-align: center;
+            border-bottom: 1px ridge black;
+        }
+
+        #no-saved-keys{
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        #existing-keys-container{
+            position: absolute;
+            top: 2.25rem;
+            left: 0;
+            right: 0;
+            bottom: 2.25rem;
+        }
+
+        #search-in-saved-keys-container{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            border-top: 1px ridge black;
+        }
+
+#item-section{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 50%;
+    border-top: 3px ridge black;
+}
+
+section > h2{
+    text-align: center;
+    border-bottom: 1px ridge black;
+    padding: 0.25rem;
+}

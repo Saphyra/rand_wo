@@ -5,19 +5,19 @@
         this.loadScript = loadScript;
     }
     
-    scriptLoader.loadScript("js/common/utils.js");
-    scriptLoader.loadScript("js/common/log_service.js");
-    scriptLoader.loadScript("js/common/dao/mapping.js");
-    scriptLoader.loadScript("js/common/dao/dao.js");
-    scriptLoader.loadScript("js/common/events.js");
-    scriptLoader.loadScript("js/common/event_processor.js");
-    scriptLoader.loadScript("js/common/load_state.js");
-    scriptLoader.loadScript("js/common/notification_service.js");
+    scriptLoader.loadScript("/js/common/utils.js");
+    scriptLoader.loadScript("/js/common/log_service.js");
+    scriptLoader.loadScript("/js/common/dao/mapping.js");
+    scriptLoader.loadScript("/js/common/dao/dao.js");
+    scriptLoader.loadScript("/js/common/events.js");
+    scriptLoader.loadScript("/js/common/event_processor.js");
+    scriptLoader.loadScript("/js/common/load_state.js");
+    scriptLoader.loadScript("/js/common/notification_service.js");
     
-    scriptLoader.loadScript("js/common/localization/locale_service.js");
-    scriptLoader.loadScript("js/common/localization/localization_loader.js");
-    scriptLoader.loadScript("js/common/localization/message_code.js");
-    scriptLoader.loadScript("js/common/localization/localization.js");
+    scriptLoader.loadScript("/js/common/localization/locale_service.js");
+    scriptLoader.loadScript("/js/common/localization/localization_loader.js");
+    scriptLoader.loadScript("/js/common/localization/message_code.js");
+    scriptLoader.loadScript("/js/common/localization/localization.js");
 
     /*
         Loads the script given as argument.

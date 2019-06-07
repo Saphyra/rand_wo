@@ -1,6 +1,7 @@
 (function Roll(){
     window.roll = new function(){
-        scriptLoader.loadScript("js/common/animation/domutil.js");
+        scriptLoader.loadScript("/js/common/animation/domutil.js");
+
         this.rollInHorizontal = rollInHorizontal;
         this.rollOutHorizontal = rollOutHorizontal;
     }

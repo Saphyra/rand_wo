@@ -1,0 +1,14 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD th:fragment="head">
+    <LINK rel="stylesheet" href="/css/item_page.css">
+</HEAD>
+<BODY>
+<MAIN th:fragment="main">
+    <SECTION th:replace="/item_page/sections.html :: label_section"></SECTION>
+    <SECTION th:replace="/item_page/sections.html :: key_section"></SECTION>
+    <SECTION th:replace="/item_page/sections.html :: item_section"></SECTION>
+</MAIN>
+
+<SPAN th:fragment="footer"></SPAN>
+</BODY>
+</HTML>

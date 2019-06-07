@@ -11,14 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class IndexController {
-    private static final String INDEX_MAPPING = "/";
+public class CreateItemController {
+    private static final String CREATE_ITEM_MAPPING = "items/create";
 
     private final ModelAndViewFactory modelAndViewFactory;
 
-    @GetMapping(INDEX_MAPPING)
-    ModelAndView index() {
-        log.info("Request arrived to {}", INDEX_MAPPING);
-        return modelAndViewFactory.create("index");
+    @GetMapping(CREATE_ITEM_MAPPING)
+    public ModelAndView createItem(){
+        log.info("Request arrived to {}", CREATE_ITEM_MAPPING);
+        return modelAndViewFactory.create("create_item");
     }
 }

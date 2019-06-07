@@ -1,0 +1,85 @@
+{
+  "title": "Új bejegyzés",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Új bejegyzés"
+      }
+    ],
+    "label-header": [
+      {
+        "key": "innerHTML",
+        "message": "Címkék"
+      }
+    ],
+    "no-added-labels": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek címkék"
+      }
+    ],
+    "new-label-value": [
+      {
+        "key": "placeholder",
+        "message": "Címke szövege"
+      }
+    ],
+    "add-new-label-button": [
+      {
+        "key": "innerHTML",
+        "message": "Hozzáadás"
+      }
+    ],
+    "no-saved-labels": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek mentett címkék"
+      }
+    ],
+    "search-in-saved-labels": [
+      {
+        "key": "placeholder",
+        "message": "Keresés"
+      }
+    ],
+    "key-header": [
+      {
+        "key": "innerHTML",
+        "message": "Oszlopok"
+      }
+    ],
+    "new-key-value": [
+      {
+        "key": "placeholder",
+        "message": "Oszlop neve"
+      }
+    ],
+    "add-new-key-button": [
+      {
+        "key": "innerHTML",
+        "message": "Hozzáadás"
+      }
+    ],
+    "no-saved-keys": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek mentett oszlopok"
+      }
+    ],
+    "search-in-saved-keys": [
+      {
+        "key": "placeholder",
+        "message": "Keresés"
+      }
+    ],
+    "item-header": [
+      {
+        "key": "innerHTML",
+        "message": "Bejegyzés"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}

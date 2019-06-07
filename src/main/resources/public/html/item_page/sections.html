@@ -1,0 +1,51 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<BODY>
+<SECTION th:fragment="label_section" id="label-section">
+    <H2 id="label-header"></H2>
+
+    <DIV id="labels-wrapper">
+        <DIV id="current-labels-container">
+            <DIV id="no-added-labels"></DIV>
+            <DIV id="current-labels"></DIV>
+        </DIV>
+
+        <DIV id="add-label-container">
+            <DIV id="create-label-container">
+                <INPUT type="text" id="new-label-value">
+                <BUTTON id="add-new-label-button"></BUTTON>
+            </DIV>
+
+            <DIV id="no-saved-labels"></DIV>
+            <DIV id="existing-labels-container"></DIV>
+            <DIV id="search-in-saved-labels-container">
+                <INPUT type="text" id="search-in-saved-labels">
+            </DIV>
+        </DIV>
+    </DIV>
+</SECTION>
+
+<SECTION th:fragment="key_section" id="key-section">
+    <H2 id="key-header"></H2>
+
+    <DIV id="keys-wrapper">
+        <DIV id="create-key-container">
+            <INPUT type="text" id="new-key-value">
+            <BUTTON id="add-new-key-button"></BUTTON>
+        </DIV>
+
+        <DIV id="no-saved-keys"></DIV>
+        <DIV id="existing-keys-container"></DIV>
+
+        <DIV id="search-in-saved-keys-container">
+            <INPUT type="text" id="search-in-saved-keys">
+        </DIV>
+    </DIV>
+</SECTION>
+
+<SECTION th:fragment="item_section" id="item-section">
+    <H2 id="item-header"></H2>
+
+    <DIV id="item"></DIV>
+</SECTION>
+</BODY>
+</HTML>

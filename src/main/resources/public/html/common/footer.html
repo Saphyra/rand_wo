@@ -1,7 +1,8 @@
 <HTML xmlns:th="http://www.thymeleaf.org">
 <BODY>
 <SPAN th:fragment="footer">
-    <BUTTON th:if="${page.name} != 'index'" id="home-button"></BUTTON>
+    <BUTTON th:if="${page.name} != 'index'" id="home-button" onclick="window.location.href = '/'"></BUTTON>
+
     <SPAN id="select-language-container">
         <BUTTON id="select-language-button"></BUTTON>
         <DIV id="selectable-languages-wrapper">

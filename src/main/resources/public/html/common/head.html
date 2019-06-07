@@ -5,10 +5,10 @@
         <LINK rel="stylesheet" href="/css/reset.css">
         <LINK rel="stylesheet" href="/css/common.css">
 
-        <SCRIPT src="js/jquery.js"></SCRIPT>
-        <SCRIPT src="js/common/common_base.js"></SCRIPT>
+        <SCRIPT src="/js/jquery.js"></SCRIPT>
+        <SCRIPT src="/js/common/common_base.js"></SCRIPT>
         <SCRIPT th:src="@{/js/} + ${pageName} + @{/page_controller.js}"></SCRIPT>
 
-        <meta th:replace="${page.templateLocation} :: head"/>
+        <meta th:replace="~{|${page.name}/page.html| :: head}"/>
     </HEAD>
 </HTML>

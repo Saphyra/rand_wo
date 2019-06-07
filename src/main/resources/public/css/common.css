@@ -107,7 +107,6 @@ button:active, .button:active, a:active, footer label:active{
 }
 
 input, textarea, div[contenteditable='true']{
-    background: black;
     border: 3px outset black;
     border-radius: 5px;
     padding: 0.2rem;
