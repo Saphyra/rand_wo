@@ -1,7 +1,17 @@
 <HTML xmlns:th="http://www.thymeleaf.org">
 <BODY>
-<HEAD th:fragment="head"></HEAD>
-<MAIN th:fragment="main"></MAIN>
+<HEAD th:fragment="head">
+    <LINK rel="stylesheet" href="/css/index.css">
+</HEAD>
+
+<MAIN th:fragment="main">
+    <DIV class="button" id="items-page-button" onclick="window.location.href='items'"></DIV>
+    <DIV class="button" id="create-item-page-button" onclick="window.location.href='items/create'"></DIV>
+    <DIV class="button" id="labels-page-button" onclick="window.location.href='labels'"></DIV>
+    <DIV class="button" id="keys-page-button" onclick="window.location.href='keys'"></DIV>
+    <DIV class="button" id="random-items-page-button" onclick="window.location.href='items/random'"></DIV>
+</MAIN>
+
 <SPAN th:fragment="footer"></SPAN>
 </BODY>
 </HTML>

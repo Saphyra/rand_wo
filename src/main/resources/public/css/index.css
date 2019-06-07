@@ -1,0 +1,14 @@
+main .button{
+    border-color: blue;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 2rem;
+    border-width: 5px;
+    background: lightblue;
+    padding: 0.5rem;
+}
+
+main .button:hover{
+    background: lightgreen;
+}

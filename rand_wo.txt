@@ -117,12 +117,6 @@ Api
                 - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
 
 FrontEnd
-    - common
-        - footer
-            - Home button
-            - Language selection button
-    - index
-        - Link to other pages //TODO implement
     - create_item
         - list of existing labels //TODO implement
         - added labels //TODO implement

@@ -6,6 +6,36 @@
         "key": "innerHTML",
         "message": "RandWo"
       }
+    ],
+    "items-page-button": [
+      {
+        "key": "innerHTML",
+        "message": "Bejegyzések"
+      }
+    ],
+    "create-item-page-button": [
+      {
+        "key": "innerHTML",
+        "message": "Új bejegyzés"
+      }
+    ],
+    "labels-page-button": [
+      {
+        "key": "innerHTML",
+        "message": "Címkék"
+      }
+    ],
+    "keys-page-button": [
+      {
+        "key": "innerHTML",
+        "message": "Oszlopok"
+      }
+    ],
+    "random-items-page-button": [
+      {
+        "key": "innerHTML",
+        "message": "Véletlenszerű bejegyzések"
+      }
     ]
   },
   "additionalContent": {
