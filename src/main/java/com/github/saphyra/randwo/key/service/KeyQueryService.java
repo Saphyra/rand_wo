@@ -1,5 +1,6 @@
 package com.github.saphyra.randwo.key.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -19,5 +20,10 @@ public class KeyQueryService {
     public Key findByKeyIdValidated(UUID keyId) {
         return keyDao.findById(keyId)
             .orElseThrow(() -> new NotFoundException(new ErrorMessage(ErrorCode.KEY_NOT_FOUND.getErrorCode()), "Key not found with keyId " + keyId));
+    }
+
+    //TODO unit test
+    public List<Key> getAll() {
+        return keyDao.getAll();
     }
 }

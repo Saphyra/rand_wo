@@ -9,6 +9,8 @@
     <SECTION th:replace="/item_page/sections.html :: item_section"></SECTION>
 </MAIN>
 
-<SPAN th:fragment="footer"></SPAN>
+<SPAN th:fragment="footer">
+    <BUTTON id="create-item-button" onclick="eventProcessor.processEvent(new Event(events.CREATE_ITEM))"></BUTTON>
+</SPAN>
 </BODY>
 </HTML>

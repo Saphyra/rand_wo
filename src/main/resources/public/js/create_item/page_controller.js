@@ -1,5 +1,8 @@
 (function PageController(){
     scriptLoader.loadScript("/js/create_item/label_controller.js");
+    scriptLoader.loadScript("/js/create_item/key_controller.js");
+    scriptLoader.loadScript("/js/create_item/item_controller.js");
+    scriptLoader.loadScript("/js/create_item/create_item_service.js");
 
     const PAGE_NAME = "create_item";
 

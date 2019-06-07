@@ -1,3 +1,7 @@
 {
-  "label-value-already-exists": "Már van címke a megadott szöveggel."
+  "item-created": "Bejegyzés mentve.",
+  "key-value-already-exists": "Már van oszlop a megadott szöveggel.",
+  "label-value-already-exists": "Már van címke a megadott szöveggel.",
+  "no-labels": "Nincs címke hozzáadva.",
+  "no-keys": "Nincs oszlop hozzáadva."
 }

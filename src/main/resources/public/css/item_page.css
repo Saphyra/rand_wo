@@ -60,7 +60,7 @@
                 border-bottom: 1px ridge black;
             }
 
-            #no-saved-labels{
+            #no-existing-labels{
                 text-align: center;
                 font-size: 1.5rem;
             }
@@ -73,7 +73,7 @@
                 bottom: 2.25rem;
             }
 
-            #search-in-saved-labels-container{
+            #search-in-existing-labels-container{
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -103,7 +103,7 @@
             border-bottom: 1px ridge black;
         }
 
-        #no-saved-keys{
+        #no-existing-keys{
             text-align: center;
             font-size: 1.5rem;
         }
@@ -116,7 +116,7 @@
             bottom: 2.25rem;
         }
 
-        #search-in-saved-keys-container{
+        #search-in-existing-keys-container{
             position: absolute;
             bottom: 0;
             left: 0;
@@ -133,6 +133,48 @@
     height: 50%;
     border-top: 3px ridge black;
 }
+
+    #no-columns{
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    #columns{
+        position: absolute;
+        top: 2.5rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+        .column{
+            position: relative;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 0.25rem;
+            min-width: 10rem;
+            min-height: 5rem;
+        }
+
+            .column-head{
+                border-bottom: 2px ridge black;
+                padding: 0.1rem;
+            }
+
+            .column textarea{
+                min-height: 3.5rem;
+            }
+
+            .column button{
+                position: absolute;
+                right: 1px;
+                top: 1px;
+                margin: 0;
+                font-size: 0.5rem;
+                border-width: 1px;
+            }
 
 section > h2{
     text-align: center;

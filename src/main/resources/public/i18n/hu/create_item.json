@@ -31,13 +31,13 @@
         "message": "Hozzáadás"
       }
     ],
-    "no-saved-labels": [
+    "no-existing-labels": [
       {
         "key": "innerHTML",
         "message": "Nincsenek mentett címkék"
       }
     ],
-    "search-in-saved-labels": [
+    "search-in-existing-labels": [
       {
         "key": "placeholder",
         "message": "Keresés"
@@ -61,13 +61,13 @@
         "message": "Hozzáadás"
       }
     ],
-    "no-saved-keys": [
+    "no-existing-keys": [
       {
         "key": "innerHTML",
         "message": "Nincsenek mentett oszlopok"
       }
     ],
-    "search-in-saved-keys": [
+    "search-in-existing-keys": [
       {
         "key": "placeholder",
         "message": "Keresés"
@@ -77,6 +77,18 @@
       {
         "key": "innerHTML",
         "message": "Bejegyzés"
+      }
+    ],
+    "no-columns": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek oszlopok"
+      }
+    ],
+    "create-item-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
       }
     ]
   },

@@ -15,10 +15,10 @@
                 <BUTTON id="add-new-label-button" onclick="eventProcessor.processEvent(new Event(events.ADD_NEW_LABEL))"></BUTTON>
             </DIV>
 
-            <DIV id="no-saved-labels"></DIV>
+            <DIV id="no-existing-labels"></DIV>
             <DIV id="existing-labels-container"></DIV>
-            <DIV id="search-in-saved-labels-container">
-                <INPUT type="text" id="search-in-saved-labels">
+            <DIV id="search-in-existing-labels-container">
+                <INPUT type="text" id="search-in-existing-labels">
             </DIV>
         </DIV>
     </DIV>
@@ -30,14 +30,14 @@
     <DIV id="keys-wrapper">
         <DIV id="create-key-container">
             <INPUT type="text" id="new-key-value">
-            <BUTTON id="add-new-key-button"></BUTTON>
+            <BUTTON id="add-new-key-button" onclick="eventProcessor.processEvent(new Event(events.ADD_NEW_KEY))"></BUTTON>
         </DIV>
 
-        <DIV id="no-saved-keys"></DIV>
+        <DIV id="no-existing-keys"></DIV>
         <DIV id="existing-keys-container"></DIV>
 
-        <DIV id="search-in-saved-keys-container">
-            <INPUT type="text" id="search-in-saved-keys">
+        <DIV id="search-in-existing-keys-container">
+            <INPUT type="text" id="search-in-existing-keys">
         </DIV>
     </DIV>
 </SECTION>
@@ -45,7 +45,8 @@
 <SECTION th:fragment="item_section" id="item-section">
     <H2 id="item-header"></H2>
 
-    <DIV id="item"></DIV>
+    <DIV id="no-columns"></DIV>
+    <DIV id="columns"></DIV>
 </SECTION>
 </BODY>
 </HTML>

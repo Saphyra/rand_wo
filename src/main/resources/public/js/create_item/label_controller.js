@@ -8,6 +8,11 @@
     const addedLabels = [];
     const newLabels = [];
 
+    window.labelController = new function(){
+        this.getAddedLabels = function(){return addedLabels};
+        this.getNewLabels = function(){return newLabels};
+    }
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.ADD_NEW_LABEL},
         function(){
@@ -63,7 +68,9 @@
     function loadLabels(){
         const request = new Request(HttpMethod.GET, Mapping.GET_LABELS);
             request.convertResponse = function(response){
-                return JSON.parse(response.body);
+                const labels = JSON.parse(response.body)
+                labels.sort(function(a, b){return a.labelValue.localeCompare(b.labelValue)});
+                return labels;
             }
             request.processValidResponse = function(labels){
                 loadedLabels = mapLabels(labels);
@@ -85,7 +92,7 @@
     }
 
     function displayLabels(){
-        labelsCanBeAdd.length ? $("#no-saved-labels").hide() : $("#no-saved-labels").show();
+        labelsCanBeAdd.length ? $("#no-existing-labels").hide() : $("#no-existing-labels").show();
 
         const container = document.getElementById("existing-labels-container");
 
@@ -101,5 +108,10 @@
 
     function init(){
         loadLabels();
+        document.getElementById("new-label-value").onkeyup = function(e){
+            if(e.which == 13){
+                eventProcessor.processEvent(new Event(events.ADD_NEW_LABEL));
+            }
+        }
     }
 })();

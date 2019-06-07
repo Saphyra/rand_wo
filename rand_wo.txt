@@ -118,11 +118,6 @@ Api
 
 FrontEnd
     - create_item
-        - list of existing labels //TODO implement
-        - added labels //TODO implement
-        - new labels //TODO implement
-        - list of existing columns //TODO implement
-        - new columns //TODO implement
         - values for columns //TODO implement
     - delete_items_by_label
         - select labels //TODO implement

@@ -1,5 +1,6 @@
 package com.github.saphyra.randwo.key.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,5 +17,10 @@ public class KeyDao extends AbstractDao<KeyEntity, Key, UUID, KeyRepository> {
 
     public Optional<Key> findByKeyValue(String keyValue) {
         return converter.convertEntity(repository.findByKeyValue(keyValue));
+    }
+
+    //TODO unit test
+    public List<Key> getAll() {
+        return converter.convertEntity(repository.findAll());
     }
 }
