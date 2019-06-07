@@ -10,6 +10,7 @@ public enum ErrorCode {
     EMPTY_KEY_VALUE("empty-key-value"),
     EMPTY_LABEL_VALUE("empty-label-value"),
     EMPTY_OBJECT_KEY("empty-object-key"),
+    GENERAL_ERROR("general-error"),
     ITEM_HAS_ONLY_ONE_KEY("item-has-only-one-key"),
     ITEM_HAS_ONLY_ONE_LABEL("item-has-only-one-label"),
     ITEM_LABEL_MAPPING_ALREADY_EXISTS("item-label-mapping-already-exists"),

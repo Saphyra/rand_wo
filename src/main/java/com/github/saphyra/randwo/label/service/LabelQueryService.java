@@ -1,5 +1,6 @@
 package com.github.saphyra.randwo.label.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -19,5 +20,10 @@ public class LabelQueryService {
     public Label findByLabelIdValidated(UUID labelId) {
         return labelDao.findById(labelId)
             .orElseThrow(() -> new NotFoundException(new ErrorMessage(ErrorCode.LABEL_NOT_FOUND.getErrorCode()), "Label not found with labelId " + labelId));
+    }
+
+    //TODO unit test
+    public List<Label> getAll() {
+        return labelDao.getAll();
     }
 }

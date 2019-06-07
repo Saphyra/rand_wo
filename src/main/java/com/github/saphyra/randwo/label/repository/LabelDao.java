@@ -1,11 +1,13 @@
 package com.github.saphyra.randwo.label.repository;
 
-import com.github.saphyra.dao.AbstractDao;
-import com.github.saphyra.randwo.label.domain.Label;
-import org.springframework.stereotype.Component;
-
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
+import com.github.saphyra.dao.AbstractDao;
+import com.github.saphyra.randwo.label.domain.Label;
 
 @Component
 public class LabelDao extends AbstractDao<LabelEntity, Label, UUID, LabelRepository> {
@@ -15,5 +17,10 @@ public class LabelDao extends AbstractDao<LabelEntity, Label, UUID, LabelReposit
 
     public Optional<Label> findByLabelValue(String labelValue) {
         return converter.convertEntity(repository.findByLabelValue(labelValue));
+    }
+
+    //TODO unit test
+    public List<Label> getAll() {
+        return converter.convertEntity(repository.findAll());
     }
 }

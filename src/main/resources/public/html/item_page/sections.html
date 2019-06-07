@@ -5,14 +5,14 @@
 
     <DIV id="labels-wrapper">
         <DIV id="current-labels-container">
-            <DIV id="no-added-labels"></DIV>
+            <DIV id="no-current-labels"></DIV>
             <DIV id="current-labels"></DIV>
         </DIV>
 
         <DIV id="add-label-container">
             <DIV id="create-label-container">
                 <INPUT type="text" id="new-label-value">
-                <BUTTON id="add-new-label-button"></BUTTON>
+                <BUTTON id="add-new-label-button" onclick="eventProcessor.processEvent(new Event(events.ADD_NEW_LABEL))"></BUTTON>
             </DIV>
 
             <DIV id="no-saved-labels"></DIV>

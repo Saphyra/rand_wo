@@ -1,4 +1,6 @@
 (function PageController(){
+    scriptLoader.loadScript("/js/create_item/label_controller.js");
+
     const PAGE_NAME = "create_item";
 
     window.pageController = new function(){

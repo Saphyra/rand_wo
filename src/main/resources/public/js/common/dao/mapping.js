@@ -1,4 +1,5 @@
 window.Mapping = {
+    GET_LABELS: "/label",
     GET_OBJECT_FROM_STORE: "/stored-object/*",
     SAVE_TO_OBJECT_STORE: "/stored-object",
 

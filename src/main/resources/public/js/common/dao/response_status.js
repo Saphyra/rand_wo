@@ -49,6 +49,7 @@ window.ResponseStatus = new function(){
     this.UNAUTHORIZED = 401;
     this.FORBIDDEN = 403
     this.NOT_FOUND = 404;
+    this.METHOD_NOT_ALLOWED = 405;
     this.CONFLICT = 409;
     this.PRECONDITION_FAILED = 412;
     this.LOCKED = 423;
