@@ -16,7 +16,8 @@
                 function(content){
                     document.title = content.title;
                     fillPageWithText(content.staticText);
-                    additionalContent = content.additionalContent;;
+                    additionalContent = content.additionalContent;
+                    fillPageWithAdditionalContent();
                 }
             );
 

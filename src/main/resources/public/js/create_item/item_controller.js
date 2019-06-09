@@ -19,7 +19,7 @@
                     const columnBody = document.createElement("DIV");
                         const textarea = document.createElement("TEXTAREA");
                             textarea.id = columnData.id;
-                            //TODO localized placeholder
+                            textarea.placeholder = Localization.getAdditionalContent("enter-value-here");
                     columnBody.appendChild(textarea);
                 column.appendChild(columnBody);
 
