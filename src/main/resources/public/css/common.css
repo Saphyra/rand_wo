@@ -146,12 +146,21 @@ input:disabled, button:disabled, textarea:disabled, .disabled{
     vertical-align: middle;
 }
 
-.formatted-table tr:nth-child(odd){
-    background-color: rgba(200,200,200,0.1);
+.formatted-table td:nth-child(odd), .formatted-table th:nth-child(odd){
+    background-color: rgba(225,225,225,1);
 }
-.formatted-table tr:nth-child(even){
-    background-color: rgba(255,255,255,0.25);
+.formatted-table td:nth-child(even), .formatted-table th:nth-child(even){
+    background-color: rgba(255,255,255,1);
 }
+
+.formatted-table tr:hover td{
+    background-color: rgba(125,125,125,1);
+}
+
+.formatted-table td:hover{
+    background-color: rgba(75,75,75,1) !important;
+}
+
 .formatted-table thead tr:first-child{
     background-color: rgba(0,75,150,0.3);
 }

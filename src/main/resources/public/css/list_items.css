@@ -1,16 +1,20 @@
-#search-field-container{
+#search-field-container, #delete-field-container{
     text-align: center;
     border-bottom: 3px ridge black;
     font-size: 1.25rem;
+}
+
+#search-field-container{
     padding-bottom: 0.5rem;
 }
 
 #items-container{
     position: absolute;
-    top: 3.5rem;
+    top: 5.75rem;
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: auto;
 }
 
     #no-items{
@@ -20,15 +24,20 @@
 
     #items{
         padding: 0.25rem;
-        overflow: auto;
     }
 
         #items-table{
             border-collapse: separate;
             border-spacing: 0 0.5rem;
+            min-width: 100%;
         }
 
-            #items-table td:not(:last-child){
+            .items-head th{
+                position: sticky;
+                top: 0rem;
+            }
+
+            #items-table td:not(:last-child), #items-table th:not(:last-child){
                 border-right: none;
             }
 
@@ -45,8 +54,9 @@
                 margin: 0.25rem;
             }
 
-            .column-name{
-                white-space: nowrap;
+            .value-area{
+                min-width: 15rem;
+                min-height: 4rem;
             }
 
             .label{

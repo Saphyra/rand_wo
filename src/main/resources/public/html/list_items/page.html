@@ -21,6 +21,14 @@
         <BUTTON id="search-button" onclick="eventProcessor.processEvent(new Event(events.SEARCH_ITEMS))"></BUTTON>
     </DIV>
 
+    <DIV id="delete-field-container">
+        <LABEL>
+            <INPUT type="checkbox" id="select-all-checkbox">
+            <SPAN id="select-all-label"></SPAN>
+        </LABEL>
+        <BUTTON id="delete-selected-button" onclick="eventProcessor.processEvent(new Event(events.DELETE_ITEMS))"></BUTTON>
+    </DIV>
+
     <DIV id="items-container">
         <DIV id="no-items"></DIV>
 

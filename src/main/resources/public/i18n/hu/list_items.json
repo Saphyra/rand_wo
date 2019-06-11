@@ -31,6 +31,18 @@
         "message": "Keresés"
       }
     ],
+    "select-all-label": [
+      {
+        "key": "innerHTML",
+        "message": "Mindet kiválaszt"
+      }
+    ],
+    "delete-selected-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelöltek törlése"
+      }
+    ],
     "no-items": [
       {
         "key": "innerHTML",
@@ -45,5 +57,11 @@
     ]
   },
   "additionalContent": {
+    "confirm-delete-items": "Biztosan törli a kiválasztott bejegyzéseket?",
+    "edit-button": "Szerkesztés",
+    "items-deleted": "bejegyzések törölve",
+    "labels-header": "Címkék",
+    "no-selected-items": "Válassza ki a bejegyzéseket!",
+    "operations-header": "Műveletek"
   }
 }

@@ -46,7 +46,7 @@ public class ItemViewQueryService {
 
         return itemLabelMappingDao.getByItemId(item.getItemId()).stream()
             .map(itemLabelMapping -> labelQueryService.findByLabelIdValidated(itemLabelMapping.getLabelId()))
-            .anyMatch(label -> label.getLabelValue().equalsIgnoreCase(searchByLabel));
+            .anyMatch(label -> label.getLabelValue().toLowerCase().contains(searchByLabel.toLowerCase()));
     }
 
     private boolean filterByKey(Item item, String searchByKey) {
@@ -56,7 +56,7 @@ public class ItemViewQueryService {
 
         return itemValueMappingDao.getByItemId(item.getItemId()).stream()
             .map(itemValueMapping -> keyQueryService.findByKeyIdValidated(itemValueMapping.getKeyId()))
-            .anyMatch(key -> key.getKeyValue().equalsIgnoreCase(searchByKey));
+            .anyMatch(key -> key.getKeyValue().toLowerCase().contains(searchByKey.toLowerCase()));
     }
 
     private boolean filterByValue(Item item, String searchByValue) {
@@ -65,6 +65,6 @@ public class ItemViewQueryService {
         }
 
         return itemValueMappingDao.getByItemId(item.getItemId()).stream()
-            .anyMatch(itemValueMapping -> itemValueMapping.getValue().equalsIgnoreCase(searchByValue));
+            .anyMatch(itemValueMapping -> itemValueMapping.getValue().toLowerCase().contains(searchByValue.toLowerCase()));
     }
 }
