@@ -1,0 +1,49 @@
+{
+  "title": "Bejegyzések",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Bejegyzések"
+      }
+    ],
+    "search-by-label-label": [
+      {
+        "key": "innerHTML",
+        "message": "Címke:"
+      }
+    ],
+    "search-by-key-label": [
+      {
+        "key": "innerHTML",
+        "message": "Oszlop:"
+      }
+    ],
+    "search-by-value-label": [
+      {
+        "key": "innerHTML",
+        "message": "Érték:"
+      }
+    ],
+    "search-button": [
+      {
+        "key": "innerHTML",
+        "message": "Keresés"
+      }
+    ],
+    "no-items": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs bejegyzés"
+      }
+    ],
+    "create-item-button": [
+      {
+        "key": "innerHTML",
+        "message": "Új bejegyzés"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}

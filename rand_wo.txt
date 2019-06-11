@@ -117,19 +117,10 @@ Api
                 - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
 
 FrontEnd
-    - create_item
-        - values for columns //TODO implement
     - delete_items_by_label
         - select labels //TODO implement
         - select method //TODO implement
     - list_items
-        - link to create_item page //TODO implement
-        - list all items //TODO implement
-        - filter by //TODO implement
-            - column name
-            - label
-            - value
-            - or / all
         - link to edit item //TODO implement
         - delete items //TODO implement
         - select all button //TODO implement

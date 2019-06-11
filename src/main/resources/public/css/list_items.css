@@ -1,0 +1,58 @@
+#search-field-container{
+    text-align: center;
+    border-bottom: 3px ridge black;
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+}
+
+#items-container{
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+    #no-items{
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    #items{
+        padding: 0.25rem;
+        overflow: auto;
+    }
+
+        #items-table{
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+        }
+
+            #items-table td:not(:last-child){
+                border-right: none;
+            }
+
+            .item{
+                text-align: center;
+            }
+
+            .item td:not(:first-child){
+                vertical-align: top;
+            }
+
+            .item input[type=checkbox]{
+                transform: scale(2);
+                margin: 0.25rem;
+            }
+
+            .column-name{
+                white-space: nowrap;
+            }
+
+            .label{
+                white-space: nowrap;
+                border: 2px outset black;
+                margin: 0.125rem;
+                padding: 0.125rem;
+                display: inline-block;
+            }

@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LabelController {
     public static final String DELETE_LABELS_MAPPING = "/label";
+    public static final String GET_LABEL = "/label/{labelId}";
     public static final String GET_LABELS = "/label";
     public static final String UPDATE_LABEL_MAPPING = "/label/{labelId}";
 
@@ -35,7 +36,16 @@ public class LabelController {
         deleteLabelService.deleteLabels(labelIds);
     }
 
+    @GetMapping(GET_LABEL)
+    //TODO unit test
+    //TODO API test
+    public Label getLabel(@PathVariable("labelId") UUID labelId){
+        log.info("Querying label with id {}", labelId);
+        return labelQueryService.findByLabelIdValidated(labelId);
+    }
+
     @GetMapping(GET_LABELS)
+    //TODO API TEST
     public List<Label> getLabels(){
         log.info("Querying all labels");
         return labelQueryService.getAll();

@@ -1,0 +1,37 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD th:fragment="head">
+    <LINK rel="stylesheet" href="/css/list_items.css">
+</HEAD>
+<BODY>
+<MAIN th:fragment="main">
+    <DIV id="search-field-container">
+        <LABEL>
+            <SPAN id="search-by-label-label"></SPAN>
+            <INPUT type="text" id="search-by-label">
+        </LABEL>
+        <LABEL>
+            <SPAN id="search-by-key-label"></SPAN>
+            <INPUT type="text" id="search-by-key">
+        </LABEL>
+        <LABEL>
+            <SPAN id="search-by-value-label"></SPAN>
+            <INPUT type="text" id="search-by-value">
+        </LABEL>
+
+        <BUTTON id="search-button" onclick="eventProcessor.processEvent(new Event(events.SEARCH_ITEMS))"></BUTTON>
+    </DIV>
+
+    <DIV id="items-container">
+        <DIV id="no-items"></DIV>
+
+        <DIV id="items">
+            <TABLE id="items-table" class="formatted-table"></TABLE>
+        </DIV>
+    </DIV>
+</MAIN>
+
+<SPAN th:fragment="footer">
+    <BUTTON id="create-item-button" onclick="window.location.href = '/items/create'"></BUTTON>
+</SPAN>
+</BODY>
+</HTML>

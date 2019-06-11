@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class KeyController {
     public static final String DELETE_KEYS_MAPPING = "/key";
+    public static final String GET_KEY_MAPPING = "/key/{keyId}";
     public static final String GET_KEYS_MAPPING = "/key";
     public static final String UPDATE_KEY_MAPPING = "/key/{keyId}";
 
@@ -35,8 +36,17 @@ public class KeyController {
         deleteKeyService.deleteKeys(keyIds);
     }
 
+    @GetMapping(GET_KEY_MAPPING)
+    //TODO API TEST
+    //TODO unit test
+    public Key getKey(@PathVariable("keyId") UUID keyId) {
+        log.info("Querying key with id {}", keyId);
+        return keyQueryService.findByKeyIdValidated(keyId);
+    }
+
     @GetMapping(GET_KEYS_MAPPING)
-    public List<Key> getKeys(){
+    //TODO API TEST
+    public List<Key> getKeys() {
         log.info("Querying all keys");
         return keyQueryService.getAll();
     }

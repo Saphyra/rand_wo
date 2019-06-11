@@ -1,13 +1,10 @@
 package com.github.saphyra.randwo.item;
 
-import com.github.saphyra.randwo.item.domain.DeleteItemRequest;
-import com.github.saphyra.randwo.item.domain.ItemRequest;
-import com.github.saphyra.randwo.item.service.create.CreateItemService;
-import com.github.saphyra.randwo.item.service.delete.DeleteItemByItemIdService;
-import com.github.saphyra.randwo.item.service.delete.DeleteItemByLabelService;
-import com.github.saphyra.randwo.item.service.update.UpdateItemService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.UUID;
+
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +12,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
-import java.util.UUID;
+import com.github.saphyra.randwo.item.domain.DeleteItemRequest;
+import com.github.saphyra.randwo.item.domain.GetItemsRequest;
+import com.github.saphyra.randwo.item.domain.ItemRequest;
+import com.github.saphyra.randwo.item.domain.ItemView;
+import com.github.saphyra.randwo.item.service.view.ItemViewQueryService;
+import com.github.saphyra.randwo.item.service.create.CreateItemService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByItemIdService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByLabelService;
+import com.github.saphyra.randwo.item.service.update.UpdateItemService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
@@ -26,11 +31,13 @@ public class ItemController {
     public static final String CREATE_ITEM_MAPPING = "/item";
     public static final String DELETE_BY_ITEM_IDS_MAPPING = "/item/id";
     public static final String DELETE_BY_LABEL_IDS_MAPPING = "/item/label";
+    public static final String GET_ITEMS_MAPPING = "/item";
     public static final String UPDATE_ITEM_MAPPING = "/item/{itemId}";
 
     private final CreateItemService createItemService;
     private final DeleteItemByItemIdService deleteItemByItemIdService;
     private final DeleteItemByLabelService deleteItemByLabelService;
+    private final ItemViewQueryService itemViewQueryService;
     private final UpdateItemService updateItemService;
 
     @PutMapping(CREATE_ITEM_MAPPING)
@@ -46,9 +53,17 @@ public class ItemController {
     }
 
     @DeleteMapping(DELETE_BY_LABEL_IDS_MAPPING)
-    public void deleteByLabelIds(@RequestBody DeleteItemRequest request){
+    public void deleteByLabelIds(@RequestBody DeleteItemRequest request) {
         log.info("Deleting items based on request: {}", request);
         deleteItemByLabelService.deleteItems(request);
+    }
+
+    @PostMapping(GET_ITEMS_MAPPING)
+    //TODO unit test
+    //TODO API test
+    public List<ItemView> getItems(@RequestBody GetItemsRequest request) {
+        log.info("Querying items: {}", request);
+        return itemViewQueryService.getItems(request);
     }
 
     @PostMapping(UPDATE_ITEM_MAPPING)
