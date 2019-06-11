@@ -19,7 +19,6 @@ public class KeyDao extends AbstractDao<KeyEntity, Key, UUID, KeyRepository> {
         return converter.convertEntity(repository.findByKeyValue(keyValue));
     }
 
-    //TODO unit test
     public List<Key> getAll() {
         return converter.convertEntity(repository.findAll());
     }

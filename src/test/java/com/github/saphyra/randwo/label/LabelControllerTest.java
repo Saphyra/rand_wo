@@ -1,5 +1,7 @@
 package com.github.saphyra.randwo.label;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
@@ -12,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.randwo.label.domain.Label;
+import com.github.saphyra.randwo.label.service.LabelQueryService;
 import com.github.saphyra.randwo.label.service.delete.DeleteLabelService;
 import com.github.saphyra.randwo.label.service.update.UpdateLabelService;
 
@@ -24,10 +28,16 @@ public class LabelControllerTest {
     private DeleteLabelService deleteLabelService;
 
     @Mock
+    private LabelQueryService labelQueryService;
+
+    @Mock
     private UpdateLabelService updateLabelService;
 
     @InjectMocks
     private LabelController underTest;
+
+    @Mock
+    private Label label;
 
     @Test
     public void deleteLabels() {
@@ -37,6 +47,16 @@ public class LabelControllerTest {
         underTest.deleteLabels(labelIds);
         //THEN
         verify(deleteLabelService).deleteLabels(labelIds);
+    }
+
+    @Test
+    public void getLabels() {
+        //GIVEN
+        given(labelQueryService.getAll()).willReturn(Arrays.asList(label));
+        //WHEN
+        List<Label> result = underTest.getLabels();
+        //THEN
+        assertThat(result).containsOnly(label);
     }
 
     @Test

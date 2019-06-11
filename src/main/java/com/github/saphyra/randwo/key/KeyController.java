@@ -36,7 +36,6 @@ public class KeyController {
     }
 
     @GetMapping(GET_KEYS_MAPPING)
-    //TODO unit test
     public List<Key> getKeys(){
         log.info("Querying all keys");
         return keyQueryService.getAll();

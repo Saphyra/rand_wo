@@ -3,6 +3,8 @@ package com.github.saphyra.randwo.key.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -42,5 +44,18 @@ public class KeyDaoTest {
         Optional<Key> result = underTest.findByKeyValue(KEY_VALUE);
         //THEN
         assertThat(result).contains(key);
+    }
+
+    @Test
+    public void getAll() {
+        //GIVEN
+        List<KeyEntity> entities = Arrays.asList(keyEntity);
+        given(keyRepository.findAll()).willReturn(entities);
+
+        given(keyConverter.convertEntity(entities)).willReturn(Arrays.asList(key));
+        //WHEN
+        List<Key> result = underTest.getAll();
+        //THEN
+        assertThat(result).containsOnly(key);
     }
 }

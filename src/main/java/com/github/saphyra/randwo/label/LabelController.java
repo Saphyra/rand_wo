@@ -36,7 +36,6 @@ public class LabelController {
     }
 
     @GetMapping(GET_LABELS)
-    //TODO unit test
     public List<Label> getLabels(){
         log.info("Querying all labels");
         return labelQueryService.getAll();

@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,5 +52,15 @@ public class LabelQueryServiceTest {
         Label result = underTest.findByLabelIdValidated(LABEL_ID);
         //THEN
         assertThat(result).isEqualTo(label);
+    }
+
+    @Test
+    public void getAll() {
+        //GIVEN
+        given(labelDao.getAll()).willReturn(Arrays.asList(label));
+        //WHEN
+        List<Label> result = underTest.getAll();
+        //THEN
+        assertThat(result).containsOnly(label);
     }
 }

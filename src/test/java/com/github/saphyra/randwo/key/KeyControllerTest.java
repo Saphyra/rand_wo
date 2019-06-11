@@ -1,5 +1,7 @@
 package com.github.saphyra.randwo.key;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
@@ -12,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.randwo.key.domain.Key;
+import com.github.saphyra.randwo.key.service.KeyQueryService;
 import com.github.saphyra.randwo.key.service.delete.DeleteKeyService;
 import com.github.saphyra.randwo.key.service.update.UpdateKeyService;
 
@@ -24,10 +28,16 @@ public class KeyControllerTest {
     private DeleteKeyService deleteKeyService;
 
     @Mock
+    private KeyQueryService keyQueryService;
+
+    @Mock
     private UpdateKeyService updateKeyService;
 
     @InjectMocks
     private KeyController underTest;
+
+    @Mock
+    private Key key;
 
     @Test
     public void deleteKeys() {
@@ -37,6 +47,16 @@ public class KeyControllerTest {
         underTest.deleteKeys(keyIds);
         //THEN
         verify(deleteKeyService).deleteKeys(keyIds);
+    }
+
+    @Test
+    public void getKeys() {
+        //GIVEN
+        given(keyQueryService.getAll()).willReturn(Arrays.asList(key));
+        //WHEN
+        List<Key> result = underTest.getKeys();
+        //THEN
+        assertThat(result).containsOnly(key);
     }
 
     @Test

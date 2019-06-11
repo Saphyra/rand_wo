@@ -19,7 +19,6 @@ public class LabelDao extends AbstractDao<LabelEntity, Label, UUID, LabelReposit
         return converter.convertEntity(repository.findByLabelValue(labelValue));
     }
 
-    //TODO unit test
     public List<Label> getAll() {
         return converter.convertEntity(repository.findAll());
     }

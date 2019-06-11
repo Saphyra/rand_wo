@@ -22,7 +22,6 @@ public class LabelQueryService {
             .orElseThrow(() -> new NotFoundException(new ErrorMessage(ErrorCode.LABEL_NOT_FOUND.getErrorCode()), "Label not found with labelId " + labelId));
     }
 
-    //TODO unit test
     public List<Label> getAll() {
         return labelDao.getAll();
     }

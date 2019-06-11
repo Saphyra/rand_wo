@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,5 +53,15 @@ public class KeyQueryServiceTest {
         Key result = underTest.findByKeyIdValidated(KEY_ID);
         //THEN
         assertThat(result).isEqualTo(key);
+    }
+
+    @Test
+    public void getAll() {
+        //GIVEN
+        given(keyDao.getAll()).willReturn(Arrays.asList(key));
+        //WHEN
+        List<Key> result = underTest.getAll();
+        //THEN
+        assertThat(result).containsOnly(key);
     }
 }

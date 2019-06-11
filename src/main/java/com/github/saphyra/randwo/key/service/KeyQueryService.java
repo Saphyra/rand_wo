@@ -22,7 +22,6 @@ public class KeyQueryService {
             .orElseThrow(() -> new NotFoundException(new ErrorMessage(ErrorCode.KEY_NOT_FOUND.getErrorCode()), "Key not found with keyId " + keyId));
     }
 
-    //TODO unit test
     public List<Key> getAll() {
         return keyDao.getAll();
     }
