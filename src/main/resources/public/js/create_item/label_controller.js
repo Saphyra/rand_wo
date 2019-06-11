@@ -121,15 +121,18 @@
     }
 
     function displayLabels(){
-        labelsCanBeAdd.length ? $("#no-existing-labels").hide() : $("#no-existing-labels").show();
+        labelsCanBeAdd.sort(function(a, b){return loadedLabels[a].localeCompare(loadedLabels[b])});
+
+        const searchText = $("#search-in-existing-labels").val();
+        const labelsToDisplay = arrayFilter(labelsCanBeAdd, function(i){return searchText.length == 0 || loadedLabels[i].toLowerCase().indexOf(searchText) > -1})
+
+        labelsToDisplay.length ? $("#no-existing-labels").hide() : $("#no-existing-labels").show();
 
         const container = document.getElementById("existing-labels-container");
             container.innerHTML = "";
 
-        labelsCanBeAdd.sort(function(a, b){return loadedLabels[a].localeCompare(loadedLabels[b])});
-
-        for(let lIndex in labelsCanBeAdd){
-            const labelId = labelsCanBeAdd[lIndex];
+        for(let lIndex in labelsToDisplay){
+            const labelId = labelsToDisplay[lIndex];
 
             const label = document.createElement("BUTTON");
                 label.innerHTML = loadedLabels[labelId];
@@ -146,6 +149,10 @@
             if(e.which == 13){
                 eventProcessor.processEvent(new Event(events.ADD_NEW_LABEL));
             }
+        }
+
+        document.getElementById("search-in-existing-labels").onkeyup = function(){
+            displayLabels();
         }
     }
 })();

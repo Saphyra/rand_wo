@@ -72,3 +72,15 @@ function generateUUID() {
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   )
 }
+
+function arrayFilter(array, filterMethod){
+    const result = [];
+    for(let i in array){
+        const item = array[i];
+        if(filterMethod(item)){
+            result.push(item);
+        }
+    }
+
+    return result;
+}

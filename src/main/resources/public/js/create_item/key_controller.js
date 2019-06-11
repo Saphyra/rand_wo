@@ -107,15 +107,19 @@
     }
 
     function displayKeys(){
-        keysCanBeAdd.length ? $("#no-existing-keys").hide() : $("#no-existing-keys").show();
-
         keysCanBeAdd.sort(function(a, b){return loadedKeys[a].localeCompare(loadedKeys[b])});
+
+        const searchText = $("#search-in-existing-keys").val();
+        const keysToDisplay = arrayFilter(keysCanBeAdd, function(i){return searchText.length == 0 || loadedKeys[i].toLowerCase().indexOf(searchText) > -1})
+
+        keysToDisplay.length ? $("#no-existing-keys").hide() : $("#no-existing-keys").show();
 
         const container = document.getElementById("existing-keys-container");
             container.innerHTML = "";
 
-        for(let kIndex in keysCanBeAdd){
-            const keyId = keysCanBeAdd[kIndex];
+        for(let kIndex in keysToDisplay){
+            const keyId = keysToDisplay[kIndex];
+
             const key = document.createElement("BUTTON");
                 key.innerHTML = loadedKeys[keyId];
                 key.onclick = function(){
@@ -142,6 +146,10 @@
             if(e.which == 13){
                 eventProcessor.processEvent(new Event(events.ADD_NEW_KEY));
             }
+        }
+
+        document.getElementById("search-in-existing-keys").onkeyup = function(){
+            displayKeys();
         }
     }
 })();
