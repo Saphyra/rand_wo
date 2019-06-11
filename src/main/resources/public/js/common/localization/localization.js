@@ -17,7 +17,6 @@
                     document.title = content.title;
                     fillPageWithText(content.staticText);
                     additionalContent = content.additionalContent;
-                    fillPageWithAdditionalContent();
                 }
             );
 

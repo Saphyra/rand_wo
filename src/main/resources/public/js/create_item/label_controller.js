@@ -1,5 +1,6 @@
 (function LabelController(){
     events.ADD_NEW_LABEL = "add_new_label";
+    events.ADD_EXISTING_LABEL = "add_existing_label";
 
     $(document).ready(init)
 
@@ -20,10 +21,15 @@
             if(labelValue.length && validate(labelValue)){
                 newLabels.push(labelValue);
 
-                addToLabels(labelValue);
+                addToLabels(
+                    labelValue,
+                    newLabels,
+                    function(){
+                        newLabels.splice(newLabels.indexOf(labelValue), 1);
+                    }
+                );
 
                 $("#new-label-value").val("");
-                $("#no-current-labels").hide();
             }
 
             function validate(labelValue){
@@ -47,30 +53,53 @@
 
                 return isValid;
             }
-
-            function addToLabels(labelValue){
-                const container = document.getElementById("current-labels");
-                    const label = document.createElement("BUTTON");
-                        label.innerHTML = labelValue;
-                container.appendChild(label);
-
-                label.onclick = function(){
-                    container.removeChild(label);
-                    newLabels.splice(newLabels.indexOf(labelValue), 1);
-                    if(addedLabels.length + newLabels.length == 0){
-                        $("#no-current-labels").show();
-                    }
-                }
-            }
         }
     ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.ADD_EXISTING_LABEL},
+        function(event){
+            const labelId = event.getPayload();
+            addedLabels.push(labelId);
+            labelsCanBeAdd.splice(labelsCanBeAdd.indexOf(labelId), 1);
+            displayLabels();
+
+            addToLabels(
+                loadedLabels[labelId],
+                addedLabels,
+                function(){
+                    labelsCanBeAdd.push(labelId);
+                    displayLabels();
+                    addedLabels.splice(addedLabels.indexOf(labelId), 1);
+                }
+            );
+        }
+    ));
+
+    function addToLabels(labelValue, labelArray, callBack){
+        const container = document.getElementById("current-labels");
+            const label = document.createElement("BUTTON");
+                label.innerHTML = labelValue;
+        container.appendChild(label);
+
+        label.onclick = function(){
+            container.removeChild(label);
+            if(addedLabels.length + newLabels.length == 0){
+                $("#no-current-labels").show();
+            }
+
+            if(callBack){
+                callBack();
+            }
+        }
+
+        $("#no-current-labels").hide();
+    }
 
     function loadLabels(){
         const request = new Request(HttpMethod.GET, Mapping.GET_LABELS);
             request.convertResponse = function(response){
-                const labels = JSON.parse(response.body)
-                labels.sort(function(a, b){return a.labelValue.localeCompare(b.labelValue)});
-                return labels;
+                return JSON.parse(response.body);
             }
             request.processValidResponse = function(labels){
                 loadedLabels = mapLabels(labels);
@@ -95,13 +124,18 @@
         labelsCanBeAdd.length ? $("#no-existing-labels").hide() : $("#no-existing-labels").show();
 
         const container = document.getElementById("existing-labels-container");
+            container.innerHTML = "";
+
+        labelsCanBeAdd.sort(function(a, b){return loadedLabels[a].localeCompare(loadedLabels[b])});
 
         for(let lIndex in labelsCanBeAdd){
             const labelId = labelsCanBeAdd[lIndex];
 
             const label = document.createElement("BUTTON");
                 label.innerHTML = loadedLabels[labelId];
-                //TODO add label
+                label.onclick = function(){
+                    eventProcessor.processEvent(new Event(events.ADD_EXISTING_LABEL, labelId));
+                }
             container.appendChild(label);
         }
     }

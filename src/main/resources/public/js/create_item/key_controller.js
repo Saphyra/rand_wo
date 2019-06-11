@@ -3,6 +3,7 @@
     events.REMOVE_COLUMN = "remove_column";
 
     const KEY_TYPE_NEW = "new";
+    const KEY_TYPE_EXISTING = "existing";
 
     $(document).ready(init)
 
@@ -69,6 +70,11 @@
                 case KEY_TYPE_NEW:
                     delete newKeys[keyData.keyId];
                 break;
+                case KEY_TYPE_EXISTING:
+                    addedKeys.splice(addedKeys.indexOf[keyData.keyId], 1);
+                    keysCanBeAdd.push(keyData.keyId);
+                    displayKeys();
+                break;
                 default:
                     throwException("IllegalArgument", "Unknown keyType: " + keyData.type);
                 break;
@@ -79,9 +85,7 @@
     function loadKeys(){
         const request = new Request(HttpMethod.GET, Mapping.GET_KEYS);
             request.convertResponse = function(response){
-                const keys = JSON.parse(response.body);
-                keys.sort(function(a, b){return a.keyValue.localeCompare(b.keyValue)});
-                return keys;
+                return JSON.parse(response.body);
             }
             request.processValidResponse = function(keys){
                 loadedKeys = mapKeys(keys);
@@ -105,13 +109,29 @@
     function displayKeys(){
         keysCanBeAdd.length ? $("#no-existing-keys").hide() : $("#no-existing-keys").show();
 
+        keysCanBeAdd.sort(function(a, b){return loadedKeys[a].localeCompare(loadedKeys[b])});
+
         const container = document.getElementById("existing-keys-container");
+            container.innerHTML = "";
 
         for(let kIndex in keysCanBeAdd){
             const keyId = keysCanBeAdd[kIndex];
             const key = document.createElement("BUTTON");
                 key.innerHTML = loadedKeys[keyId];
-                //TODO add key
+                key.onclick = function(){
+                    eventProcessor.processEvent(new Event(
+                        events.ADD_COLUMN,
+                        {
+                            id: keyId,
+                            value: loadedKeys[keyId],
+                            type: KEY_TYPE_EXISTING
+                        }
+                    ));
+
+                    addedKeys.push(keyId),
+                    keysCanBeAdd.splice(keysCanBeAdd.indexOf(keyId), 1);
+                    displayKeys();
+                }
             container.appendChild(key);
         }
     }
