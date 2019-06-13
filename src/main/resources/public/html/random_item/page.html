@@ -1,0 +1,38 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD th:fragment="head">
+    <LINK rel="stylesheet" href="/css/random_item.css">
+</HEAD>
+<BODY>
+<MAIN th:fragment="main">
+    <DIV id="labels-container">
+        <DIV id="selected-labels-container">
+            <DIV id="no-selected-labels"></DIV>
+            <DIV id="selected-labels"></DIV>
+        </DIV>
+
+        <DIV id="select-label-container">
+            <DIV id="search-label-container">
+                <INPUT type="text" id="search-label-value">
+                <BUTTON id="select-all-labels-button" onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_LABELS))"></BUTTON>
+            </DIV>
+
+            <DIV id="no-labels"></DIV>
+            <DIV id="selectable-labels"></DIV>
+        </DIV>
+    </DIV>
+
+    <DIV id="columns-container">
+        <DIV id="no-columns"></DIV>
+        <DIV id="columns"></DIV>
+    </DIV>
+
+    <DIV id="item-container">
+        <TABLE id="items" class="formatted-table"></TABLE>
+    </DIV>
+</MAIN>
+
+<SPAN th:fragment="footer">
+    <BUTTON id="new-world-button" onclick="eventProcessor.processEvent(new Event(events.DISPLAY_NEW_WORD))"></BUTTON>
+</SPAN>
+</BODY>
+</HTML>

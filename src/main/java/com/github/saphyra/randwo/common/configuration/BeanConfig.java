@@ -1,14 +1,20 @@
 package com.github.saphyra.randwo.common.configuration;
 
-import com.github.saphyra.util.IdGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.github.saphyra.util.IdGenerator;
+import com.github.saphyra.util.Random;
+
 @Configuration
 public class BeanConfig {
+    @Bean
+    public IdGenerator idGenerator() {
+        return new IdGenerator();
+    }
 
     @Bean
-    public IdGenerator idGenerator(){
-        return new IdGenerator();
+    public Random random() {
+        return new Random();
     }
 }

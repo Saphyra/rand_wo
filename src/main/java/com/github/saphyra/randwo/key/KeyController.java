@@ -24,6 +24,7 @@ public class KeyController {
     public static final String DELETE_KEYS_MAPPING = "/key";
     public static final String GET_KEY_MAPPING = "/key/{keyId}";
     public static final String GET_KEYS_MAPPING = "/key";
+    public static final String GET_KEYS_FOR_LABELS_MAPPING = "/key/label";
     public static final String UPDATE_KEY_MAPPING = "/key/{keyId}";
 
     private final DeleteKeyService deleteKeyService;
@@ -49,6 +50,14 @@ public class KeyController {
     public List<Key> getKeys() {
         log.info("Querying all keys");
         return keyQueryService.getAll();
+    }
+
+    @PostMapping(GET_KEYS_FOR_LABELS_MAPPING)
+    //TODO unit test
+    //TODO api test
+    public List<Key> getKeysForLabels(@RequestBody List<UUID> labelIds){
+        log.info("Querying keys for labelIds {}", labelIds);
+        return keyQueryService.getKeysForLabels(labelIds);
     }
 
     @PostMapping(UPDATE_KEY_MAPPING)

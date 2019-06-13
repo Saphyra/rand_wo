@@ -193,3 +193,8 @@ footer span:nth-child(2){
 #selectable-languages-wrapper .button{
     text-align: right
 }
+
+/*======CLASSES=======*/
+.cursor-pointer{
+    cursor: pointer;
+}

@@ -39,6 +39,7 @@ public enum ErrorCode {
     NULL_OBJECT_KEY("null-object-key"),
     OBJECT_KEY_TOO_LONG("object-key-too-long"),
     OBJECT_NOT_FOUND("object-not-found"),
+    RANDOM_ITEM_CANNOT_BE_SELECTED("random-item-cannot-be-selected"),
     REQUEST_BODY_MISSING("request-body-missing"),
     VALUE_IS_NULL("value-is-null");
 

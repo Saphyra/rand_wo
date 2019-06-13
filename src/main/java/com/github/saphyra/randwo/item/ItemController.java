@@ -16,11 +16,13 @@ import com.github.saphyra.randwo.item.domain.DeleteItemRequest;
 import com.github.saphyra.randwo.item.domain.GetItemsRequest;
 import com.github.saphyra.randwo.item.domain.ItemRequest;
 import com.github.saphyra.randwo.item.domain.ItemView;
-import com.github.saphyra.randwo.item.service.view.ItemViewQueryService;
+import com.github.saphyra.randwo.item.domain.RandomItemRequest;
 import com.github.saphyra.randwo.item.service.create.CreateItemService;
 import com.github.saphyra.randwo.item.service.delete.DeleteItemByItemIdService;
 import com.github.saphyra.randwo.item.service.delete.DeleteItemByLabelService;
 import com.github.saphyra.randwo.item.service.update.UpdateItemService;
+import com.github.saphyra.randwo.item.service.view.ItemViewQueryService;
+import com.github.saphyra.randwo.item.service.view.RandomItemViewQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,12 +34,14 @@ public class ItemController {
     public static final String DELETE_BY_ITEM_IDS_MAPPING = "/item/id";
     public static final String DELETE_BY_LABEL_IDS_MAPPING = "/item/label";
     public static final String GET_ITEMS_MAPPING = "/item";
+    public static final String GET_RANDOM_ITEM_MAPPING = "/item/random";
     public static final String UPDATE_ITEM_MAPPING = "/item/{itemId}";
 
     private final CreateItemService createItemService;
     private final DeleteItemByItemIdService deleteItemByItemIdService;
     private final DeleteItemByLabelService deleteItemByLabelService;
     private final ItemViewQueryService itemViewQueryService;
+    private final RandomItemViewQueryService randomItemViewQueryService;
     private final UpdateItemService updateItemService;
 
     @PutMapping(CREATE_ITEM_MAPPING)
@@ -64,6 +68,14 @@ public class ItemController {
     public List<ItemView> getItems(@RequestBody GetItemsRequest request) {
         log.info("Querying items: {}", request);
         return itemViewQueryService.getItems(request);
+    }
+
+    @PostMapping(GET_RANDOM_ITEM_MAPPING)
+    //TODO unit test
+    //TODO API test
+    public ItemView itemView(@RequestBody RandomItemRequest request){
+        log.info("Querying random item for request {}", request);
+        return randomItemViewQueryService.getRandomItem(request);
     }
 
     @PostMapping(UPDATE_ITEM_MAPPING)

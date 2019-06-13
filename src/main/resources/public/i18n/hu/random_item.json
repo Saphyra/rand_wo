@@ -1,0 +1,53 @@
+{
+  "title": "Véletlenszerű bejegyzés",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Véletlenszerű bejegyzés"
+      }
+    ],
+    "no-selected-labels": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs címke kiválasztva."
+      }
+    ],
+    "search-label-value": [
+      {
+        "key": "placeholder",
+        "message": "Keresés"
+      }
+    ],
+    "select-all-labels-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mindet kiválaszt"
+      }
+    ],
+    "no-labels": [
+      {
+        "key": "innerHTML",
+        "message": "Nem található címke."
+      }
+    ],
+    "no-columns": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs oszlop"
+      }
+    ],
+    "new-world-button": [
+      {
+        "key": "innerHTML",
+        "message": "Bejegyzés sorsolása"
+      }
+    ]
+  },
+  "additionalContent": {
+    "is-displayed": "Oszlop megjelenítése",
+    "is-hidden": "Érték elrejtése",
+    "no-value": "Nincs érték",
+    "reveal": "Felfed"
+  }
+}

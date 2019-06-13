@@ -137,11 +137,6 @@ FrontEnd
         - link to view items of key (given key at first) //TODO implement
     - edit_key //TODO implement
     - random_items
-        - Select labels //TODO implement
-            - and / or
-        - Select columns displayed //TODO implement
-        - Select shown column(s) //TODO implement
-            - select all button
-        - "Reveal" button for hidden columns //TODO implement
         - Link to edit page //TODO implement
         - Delete item button //TODO implement
+        - Displaying size of pool //TODO implement

@@ -4,9 +4,11 @@ window.Mapping = {
     GET_ITEMS: "/item",
     GET_KEY: "/key/*",
     GET_KEYS: "/key",
+    GET_KEYS_FOR_LABELS: "/key/label",
     GET_LABEL: "/label/*",
     GET_LABELS: "/label",
     GET_OBJECT_FROM_STORE: "/stored-object/*",
+    GET_RANDOM_ITEM: "/item/random",
     SAVE_TO_OBJECT_STORE: "/stored-object",
 
     concat: function(path, id){

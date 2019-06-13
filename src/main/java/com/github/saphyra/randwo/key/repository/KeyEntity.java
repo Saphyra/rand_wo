@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "value_key")
 @Entity
-public class KeyEntity {
+class KeyEntity {
     @Id
     private UUID keyId;
     private String keyValue;

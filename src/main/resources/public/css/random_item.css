@@ -1,0 +1,98 @@
+#labels-container{
+    border-bottom: 3px ridge black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+    #selected-labels-container{
+        border-right: 3px ridge black;
+    }
+
+        #no-selected-labels{
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 1rem;
+        }
+
+        #selected-labels{
+
+        }
+
+    #select-label-container{
+
+    }
+
+        #search-label-container{
+            text-align: center;
+            border-bottom: 2px ridge black;
+        }
+
+        #no-labels{
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 0.25rem;
+        }
+
+        #selectable-labels{
+
+        }
+
+#columns-container{
+    border-bottom: 3px ridge black;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    right: 0;
+    height: 30%;
+}
+
+    #no-columns{
+        text-align: center;
+        font-size: 1.5rem;
+        margin: 1rem;
+    }
+
+    #columns{
+
+    }
+
+        .column{
+            display: inline-block;
+            border: 2px inset black;
+            border-radius: 5px;
+            margin: 0.25rem;
+        }
+
+            .column-name{
+                background: rgb(200,200,200);
+                border-bottom: 2px inset black;
+                padding: 0.125rem;
+                text-align: center;
+            }
+
+            .column-labels{
+                padding: 0.125rem;
+            }
+
+                .column-labels label{
+                    display: block;
+                }
+
+                .value-area{
+                    min-width: 15rem;
+                    min-height: 4rem;
+                }
+
+#item-container{
+    position: absolute;
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.5rem;
+}
