@@ -14,7 +14,6 @@ public class ItemDao extends AbstractDao<ItemEntity, Item, UUID, ItemRepository>
         super(converter, repository);
     }
 
-    //TODO unit test
     public List<Item> getAll() {
         return converter.convertEntity(repository.findAll());
     }

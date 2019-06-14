@@ -129,10 +129,16 @@ FrontEnd
             - label
         - link to edit label //TODO implement
         - delete labels //TODO implement
-        - only deletable labels can be selected //TODO implement
+            - only deletable labels can be selected //TODO implement
         - select all button //TODO implement
     - edit_label //TODO implement
     - view_keys
         - display number of items containing //TODO implement
         - link to view items of key (given key at first) //TODO implement
+        - filter by
+            - keyValue //TODO implement
+        - link to edit key //TODO implement
+        - delete keys //TODO implement
+            - only deletable keys can be selected //TODO implement
+        - select all button //TODO implement
     - edit_key //TODO implement

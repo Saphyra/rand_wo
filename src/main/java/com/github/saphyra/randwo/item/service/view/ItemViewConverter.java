@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class ItemViewConverter {
     private final ItemLabelMappingDao itemLabelMappingDao;
     private final ItemValueMappingDao itemValueMappingDao;
