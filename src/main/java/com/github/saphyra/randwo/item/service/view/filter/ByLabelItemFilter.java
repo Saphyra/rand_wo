@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class ByLabelItemFilter implements ItemFilter {
     private final ItemLabelMappingDao itemLabelMappingDao;
     private final LabelQueryService labelQueryService;
