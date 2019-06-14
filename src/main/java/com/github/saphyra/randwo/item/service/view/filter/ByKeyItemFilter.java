@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class ByKeyItemFilter implements ItemFilter {
     private final ItemValueMappingDao itemValueMappingDao;
     private final KeyQueryService keyQueryService;
