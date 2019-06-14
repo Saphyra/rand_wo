@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.saphyra.randwo.label.domain.Label;
-import com.github.saphyra.randwo.label.service.LabelQueryService;
+import com.github.saphyra.randwo.label.domain.LabelView;
 import com.github.saphyra.randwo.label.service.delete.DeleteLabelService;
 import com.github.saphyra.randwo.label.service.update.UpdateLabelService;
+import com.github.saphyra.randwo.label.service.view.LabelViewQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +27,7 @@ public class LabelController {
     public static final String UPDATE_LABEL_MAPPING = "/label/{labelId}";
 
     private final DeleteLabelService deleteLabelService;
-    private final LabelQueryService labelQueryService;
+    private final LabelViewQueryService labelViewQueryService;
     private final UpdateLabelService updateLabelService;
 
     @DeleteMapping(DELETE_LABELS_MAPPING)
@@ -39,16 +39,16 @@ public class LabelController {
     @GetMapping(GET_LABEL)
     //TODO unit test
     //TODO API test
-    public Label getLabel(@PathVariable("labelId") UUID labelId){
+    public LabelView getLabel(@PathVariable("labelId") UUID labelId){
         log.info("Querying label with id {}", labelId);
-        return labelQueryService.findByLabelIdValidated(labelId);
+        return labelViewQueryService.findByLabelId(labelId);
     }
 
     @GetMapping(GET_LABELS)
     //TODO API TEST
-    public List<Label> getLabels(){
+    public List<LabelView> getLabels(){
         log.info("Querying all labels");
-        return labelQueryService.getAll();
+        return labelViewQueryService.getAll();
     }
 
     @PostMapping(UPDATE_LABEL_MAPPING)

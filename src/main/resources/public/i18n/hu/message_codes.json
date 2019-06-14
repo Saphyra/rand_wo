@@ -1,5 +1,6 @@
 {
   "item-created": "Bejegyzés mentve.",
+  "items-deleted": "Bejegyzés(ek) törölve.",
   "key-value-already-exists": "Már van oszlop a megadott szöveggel.",
   "label-value-already-exists": "Már van címke a megadott szöveggel.",
   "no-columns": "Nincs megfelelő oszlop kiválasztva (Legalább egy olyan oszlop kell, amelyik meg van jelenítve, és nem rejtett).",

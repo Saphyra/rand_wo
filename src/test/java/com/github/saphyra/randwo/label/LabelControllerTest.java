@@ -14,10 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.randwo.label.domain.Label;
-import com.github.saphyra.randwo.label.service.LabelQueryService;
+import com.github.saphyra.randwo.label.domain.LabelView;
 import com.github.saphyra.randwo.label.service.delete.DeleteLabelService;
 import com.github.saphyra.randwo.label.service.update.UpdateLabelService;
+import com.github.saphyra.randwo.label.service.view.LabelViewQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LabelControllerTest {
@@ -28,7 +28,7 @@ public class LabelControllerTest {
     private DeleteLabelService deleteLabelService;
 
     @Mock
-    private LabelQueryService labelQueryService;
+    private LabelViewQueryService labelViewQueryService;
 
     @Mock
     private UpdateLabelService updateLabelService;
@@ -37,7 +37,7 @@ public class LabelControllerTest {
     private LabelController underTest;
 
     @Mock
-    private Label label;
+    private LabelView labelView;
 
     @Test
     public void deleteLabels() {
@@ -52,11 +52,11 @@ public class LabelControllerTest {
     @Test
     public void getLabels() {
         //GIVEN
-        given(labelQueryService.getAll()).willReturn(Arrays.asList(label));
+        given(labelViewQueryService.getAll()).willReturn(Arrays.asList(labelView));
         //WHEN
-        List<Label> result = underTest.getLabels();
+        List<LabelView> result = underTest.getLabels();
         //THEN
-        assertThat(result).containsOnly(label);
+        assertThat(result).containsOnly(labelView);
     }
 
     @Test

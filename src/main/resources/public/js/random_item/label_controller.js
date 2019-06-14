@@ -1,4 +1,5 @@
 (function LabelController(){
+    events.LOAD_LABELS = "load_labels"
     events.SELECT_ALL_LABELS = "select_all_labels"
 
     $(document).ready(init);
@@ -11,6 +12,11 @@
         this.getSelectedLabels = function(){return selectedLabels};
     }
 
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.LOAD_LABELS},
+        loadLabels
+    ));
+
     function loadLabels(){
         const request = new Request(HttpMethod.GET, Mapping.GET_LABELS);
             request.convertResponse = function(response){
@@ -19,8 +25,10 @@
 
             request.processValidResponse = function(labels){
                 loadedLabels = mapLabels(labels);
-                selectableLabels = Object.keys(loadedLabels);
+                selectableLabels = Object.keys(loadedLabels)
+                    .filter(function(labelId){return selectedLabels.indexOf(labelId) < 0});
                 displayLabels();
+                displaySelectedLabels();
             }
         dao.sendRequestAsync(request);
 
@@ -29,7 +37,7 @@
 
             for(let lIndex in labels){
                 const label = labels[lIndex];
-                result[label.labelId] = label.labelValue;
+                result[label.labelId] = {labelValue: label.labelValue, items: label.items};
             }
 
             return result;
@@ -48,7 +56,8 @@
             const labelId = displayableLabels[lIndex];
 
             const labelButton = document.createElement("BUTTON");
-                labelButton.innerHTML = loadedLabels[labelId];
+                const label = loadedLabels[labelId];
+                labelButton.innerHTML = label.labelValue + " (" + label.items + ")";
                 labelButton.onclick = function(){
                     selectLabel(labelId);
                 }
@@ -59,11 +68,11 @@
             const searchValue = $("#search-label-value").val().toLowerCase();
 
             const filtered = labels.filter(function(label){
-                return searchValue.length == 0 || loadedLabels[label].toLowerCase().indexOf(searchValue) > -1;
+                return searchValue.length == 0 || loadedLabels[label].labelValue.toLowerCase().indexOf(searchValue) > -1;
             });
 
             filtered.sort(function(a, b){
-                return loadedLabels[a].localeCompare(loadedLabels[b]);
+                return loadedLabels[a].labelValue.localeCompare(loadedLabels[b].labelValue);
             });
 
             return filtered;
@@ -76,18 +85,21 @@
 
         selectedLabels.length == 0 ? $("#no-selected-labels").show() : $("#no-selected-labels").hide();
 
-        selectedLabels.sort(function(a, b){return loadedLabels[a].localeCompare(loadedLabels[b])});
+        selectedLabels.sort(function(a, b){return loadedLabels[a].labelValue.localeCompare(loadedLabels[b].labelValue)});
 
         for(let lIndex in selectedLabels){
             const labelId = selectedLabels[lIndex];
 
             const labelButton = document.createElement("BUTTON");
-                labelButton.innerHTML = loadedLabels[labelId];
+                const label = loadedLabels[labelId];
+                labelButton.innerHTML = label.labelValue + " (" + label.items + ")";
                 labelButton.onclick = function(){
                     deselectLabel(labelId);
                 }
             container.appendChild(labelButton);
         }
+
+        eventProcessor.processEvent(new Event(events.LABELS_CHANGED));
     }
 
     function selectLabel(labelId){
@@ -96,7 +108,6 @@
 
         displayLabels();
         displaySelectedLabels();
-        eventProcessor.processEvent(new Event(events.LABELS_CHANGED));
     }
 
     function deselectLabel(labelId){

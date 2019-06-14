@@ -25,7 +25,6 @@
                     return !storedSetting.isHidden();
                 });
 
-
             if(selectedLabels.length == 0){
                 notificationService.showError(MessageCode.getMessage("no-labels"));
                 return;
@@ -97,8 +96,41 @@
             valueRow.appendChild(valueCell);
         }
 
+            const operationsHead = document.createElement("TH");
+                operationsHead.innerHTML = Localization.getAdditionalContent("operations");
+        headRow.appendChild(operationsHead);
+
+            const operationsCell = document.createElement("TD");
+                const deleteButton = document.createElement("BUTTON");
+                    deleteButton.innerHTML = Localization.getAdditionalContent("delete");
+                    deleteButton.onclick = function(){
+                        deleteItem(item.itemId);
+                    }
+            operationsCell.appendChild(deleteButton);
+
+                const editButton = document.createElement("BUTTON");
+                    editButton.innerHTML = Localization.getAdditionalContent("edit");
+                    editButton.onclick = function(){
+                        window.open("items/edit/" + item.itemId);
+                    }
+            operationsCell.appendChild(editButton);
+        valueRow.appendChild(operationsCell);
+
         container.appendChild(headRow);
         container.appendChild(valueRow);
+    }
+
+    function deleteItem(itemId){
+        if(!confirm(Localization.getAdditionalContent("confirm-delete-item"))){
+            return;
+        }
+        const request = new Request(HttpMethod.DELETE, Mapping.DELETE_ITEMS, [itemId]);
+            request.processValidResponse = function(){
+                document.getElementById("items").innerHTML = "";
+                notificationService.showSuccess(MessageCode.getMessage("items-deleted"));
+                eventProcessor.processEvent(new Event(events.LOAD_LABELS));
+            }
+        dao.sendRequestAsync(request);
     }
 
     function loadKey(keyId){

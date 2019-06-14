@@ -136,7 +136,3 @@ FrontEnd
         - display number of items containing //TODO implement
         - link to view items of key (given key at first) //TODO implement
     - edit_key //TODO implement
-    - random_items
-        - Link to edit page //TODO implement
-        - Delete item button //TODO implement
-        - Displaying size of pool //TODO implement
