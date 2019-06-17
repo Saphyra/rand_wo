@@ -50,6 +50,16 @@ public class LabelControllerTest {
     }
 
     @Test
+    public void getLabel() {
+        //GIVEN
+        given(labelViewQueryService.findByLabelId(LABEL_ID)).willReturn(labelView);
+        //WHEN
+        LabelView result = underTest.getLabel(LABEL_ID);
+        //THEN
+        assertThat(result).isEqualTo(labelView);
+    }
+
+    @Test
     public void getLabels() {
         //GIVEN
         given(labelViewQueryService.getAll()).willReturn(Arrays.asList(labelView));

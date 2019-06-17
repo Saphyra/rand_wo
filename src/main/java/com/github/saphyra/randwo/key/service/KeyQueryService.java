@@ -33,7 +33,6 @@ public class KeyQueryService {
         return keyDao.getAll();
     }
 
-    //TODO unit test
     public List<Key> getKeysForLabels(List<UUID> labelIds) {
         return labelIds.stream()
             //Get item ids linked to labels

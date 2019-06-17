@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-//TODO unit test
 public class LabelViewQueryService {
     private final LabelQueryService labelQueryService;
     private final LabelViewConverter labelViewConverter;

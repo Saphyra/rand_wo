@@ -39,7 +39,6 @@ public class KeyController {
 
     @GetMapping(GET_KEY_MAPPING)
     //TODO API TEST
-    //TODO unit test
     public Key getKey(@PathVariable("keyId") UUID keyId) {
         log.info("Querying key with id {}", keyId);
         return keyQueryService.findByKeyIdValidated(keyId);
@@ -53,7 +52,6 @@ public class KeyController {
     }
 
     @PostMapping(GET_KEYS_FOR_LABELS_MAPPING)
-    //TODO unit test
     //TODO api test
     public List<Key> getKeysForLabels(@RequestBody List<UUID> labelIds){
         log.info("Querying keys for labelIds {}", labelIds);

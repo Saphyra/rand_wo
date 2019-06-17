@@ -23,6 +23,7 @@ import com.github.saphyra.randwo.key.service.update.UpdateKeyService;
 public class KeyControllerTest {
     private static final UUID KEY_ID = UUID.randomUUID();
     private static final String NEW_VALUE = "new_value";
+    private static final UUID LABEL_ID = UUID.randomUUID();
 
     @Mock
     private DeleteKeyService deleteKeyService;
@@ -50,11 +51,32 @@ public class KeyControllerTest {
     }
 
     @Test
+    public void getKey() {
+        //GIVEN
+        given(keyQueryService.findByKeyIdValidated(KEY_ID)).willReturn(key);
+        //WHEN
+        Key result = underTest.getKey(KEY_ID);
+        //THEN
+        assertThat(result).isEqualTo(key);
+    }
+
+    @Test
     public void getKeys() {
         //GIVEN
         given(keyQueryService.getAll()).willReturn(Arrays.asList(key));
         //WHEN
         List<Key> result = underTest.getKeys();
+        //THEN
+        assertThat(result).containsOnly(key);
+    }
+
+    @Test
+    public void getKeysForLabels() {
+        //GIVEN
+        List<UUID> labelIds = Arrays.asList(LABEL_ID);
+        given(keyQueryService.getKeysForLabels(labelIds)).willReturn(Arrays.asList(key));
+        //WHEN
+        List<Key> result = underTest.getKeysForLabels(labelIds);
         //THEN
         assertThat(result).containsOnly(key);
     }

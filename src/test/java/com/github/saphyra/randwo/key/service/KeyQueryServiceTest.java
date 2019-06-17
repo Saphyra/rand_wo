@@ -19,10 +19,22 @@ import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
+import com.github.saphyra.randwo.mapping.itemlabel.domain.ItemLabelMapping;
+import com.github.saphyra.randwo.mapping.itemlabel.repository.ItemLabelMappingDao;
+import com.github.saphyra.randwo.mapping.itemvalue.domain.ItemValueMapping;
+import com.github.saphyra.randwo.mapping.itemvalue.repository.ItemValueMappingDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KeyQueryServiceTest {
     private static final UUID KEY_ID = UUID.randomUUID();
+    private static final UUID LABEL_ID = UUID.randomUUID();
+    private static final UUID ITEM_ID = UUID.randomUUID();
+
+    @Mock
+    private ItemLabelMappingDao itemLabelMappingDao;
+
+    @Mock
+    private ItemValueMappingDao itemValueMappingDao;
 
     @Mock
     private KeyDao keyDao;
@@ -32,6 +44,12 @@ public class KeyQueryServiceTest {
 
     @Mock
     private Key key;
+
+    @Mock
+    private ItemLabelMapping itemLabelMapping;
+
+    @Mock
+    private ItemValueMapping itemValueMapping;
 
     @Test
     public void findByKeyIdValidated_notFound() {
@@ -61,6 +79,20 @@ public class KeyQueryServiceTest {
         given(keyDao.getAll()).willReturn(Arrays.asList(key));
         //WHEN
         List<Key> result = underTest.getAll();
+        //THEN
+        assertThat(result).containsOnly(key);
+    }
+
+    @Test
+    public void getKeysForLabels() {
+        //GIVEN
+        given(itemLabelMappingDao.getByLabelId(LABEL_ID)).willReturn(Arrays.asList(itemLabelMapping));
+        given(itemLabelMapping.getItemId()).willReturn(ITEM_ID);
+        given(itemValueMappingDao.getByItemId(ITEM_ID)).willReturn(Arrays.asList(itemValueMapping));
+        given(itemValueMapping.getKeyId()).willReturn(KEY_ID);
+        given(keyDao.findById(KEY_ID)).willReturn(Optional.of(key));
+        //WHEN
+        List<Key> result = underTest.getKeysForLabels(Arrays.asList(LABEL_ID));
         //THEN
         assertThat(result).containsOnly(key);
     }

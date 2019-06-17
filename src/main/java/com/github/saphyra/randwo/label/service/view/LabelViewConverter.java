@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class LabelViewConverter {
     private final ItemLabelMappingDao itemLabelMappingDao;
 

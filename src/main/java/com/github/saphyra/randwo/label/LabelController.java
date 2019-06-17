@@ -37,7 +37,6 @@ public class LabelController {
     }
 
     @GetMapping(GET_LABEL)
-    //TODO unit test
     //TODO API test
     public LabelView getLabel(@PathVariable("labelId") UUID labelId){
         log.info("Querying label with id {}", labelId);
