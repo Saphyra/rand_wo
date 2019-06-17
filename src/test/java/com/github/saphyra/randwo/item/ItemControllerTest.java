@@ -1,22 +1,30 @@
 package com.github.saphyra.randwo.item;
 
-import com.github.saphyra.randwo.item.domain.DeleteItemRequest;
-import com.github.saphyra.randwo.item.domain.ItemRequest;
-import com.github.saphyra.randwo.item.service.create.CreateItemService;
-import com.github.saphyra.randwo.item.service.delete.DeleteItemByItemIdService;
-import com.github.saphyra.randwo.item.service.delete.DeleteItemByLabelService;
-import com.github.saphyra.randwo.item.service.update.UpdateItemService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.randwo.item.domain.DeleteItemRequest;
+import com.github.saphyra.randwo.item.domain.GetItemsRequest;
+import com.github.saphyra.randwo.item.domain.ItemRequest;
+import com.github.saphyra.randwo.item.domain.ItemView;
+import com.github.saphyra.randwo.item.domain.RandomItemRequest;
+import com.github.saphyra.randwo.item.service.create.CreateItemService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByItemIdService;
+import com.github.saphyra.randwo.item.service.delete.DeleteItemByLabelService;
+import com.github.saphyra.randwo.item.service.update.UpdateItemService;
+import com.github.saphyra.randwo.item.service.view.ItemViewQueryService;
+import com.github.saphyra.randwo.item.service.view.RandomItemViewQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ItemControllerTest {
@@ -32,6 +40,12 @@ public class ItemControllerTest {
     private DeleteItemByLabelService deleteItemByLabelService;
 
     @Mock
+    private ItemViewQueryService itemViewQueryService;
+
+    @Mock
+    private RandomItemViewQueryService randomItemViewQueryService;
+
+    @Mock
     private UpdateItemService updateItemService;
 
     @InjectMocks
@@ -42,6 +56,15 @@ public class ItemControllerTest {
 
     @Mock
     private DeleteItemRequest deleteItemRequest;
+
+    @Mock
+    private GetItemsRequest getItemsRequest;
+
+    @Mock
+    private ItemView itemView;
+
+    @Mock
+    private RandomItemRequest randomItemRequest;
 
     @Test
     public void createItem() {
@@ -67,6 +90,26 @@ public class ItemControllerTest {
         underTest.deleteByLabelIds(deleteItemRequest);
         //THEN
         verify(deleteItemByLabelService).deleteItems(deleteItemRequest);
+    }
+
+    @Test
+    public void getItems() {
+        //GIVEN
+        given(itemViewQueryService.getItems(getItemsRequest)).willReturn(Arrays.asList(itemView));
+        //WHEN
+        List<ItemView> result = underTest.getItems(getItemsRequest);
+        //THEN
+        assertThat(result).containsOnly(itemView);
+    }
+
+    @Test
+    public void getRandomItem() {
+        //GIVEN
+        given(randomItemViewQueryService.getRandomItem(randomItemRequest)).willReturn(itemView);
+        //WHEN
+        ItemView result = underTest.getRandomItem(randomItemRequest);
+        //THEN
+        assertThat(result).isEqualTo(itemView);
     }
 
     @Test

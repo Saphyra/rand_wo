@@ -63,7 +63,6 @@ public class ItemController {
     }
 
     @PostMapping(GET_ITEMS_MAPPING)
-    //TODO unit test
     //TODO API test
     public List<ItemView> getItems(@RequestBody GetItemsRequest request) {
         log.info("Querying items: {}", request);
@@ -71,9 +70,8 @@ public class ItemController {
     }
 
     @PostMapping(GET_RANDOM_ITEM_MAPPING)
-    //TODO unit test
     //TODO API test
-    public ItemView itemView(@RequestBody RandomItemRequest request){
+    public ItemView getRandomItem(@RequestBody RandomItemRequest request){
         log.info("Querying random item for request {}", request);
         return randomItemViewQueryService.getRandomItem(request);
     }

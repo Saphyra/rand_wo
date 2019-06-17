@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class ByValueItemFilter implements ItemFilter {
     private final ItemValueMappingDao itemValueMappingDao;
 

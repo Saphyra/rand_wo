@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.saphyra.exceptionhandling.domain.ErrorMessage;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.item.domain.ItemView;
 import com.github.saphyra.randwo.item.domain.RandomItemRequest;
@@ -22,8 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class RandomItemViewQueryService {
+    private final CollectionValidator collectionValidator;
     private final ItemQueryService itemQueryService;
     private final ItemLabelMappingDao itemLabelMappingDao;
     private final ItemValueMappingDao itemValueMappingDao;
@@ -31,6 +32,9 @@ public class RandomItemViewQueryService {
     private final Random random;
 
     public ItemView getRandomItem(RandomItemRequest request) {
+        collectionValidator.validateDoesNotContainNull(request.getLabelIds(), ErrorCode.NULL_IN_LABEL_IDS);
+        collectionValidator.validateDoesNotContainNull(request.getKeyIds(), ErrorCode.NULL_IN_KEY_IDS);
+
         List<UUID> itemIds = request.getLabelIds().stream()
             //Get itemIds with the given labels
             .flatMap(labelId -> itemLabelMappingDao.getByLabelId(labelId).stream())
