@@ -63,7 +63,6 @@ public class ItemController {
     }
 
     @PostMapping(GET_ITEMS_MAPPING)
-    //TODO API test
     public List<ItemView> getItems(@RequestBody GetItemsRequest request) {
         log.info("Querying items: {}", request);
         return itemViewQueryService.getItems(request);

@@ -8,10 +8,12 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 @Builder
+@NoArgsConstructor
 public class ItemView {
     private UUID itemId;
     private List<UUID> labelIds;
