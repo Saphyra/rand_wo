@@ -1,6 +1,5 @@
 package com.github.saphyra.integration.mvc.item;
 
-import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -27,7 +26,6 @@ import com.github.saphyra.common.configuration.MvcConfiguration;
 import com.github.saphyra.common.testcomponent.DatabaseCleanup;
 import com.github.saphyra.common.testcomponent.MockMvcWrapper;
 import com.github.saphyra.common.testcomponent.ResponseValidator;
-import com.github.saphyra.exceptionhandling.domain.ErrorResponse;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.item.ItemController;
 import com.github.saphyra.randwo.item.domain.Item;
@@ -120,8 +118,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_EXISTING_KEY_VALUES);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_EXISTING_KEY_VALUE_IDS);
     }
 
     @Test
@@ -136,8 +133,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_NEW_KEY_VALUES);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_NEW_KEY_VALUES);
     }
 
     @Test
@@ -218,8 +214,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_EXISTING_LABEL_IDS);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_EXISTING_LABEL_IDS);
     }
 
     @Test
@@ -236,8 +231,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_NEW_LABELS);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_NEW_LABELS);
     }
 
     @Test
@@ -461,12 +455,6 @@ public class UpdateItemTest {
             .itemId(ITEM_ID)
             .build();
         itemLabelMappingDao.save(mapping);
-    }
-
-
-    private void verifyResponseParams(Map<String, String> params, ErrorCode expectedValue) {
-        assertThat(params).containsKey(PARAMETER_KEY_NULL_VALUE);
-        assertThat(params.get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(expectedValue.getErrorCode());
     }
 
     private void givenExistingKey() {

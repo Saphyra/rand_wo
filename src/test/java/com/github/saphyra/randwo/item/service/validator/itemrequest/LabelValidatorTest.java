@@ -1,6 +1,5 @@
 package com.github.saphyra.randwo.item.service.validator.itemrequest;
 
-import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
@@ -50,8 +49,7 @@ public class LabelValidatorTest {
         //THEN
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
-        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.VALUE_IS_NULL.getErrorCode());
-        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(ErrorCode.NULL_EXISTING_LABEL_IDS.getErrorCode());
+        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.NULL_EXISTING_LABEL_IDS.getErrorCode());
     }
 
     @Test
@@ -61,8 +59,7 @@ public class LabelValidatorTest {
         //THEN
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
-        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.VALUE_IS_NULL.getErrorCode());
-        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(ErrorCode.NULL_NEW_LABELS.getErrorCode());
+        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.NULL_NEW_LABELS.getErrorCode());
     }
 
     @Test

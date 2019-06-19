@@ -11,7 +11,6 @@ import com.github.saphyra.exceptionhandling.domain.ErrorMessage;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
-import com.github.saphyra.randwo.common.ExceptionFactory;
 import com.github.saphyra.randwo.label.repository.LabelDao;
 import lombok.RequiredArgsConstructor;
 
@@ -23,11 +22,11 @@ public class LabelValidator {
 
     void validate(List<UUID> existingLabelIds, List<String> newLabels){
         if(isNull(existingLabelIds)){
-            throw ExceptionFactory.createNullException(ErrorCode.NULL_EXISTING_LABEL_IDS);
+            throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_EXISTING_LABEL_IDS.getErrorCode()), "existingLabelIds is null");
         }
 
         if(isNull(newLabels)){
-            throw ExceptionFactory.createNullException(ErrorCode.NULL_NEW_LABELS);
+            throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_NEW_LABELS.getErrorCode()), "newLabels is null");
         }
 
         if(existingLabelIds.isEmpty() && newLabels.isEmpty()){

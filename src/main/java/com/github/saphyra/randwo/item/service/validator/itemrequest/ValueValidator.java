@@ -11,7 +11,6 @@ import com.github.saphyra.exceptionhandling.domain.ErrorMessage;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
-import com.github.saphyra.randwo.common.ExceptionFactory;
 import com.github.saphyra.randwo.key.repository.KeyDao;
 import lombok.RequiredArgsConstructor;
 
@@ -23,11 +22,11 @@ public class ValueValidator {
 
     void validate(Map<UUID, String> existingKeyValueIds, Map<String, String> newKeyValues) {
         if (isNull(existingKeyValueIds)) {
-            throw ExceptionFactory.createNullException(ErrorCode.NULL_EXISTING_KEY_VALUES);
+            throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_EXISTING_KEY_VALUE_IDS.getErrorCode()), "existingKeyValueIds is null");
         }
 
         if (isNull(newKeyValues)) {
-            throw ExceptionFactory.createNullException(ErrorCode.NULL_NEW_KEY_VALUES);
+            throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_NEW_KEY_VALUES.getErrorCode()), "newKeyValues is null");
         }
 
         if (existingKeyValueIds.isEmpty() && newKeyValues.isEmpty()) {

@@ -1,9 +1,7 @@
 package com.github.saphyra.randwo.common;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Getter
 public enum ErrorCode {
     EMPTY_ITEM_IDS("empty-item-ids"),
@@ -22,7 +20,7 @@ public enum ErrorCode {
     LABEL_VALUE_ALREADY_EXISTS("label-value-already-exists"),
     NO_ITEM_VALUES("no-item-values"),
     NO_LABELS("no-labels"),
-    NULL_EXISTING_KEY_VALUES("null-existing-key-values"),
+    NULL_EXISTING_KEY_VALUE_IDS("null-existing-key-value-ids"),
     NULL_EXISTING_LABEL_IDS("null-existing-label-ids"),
     NULL_IN_EXISTING_KEY_VALUES("null-in-existing-key-values"),
     NULL_IN_EXISTING_LABEL_IDS("null-in-existing-label-ids"),
@@ -41,10 +39,13 @@ public enum ErrorCode {
     OBJECT_KEY_TOO_LONG("object-key-too-long"),
     OBJECT_NOT_FOUND("object-not-found"),
     RANDOM_ITEM_CANNOT_BE_SELECTED("random-item-cannot-be-selected"),
-    REQUEST_BODY_MISSING("request-body-missing"),
-    VALUE_IS_NULL("value-is-null");
+    REQUEST_BODY_MISSING("request-body-missing");
 
     public static final String PARAMETER_KEY_NULL_VALUE = "parameter-null";
 
     private final String errorCode;
+
+    ErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
 }
