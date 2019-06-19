@@ -171,8 +171,7 @@ public class CreateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_EXISTING_KEY_VALUES);
+        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_EXISTING_KEY_VALUES);
     }
 
     @Test
@@ -189,8 +188,7 @@ public class CreateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_NEW_KEY_VALUES);
+        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_NEW_KEY_VALUES);
     }
 
     @Test
@@ -275,8 +273,7 @@ public class CreateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_EXISTING_LABEL_IDS);
+        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_EXISTING_LABEL_IDS);
     }
 
     @Test
@@ -293,8 +290,7 @@ public class CreateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.putRequest(ItemController.CREATE_ITEM_MAPPING, request);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_NEW_LABELS);
+        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_NEW_LABELS);
     }
 
     @Test

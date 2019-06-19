@@ -169,8 +169,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_EXISTING_KEY_VALUES);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_EXISTING_KEY_VALUES);
     }
 
     @Test
@@ -187,8 +186,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_NEW_KEY_VALUES);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_NEW_KEY_VALUES);
     }
 
     @Test
@@ -273,8 +271,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_EXISTING_LABEL_IDS);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_EXISTING_LABEL_IDS);
     }
 
     @Test
@@ -291,8 +288,7 @@ public class UpdateItemTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.postRequest(ItemController.UPDATE_ITEM_MAPPING, request, ITEM_ID);
         //THEN
-        ErrorResponse response = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(response.getParams(), ErrorCode.NULL_IN_NEW_LABELS);
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_NEW_LABELS);
     }
 
     @Test

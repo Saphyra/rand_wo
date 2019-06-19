@@ -1,6 +1,5 @@
 package com.github.saphyra.randwo.common;
 
-import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
@@ -29,8 +28,6 @@ public class CollectionValidatorTest {
         //THEN
         assertThat(ex).isInstanceOf(BadRequestException.class);
         BadRequestException exception = (BadRequestException) ex;
-        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.VALUE_IS_NULL.getErrorCode());
-        assertThat(exception.getErrorMessage().getParams()).containsKey(PARAMETER_KEY_NULL_VALUE);
-        assertThat(exception.getErrorMessage().getParams().get(PARAMETER_KEY_NULL_VALUE)).isEqualTo(ErrorCode.EMPTY_KEY_VALUE.getErrorCode());
+        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.EMPTY_KEY_VALUE.getErrorCode());
     }
 }

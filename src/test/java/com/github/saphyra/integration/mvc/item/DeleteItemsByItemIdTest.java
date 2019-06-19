@@ -106,8 +106,7 @@ public class DeleteItemsByItemIdTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.deleteRequest(ItemController.DELETE_BY_ITEM_IDS_MAPPING, Arrays.asList(ITEM_ID_1, null));
         //THEN
-        ErrorResponse errorResponse = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        verifyResponseParams(errorResponse.getParams(), ErrorCode.NULL_ITEM_ID.getErrorCode());
+        ErrorResponse errorResponse = responseValidator.verifyBadRequest(result, ErrorCode.NULL_ITEM_ID);
     }
 
     @Test

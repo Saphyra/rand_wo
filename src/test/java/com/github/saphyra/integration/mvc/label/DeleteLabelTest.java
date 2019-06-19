@@ -1,6 +1,5 @@
 package com.github.saphyra.integration.mvc.label;
 
-import static com.github.saphyra.randwo.common.ErrorCode.PARAMETER_KEY_NULL_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -21,7 +20,6 @@ import com.github.saphyra.common.configuration.MvcConfiguration;
 import com.github.saphyra.common.testcomponent.DatabaseCleanup;
 import com.github.saphyra.common.testcomponent.MockMvcWrapper;
 import com.github.saphyra.common.testcomponent.ResponseValidator;
-import com.github.saphyra.exceptionhandling.domain.ErrorResponse;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.label.LabelController;
 import com.github.saphyra.randwo.label.domain.Label;
@@ -78,8 +76,7 @@ public class DeleteLabelTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.deleteRequest(LabelController.DELETE_LABELS_MAPPING, Arrays.asList(LABEL_ID_1, null));
         //THEN
-        ErrorResponse errorResponse = responseValidator.verifyBadRequest(result, ErrorCode.VALUE_IS_NULL);
-        responseValidator.verifyResponseParams(errorResponse.getParams(), PARAMETER_KEY_NULL_VALUE, ErrorCode.NULL_IN_LABEL_IDS.getErrorCode());
+        responseValidator.verifyBadRequest(result, ErrorCode.NULL_IN_LABEL_IDS);
     }
 
     @Test

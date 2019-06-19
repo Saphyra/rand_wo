@@ -69,7 +69,6 @@ public class ItemController {
     }
 
     @PostMapping(GET_RANDOM_ITEM_MAPPING)
-    //TODO API test
     public ItemView getRandomItem(@RequestBody RandomItemRequest request){
         log.info("Querying random item for request {}", request);
         return randomItemViewQueryService.getRandomItem(request);

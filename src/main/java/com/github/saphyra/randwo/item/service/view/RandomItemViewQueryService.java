@@ -1,5 +1,7 @@
 package com.github.saphyra.randwo.item.service.view;
 
+import static java.util.Objects.isNull;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -7,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.github.saphyra.exceptionhandling.domain.ErrorMessage;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
@@ -32,6 +35,14 @@ public class RandomItemViewQueryService {
     private final Random random;
 
     public ItemView getRandomItem(RandomItemRequest request) {
+        if (isNull(request.getLabelIds())) {
+            throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_LABEL_IDS.getErrorCode()), "labelIds is null.");
+        }
+
+        if (isNull(request.getKeyIds())) {
+            throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_KEY_IDS.getErrorCode()), "keyIds is null.");
+        }
+
         collectionValidator.validateDoesNotContainNull(request.getLabelIds(), ErrorCode.NULL_IN_LABEL_IDS);
         collectionValidator.validateDoesNotContainNull(request.getKeyIds(), ErrorCode.NULL_IN_KEY_IDS);
 

@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
@@ -71,6 +72,40 @@ public class RandomItemViewQueryServiceTest {
 
     @Mock
     private ItemView itemView;
+
+    @Test
+    public void nullLabelIds() {
+        //GIVEN
+        List<UUID> labelIds = null;
+        List<UUID> keyIds = Arrays.asList(KEY_ID_1);
+        RandomItemRequest request = RandomItemRequest.builder()
+            .labelIds(labelIds)
+            .keyIds(keyIds)
+            .build();
+        //WHEN
+        Throwable ex = catchThrowable(() -> underTest.getRandomItem(request));
+        //THEN
+        assertThat(ex).isInstanceOf(BadRequestException.class);
+        BadRequestException exception = (BadRequestException) ex;
+        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.NULL_LABEL_IDS.getErrorCode());
+    }
+
+    @Test
+    public void nullKeyIds() {
+        //GIVEN
+        List<UUID> labelIds = Arrays.asList(LABEL_ID_1);
+        List<UUID> keyIds = null;
+        RandomItemRequest request = RandomItemRequest.builder()
+            .labelIds(labelIds)
+            .keyIds(keyIds)
+            .build();
+        //WHEN
+        Throwable ex = catchThrowable(() -> underTest.getRandomItem(request));
+        //THEN
+        assertThat(ex).isInstanceOf(BadRequestException.class);
+        BadRequestException exception = (BadRequestException) ex;
+        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.NULL_KEY_IDS.getErrorCode());
+    }
 
     @Test
     public void getRandomItem_noItems() {

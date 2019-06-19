@@ -33,6 +33,7 @@ public enum ErrorCode {
     NULL_ITEM_DELETE_METHOD("null-item-delete-method"),
     NULL_ITEM_ID("null-item-id"),
     NULL_ITEM_VALUE("empty-item-value"),
+    NULL_KEY_IDS("null-key-ids"),
     NULL_LABEL_IDS("null-label-ids"),
     NULL_NEW_KEY_VALUES("null-new-key-values"),
     NULL_NEW_LABELS("null-new-values"),
