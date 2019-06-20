@@ -22,8 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LabelController {
     public static final String DELETE_LABELS_MAPPING = "/label";
-    public static final String GET_LABEL = "/label/{labelId}";
-    public static final String GET_LABELS = "/label";
+    public static final String GET_LABEL_MAPPING = "/label/{labelId}";
+    public static final String GET_LABELS_MAPPING = "/label";
     public static final String UPDATE_LABEL_MAPPING = "/label/{labelId}";
 
     private final DeleteLabelService deleteLabelService;
@@ -36,15 +36,13 @@ public class LabelController {
         deleteLabelService.deleteLabels(labelIds);
     }
 
-    @GetMapping(GET_LABEL)
-    //TODO API test
+    @GetMapping(GET_LABEL_MAPPING)
     public LabelView getLabel(@PathVariable("labelId") UUID labelId){
         log.info("Querying label with id {}", labelId);
         return labelViewQueryService.findByLabelId(labelId);
     }
 
-    @GetMapping(GET_LABELS)
-    //TODO API TEST
+    @GetMapping(GET_LABELS_MAPPING)
     public List<LabelView> getLabels(){
         log.info("Querying all labels");
         return labelViewQueryService.getAll();
