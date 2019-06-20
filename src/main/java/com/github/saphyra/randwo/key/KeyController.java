@@ -38,7 +38,6 @@ public class KeyController {
     }
 
     @GetMapping(GET_KEY_MAPPING)
-    //TODO API TEST
     public Key getKey(@PathVariable("keyId") UUID keyId) {
         log.info("Querying key with id {}", keyId);
         return keyQueryService.findByKeyIdValidated(keyId);

@@ -43,6 +43,7 @@ public class DeleteKeyTest {
     private static final UUID KEY_ID_3 = UUID.randomUUID();
     private static final String KEY_VALUE = "key_value";
     private static final String VALUE = "value";
+
     @Autowired
     private MockMvcWrapper mockMvcWrapper;
 
