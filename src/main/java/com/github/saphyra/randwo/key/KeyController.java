@@ -44,14 +44,12 @@ public class KeyController {
     }
 
     @GetMapping(GET_KEYS_MAPPING)
-    //TODO API TEST
     public List<Key> getKeys() {
         log.info("Querying all keys");
         return keyQueryService.getAll();
     }
 
     @PostMapping(GET_KEYS_FOR_LABELS_MAPPING)
-    //TODO api test
     public List<Key> getKeysForLabels(@RequestBody List<UUID> labelIds){
         log.info("Querying keys for labelIds {}", labelIds);
         return keyQueryService.getKeysForLabels(labelIds);

@@ -3,6 +3,7 @@ package com.github.saphyra.randwo.key.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +16,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
@@ -29,6 +32,9 @@ public class KeyQueryServiceTest {
     private static final UUID KEY_ID = UUID.randomUUID();
     private static final UUID LABEL_ID = UUID.randomUUID();
     private static final UUID ITEM_ID = UUID.randomUUID();
+
+    @Mock
+    private CollectionValidator collectionValidator;
 
     @Mock
     private ItemLabelMappingDao itemLabelMappingDao;
@@ -84,6 +90,16 @@ public class KeyQueryServiceTest {
     }
 
     @Test
+    public void getKeysForLabels_nullLabelIds() {
+        //WHEN
+        Throwable ex = catchThrowable(() -> underTest.getKeysForLabels(null));
+        //THEN
+        assertThat(ex).isInstanceOf(BadRequestException.class);
+        BadRequestException exception = (BadRequestException) ex;
+        assertThat(exception.getErrorMessage().getErrorCode()).isEqualTo(ErrorCode.NULL_LABEL_IDS.getErrorCode());
+    }
+
+    @Test
     public void getKeysForLabels() {
         //GIVEN
         given(itemLabelMappingDao.getByLabelId(LABEL_ID)).willReturn(Arrays.asList(itemLabelMapping));
@@ -91,9 +107,12 @@ public class KeyQueryServiceTest {
         given(itemValueMappingDao.getByItemId(ITEM_ID)).willReturn(Arrays.asList(itemValueMapping));
         given(itemValueMapping.getKeyId()).willReturn(KEY_ID);
         given(keyDao.findById(KEY_ID)).willReturn(Optional.of(key));
+
+        List<UUID> labelIds = Arrays.asList(LABEL_ID);
         //WHEN
-        List<Key> result = underTest.getKeysForLabels(Arrays.asList(LABEL_ID));
+        List<Key> result = underTest.getKeysForLabels(labelIds);
         //THEN
+        verify(collectionValidator).validateDoesNotContainNull(labelIds, ErrorCode.NULL_IN_LABEL_IDS);
         assertThat(result).containsOnly(key);
     }
 }

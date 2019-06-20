@@ -1,5 +1,7 @@
 package com.github.saphyra.randwo.key.service;
 
+import static java.util.Objects.isNull;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -7,7 +9,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.github.saphyra.exceptionhandling.domain.ErrorMessage;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.randwo.common.CollectionValidator;
 import com.github.saphyra.randwo.common.ErrorCode;
 import com.github.saphyra.randwo.key.domain.Key;
 import com.github.saphyra.randwo.key.repository.KeyDao;
@@ -20,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class KeyQueryService {
+    private final CollectionValidator collectionValidator;
     private final ItemLabelMappingDao itemLabelMappingDao;
     private final ItemValueMappingDao itemValueMappingDao;
     private final KeyDao keyDao;
@@ -34,6 +39,11 @@ public class KeyQueryService {
     }
 
     public List<Key> getKeysForLabels(List<UUID> labelIds) {
+        if (isNull(labelIds)) {
+            throw new BadRequestException(new ErrorMessage(ErrorCode.NULL_LABEL_IDS.getErrorCode()), "labelIds is null.");
+        }
+        collectionValidator.validateDoesNotContainNull(labelIds, ErrorCode.NULL_IN_LABEL_IDS);
+
         return labelIds.stream()
             //Get item ids linked to labels
             .flatMap(labelId -> itemLabelMappingDao.getByLabelId(labelId).stream())
