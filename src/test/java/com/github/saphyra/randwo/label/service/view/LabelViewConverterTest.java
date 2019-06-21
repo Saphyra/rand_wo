@@ -21,6 +21,7 @@ import com.github.saphyra.randwo.mapping.itemlabel.repository.ItemLabelMappingDa
 public class LabelViewConverterTest {
     private static final UUID LABEL_ID = UUID.randomUUID();
     private static final String LABEL_VALUE = "label_value";
+    private static final UUID ITEM_ID = UUID.randomUUID();
 
     @Mock
     private ItemLabelMappingDao itemLabelMappingDao;
@@ -32,18 +33,40 @@ public class LabelViewConverterTest {
     private ItemLabelMapping itemLabelMapping;
 
     @Test
-    public void convert() {
+    public void convert_deletable() {
         //GIVEN
         Label label = Label.builder()
             .labelId(LABEL_ID)
             .labelValue(LABEL_VALUE)
             .build();
         given(itemLabelMappingDao.getByLabelId(LABEL_ID)).willReturn(Arrays.asList(itemLabelMapping));
+        given(itemLabelMapping.getItemId()).willReturn(ITEM_ID);
+        given(itemLabelMappingDao.getByItemId(ITEM_ID)).willReturn(Arrays.asList(itemLabelMapping, itemLabelMapping));
         //WHEN
         LabelView result = underTest.convert(label);
         //THEN
         assertThat(result.getLabelId()).isEqualTo(LABEL_ID);
         assertThat(result.getLabelValue()).isEqualTo(LABEL_VALUE);
         assertThat(result.getItems()).isEqualTo(1);
+        assertThat(result.isDeletable()).isTrue();
+    }
+
+    @Test
+    public void convert_notDeletable() {
+        //GIVEN
+        Label label = Label.builder()
+            .labelId(LABEL_ID)
+            .labelValue(LABEL_VALUE)
+            .build();
+        given(itemLabelMappingDao.getByLabelId(LABEL_ID)).willReturn(Arrays.asList(itemLabelMapping));
+        given(itemLabelMapping.getItemId()).willReturn(ITEM_ID);
+        given(itemLabelMappingDao.getByItemId(ITEM_ID)).willReturn(Arrays.asList(itemLabelMapping));
+        //WHEN
+        LabelView result = underTest.convert(label);
+        //THEN
+        assertThat(result.getLabelId()).isEqualTo(LABEL_ID);
+        assertThat(result.getLabelValue()).isEqualTo(LABEL_VALUE);
+        assertThat(result.getItems()).isEqualTo(1);
+        assertThat(result.isDeletable()).isFalse();
     }
 }

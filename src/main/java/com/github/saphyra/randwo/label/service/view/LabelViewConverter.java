@@ -17,6 +17,12 @@ class LabelViewConverter {
             .labelId(label.getLabelId())
             .labelValue(label.getLabelValue())
             .items(itemLabelMappingDao.getByLabelId(label.getLabelId()).size())
+            .deletable(isDeletable(label))
             .build();
+    }
+
+    private boolean isDeletable(Label label) {
+        return itemLabelMappingDao.getByLabelId(label.getLabelId()).stream()
+            .noneMatch(itemLabelMapping -> itemLabelMappingDao.getByItemId(itemLabelMapping.getItemId()).size() == 1);
     }
 }

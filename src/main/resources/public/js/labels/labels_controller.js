@@ -64,6 +64,7 @@
                                 checkbox.classList.add("select-checkbox");
                                 checkbox.value = labelData.labelId;
                                 checkbox.type = "checkbox";
+                                checkbox.disabled = !labelData.deletable;
                         checkBoxCell.appendChild(checkbox);
                     row.appendChild(checkBoxCell);
 
@@ -91,6 +92,7 @@
                             const deleteButton = document.createElement("BUTTON");
                                 deleteButton.classList.add("display-block");
                                 deleteButton.innerHTML = Localization.getAdditionalContent("delete-button");
+                                deleteButton.disabled = !labelData.deletable;
                                 deleteButton.onclick = function(){
                                     deleteLabels([labelData.labelId]);
                                 }

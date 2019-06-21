@@ -14,4 +14,5 @@ public class LabelView {
     private UUID labelId;
     private String labelValue;
     private int items;
+    private boolean deletable;
 }

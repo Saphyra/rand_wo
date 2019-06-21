@@ -231,9 +231,6 @@ FrontEnd
         - select method //TODO implement
     - edit_item
         - create item page prefilled //TODO implement
-    - view_labels
-        - delete labels
-            - only deletable labels can be selected //TODO implement
     - edit_label //TODO implement
     - view_keys
         - display number of items containing //TODO implement
