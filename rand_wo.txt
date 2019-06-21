@@ -214,6 +214,7 @@ Api
                 - <UUID> labelId
                 - <String> labelValue
                 - <Integer> items: number of items assigned to this label
+                - <Boolean> deletable
         - Key
             - fields
                 - <UUID> keyId

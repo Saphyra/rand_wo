@@ -20,7 +20,6 @@
         for(let eindex in codes){
             messageCodes[eindex] = codes[eindex];
         }
-        
         eventProcessor.processEvent(new Event(events.MESSAGE_CODES_LOADED));
     }
 })();

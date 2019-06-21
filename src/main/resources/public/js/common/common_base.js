@@ -13,11 +13,13 @@
     scriptLoader.loadScript("/js/common/event_processor.js");
     scriptLoader.loadScript("/js/common/load_state.js");
     scriptLoader.loadScript("/js/common/notification_service.js");
-    
+
     scriptLoader.loadScript("/js/common/localization/locale_service.js");
     scriptLoader.loadScript("/js/common/localization/localization_loader.js");
     scriptLoader.loadScript("/js/common/localization/message_code.js");
     scriptLoader.loadScript("/js/common/localization/localization.js");
+
+    scriptLoader.loadScript("/js/common/logout.js");
 
     /*
         Loads the script given as argument.

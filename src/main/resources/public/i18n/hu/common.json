@@ -22,5 +22,11 @@
       "key": "innerHTML",
       "message": "Angol"
     }
+  ],
+  "logout-button": [
+    {
+      "key": "innerHTML",
+      "message": "Kilépés"
+    }
   ]
 }

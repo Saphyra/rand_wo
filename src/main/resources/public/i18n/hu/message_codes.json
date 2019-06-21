@@ -5,5 +5,6 @@
   "label-value-already-exists": "Már van címke a megadott szöveggel.",
   "no-columns": "Nincs megfelelő oszlop kiválasztva (Legalább egy olyan oszlop kell, amelyik meg van jelenítve, és nem rejtett).",
   "no-labels": "Nincs címke hozzáadva.",
-  "no-keys": "Nincs oszlop hozzáadva."
+  "no-keys": "Nincs oszlop hozzáadva.",
+  "server-stopped": "A kiszolgáló leállítva. Zárja be a böngésző ablakot!"
 }
