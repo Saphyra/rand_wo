@@ -22,6 +22,7 @@ import com.github.saphyra.common.testcomponent.MockMvcWrapper;
 import com.github.saphyra.randwo.common.ObjectMapperDelegator;
 import com.github.saphyra.randwo.label.LabelController;
 import com.github.saphyra.randwo.label.domain.Label;
+import com.github.saphyra.randwo.label.domain.LabelView;
 import com.github.saphyra.randwo.label.repository.LabelDao;
 
 @RunWith(SpringRunner.class)
@@ -65,10 +66,12 @@ public class GetLabelsTest {
         //THEN
         assertThat(result.getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        List<Label> resultLabels = objectMapperDelegator.readArrayValue(result.getContentAsString(), Label[].class);
+        List<LabelView> resultLabels = objectMapperDelegator.readArrayValue(result.getContentAsString(), LabelView[].class);
         assertThat(resultLabels).hasSize(1);
-        Label resultKey = resultLabels.get(0);
-        assertThat(resultKey.getLabelId()).isEqualTo(LABEL_ID);
-        assertThat(resultKey.getLabelValue()).isEqualTo(LABEL_VALUE);
+        LabelView resultLabel = resultLabels.get(0);
+        assertThat(resultLabel.getLabelId()).isEqualTo(LABEL_ID);
+        assertThat(resultLabel.getLabelValue()).isEqualTo(LABEL_VALUE);
+        assertThat(resultLabel.getItems()).isEqualTo(0);
+        assertThat(resultLabel.isDeletable()).isTrue();
     }
 }
