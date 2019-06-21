@@ -83,7 +83,7 @@ a{
     text-decoration: none;
     color: black;
 }
-button, .button, a, select, footer label{
+button, .button, a, select, footer label, input[type=checkbox]{
     margin: 0.25rem;
     border: 3px outset black;
     border-radius: 5px;
@@ -197,4 +197,8 @@ footer span:nth-child(2){
 /*======CLASSES=======*/
 .cursor-pointer{
     cursor: pointer;
+}
+
+.display-block{
+    display: block;
 }

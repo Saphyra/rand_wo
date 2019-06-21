@@ -1,0 +1,48 @@
+{
+  "title": "Címkék",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Címkék"
+      }
+    ],
+    "label-value": [
+      {
+        "key": "placeholder",
+        "message": "Keresés"
+      }
+    ],
+    "search-button": [
+      {
+        "key": "innerHTML",
+        "message": "Keresés"
+      }
+    ],
+    "select-all-span": [
+      {
+        "key": "innerHTML",
+        "message": "Mindet kijelöl"
+      }
+    ],
+    "delete-selected-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelöltek törlése"
+      }
+    ],
+    "no-labels": [
+      {
+        "key": "innerHTML",
+        "message": "Nem található címke"
+      }
+    ]
+  },
+  "additionalContent": {
+    "confirm-deletion": "Biztosan törli a kiválasztott címké(ke)t?",
+    "edit-button": "Módosítás",
+    "delete-button": "Törlés",
+    "labels-deleted": "Törlés sikeres.",
+    "no-selected-labels": "Válassza ki a címkéket!"
+  }
+}

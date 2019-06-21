@@ -1,0 +1,63 @@
+input[type=checkbox]{
+    transform: scale(1.5);
+}
+
+#operations-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2.5rem;
+    border-bottom: 3px ridge black;
+}
+
+    #operations-container table{
+        width: 100%;
+    }
+
+    #operations-container table td{
+        width: 50%;
+        text-align: center;
+    }
+
+        #select-all-span{
+            font-size: 1.25rem;
+        }
+
+#labels-container{
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+    #no-labels{
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+
+    #labels{
+
+    }
+
+        .label{
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+            .label button{
+                text-align: center;
+                width: 90%
+            }
+
+            .label table td{
+                border: 3px ridge black;
+                padding: 0.25rem;
+                vertical-align: middle;
+            }
+
+            .label input[type=checkbox]{
+                margin: 0.25rem;
+            }

@@ -224,20 +224,16 @@ Api
                 - <String> value
 
 FrontEnd
+    - view items
+        - Auto-fill search field based on query param //TODO implement
     - delete_items_by_label
         - select labels //TODO implement
         - select method //TODO implement
     - edit_item
         - create item page prefilled //TODO implement
     - view_labels
-        - displaying number of items assigned //TODO implement
-        - link to view items of label //TODO implement
-        - filter by //TODO implement
-            - label
-        - link to edit label //TODO implement
-        - delete labels //TODO implement
+        - delete labels
             - only deletable labels can be selected //TODO implement
-        - select all button //TODO implement
     - edit_label //TODO implement
     - view_keys
         - display number of items containing //TODO implement
