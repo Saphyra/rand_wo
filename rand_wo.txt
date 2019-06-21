@@ -22,24 +22,21 @@ Domains
         - <UUID> itemId
         - <UUID> keyId
         - <String> value
+    - StoredObject
+        - <String> key
+        - <String> value
 
 Api
     - endpoints
-        - item
+        - ItemController
             - createItem
                 - uri: /item
                 - method: PUT
                 - params
                     - <ItemRequest> itemRequest: requestBody
                 - description: creates a new item with the given values assigned to given labels, also creates the labels and value keys if not exists
-            - updateItem
-                - uri: /item/{itemId}
-                - method: POST
-                - params
-                    - <ItemRequest> itemRequest: requestBody
-                    - <UUID> itemId: pathVariable
-                - description: updates the given item with the given values assigned to given labels, also creates the labels and value keys if not exists
-            - deleteItemsById
+                - response: void
+            - deleteByItemIds
                 - uri: /item/id
                 - method: DELETE
                 - params
@@ -48,14 +45,38 @@ Api
                             - must not be null
                             - must not contain null
                 - description: delete the items with the given ids.
-            - deleteItemsByLabel
+                - response: void
+            - deleteByLabelIds
                 - uri: /item/label
                 - method: DELETE
                 - params
                     - <DeleteItemRequest> deleteItemRequest: requestBody
                 - description: deletes items by label ids
-        - label
-            - deleteLabel
+                - response: void
+            - getItems
+                - uri: /item
+                - method: POST
+                - params
+                    <GetItemsRequest> getItemsRequest: requestBody
+                - description: returns all of the stored items filtered by details of getItemRequest
+                - response: <<ItemView> itemView> itemViews
+            - getRandomItem
+                - uri: /item/random
+                - method: POST
+                - params
+                    - <RandomItemRequest> randomItemRequest: identifies a pool of items the engine can select from
+                - description: returns a random item from the pool identified by randomItemRequest
+                - response: <ItemView> itemView
+            - updateItem
+                - uri: /item/{itemId}
+                - method: POST
+                - params
+                    - <ItemRequest> itemRequest: requestBody
+                    - <UUID> itemId: pathVariable
+                - description: updates the given item with the given values assigned to given labels, also creates the labels and value keys if not exists
+                - response: void
+        - LabelController
+            - deleteLabels
                 - uri: /label
                 - method: DELETE
                 - params
@@ -66,15 +87,29 @@ Api
                 - description:
                     - deletes the labels (and their mappings with items) with the given labelIds.
                     - can be deleted only when there are no items with only this label
-            - editLabel
+                - response: void
+            - getLabel
+                - uri: /label/{labelId}
+                - method: GET
+                - params
+                    - <UUID> labelId: pathVariable
+                - description: returns the label with the given labelId
+                - response: <LabelView> labelView
+            - getLabels
+                - uri: /label
+                - method: GET
+                - description: returns all of the saved labels
+                - response: <<LabelView> labelView> labelViews
+            - updateLabel
                 - uri: /label/{labelId}
                 - method: POST
                 - params
                     - <UUID> labelId: pathVariable
                     - <String> newValue: requestBody
                 - description: updates the value of the given label.
-        - key
-            - deleteKey
+                - response: void
+        - KeyController
+            - deleteKeys
                 - uri: /key
                 - method: DELETE
                 - params
@@ -85,6 +120,26 @@ Api
                 - description:
                     - deletes the keys (and their mappings with items) with the given keyIds.
                     - can be deleted only when there are n items with only this key.
+                - response: void
+            - getKey
+                - uri: /key/{keyId}
+                - method: GET
+                - params
+                    - <UUID> keyId: pathVariable
+                - description: returns the key with the given keyId
+                - response: <Key> key
+            - getKeys
+                - uri: /key
+                - method: GET
+                - description: returns all the saved keys.
+                - response: <<Key> key> keys
+            - getKeysForLabels
+                - uri: /key/label
+                - method: POST
+                - params
+                    - <<UUID> labelId> labelIds
+                - description: returns all the keys what are assigned to items belong to the given labelIds
+                - response: <<Key> key> keys
             - updateKey
                 - uri: /key/{keyId}
                 - method: POST
@@ -92,7 +147,39 @@ Api
                     - <UUID> keyId: pathVariable
                     - <String> newValue: requestBody
                 - description: updates the value of the given key.
+            - response: void
+        - StoredObjectController
+            - getObject
+                - uri: /stored-object/{key}
+                - method: GET
+                - params
+                    - <String> key: pathVariable
+                - description: returns the stored object with the given key
+                - response: <StoredObject> storedObject
+            - saveObject
+                - uri: /stored-object
+                - method: POST
+                - params
+                    - <StoreObjectRequest> storeObjectRequest
+                - description: saves or updates a StoredObject with the given details
+                - response: void
     - request params
+        - DeleteItemRequest
+            - fields
+                - <<UUID> labelId> labelIds
+                - <<ItemDeleteMethod> deleteMethod> deleteMethod
+            - validation
+                - none of the fields can be null, or contain null.
+        - GetItemsRequest
+            - fields:
+                - <String> searchByLabel: filtering items by label values. Leave empty if no filtering required
+                - <String> searchByKey: filtering items by key values. Leave empty if no filtering required
+                - <String> searchByValue: filtering items by column values. Leave empty if no filtering required
+        - ItemDeleteMethod
+            - type: enum
+            - values
+                - CONTAINS: delete the item if it has mapping with ANY of the labels
+                - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
         - ItemRequest
             - fields
                 - <<UUID> keyId = <UUID> value> existingKeyValueIds
@@ -104,17 +191,37 @@ Api
                 - existingLabelIds or newLabelValues must contain at least 1 item
                 - existingKeyValueIds and existingLabelIds must contain valid ids
                 - none of the fields can be null, or contain null.
-        - DeleteItemRequest
+        - RandomItemRequest
             - fields
-                - <<UUID> labelId> labelIds
-                - <<ItemDeleteMethod> deleteMethod> deleteMethod
-            - validation
+                - <<UUID> labelId> labelIds: adds the item to the pool if the item contains any of these labels
+                - <<UUID> keyId> keyIds: adds the item to the pool if the item contains any of these keys
+            - validation:
                 - none of the fields can be null, or contain null.
-        - ItemDeleteMethod
-            - type: enum
-            - values
-                - CONTAINS: delete the item if it has mapping with ANY of the labels
-                - CONTAINS_ALL: delete the item if it has mapping with ALL of the labels
+        - StoreObjectRequest
+            - fields
+                - <String> key
+                - <String> value
+            - validation:
+                - key must not be null or blank, and must not be longer than 255 characters
+    - responses
+        - ItemView
+            - fields
+                - <UUID> itemId
+                - <<UUID> labelId> labelIds
+                - <<UUID> keyId = <String> columnValue> columns
+        - LabelView
+            - fields
+                - <UUID> labelId
+                - <String> labelValue
+                - <Integer> items: number of items assigned to this label
+        - Key
+            - fields
+                - <UUID> keyId
+                - <String> keyValue
+        - StoredObject
+            - fields
+                - <String> key
+                - <String> value
 
 FrontEnd
     - delete_items_by_label
