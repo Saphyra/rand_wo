@@ -93,6 +93,7 @@
     ]
   },
   "additionalContent": {
+    "edit-item": "Bejegyzés szerkesztése",
     "enter-value-here": "Szöveg helye"
   }
 }

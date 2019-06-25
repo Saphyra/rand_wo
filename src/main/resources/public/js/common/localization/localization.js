@@ -17,10 +17,10 @@
                     document.title = content.title;
                     fillPageWithText(content.staticText);
                     additionalContent = content.additionalContent;
+
+                    eventProcessor.processEvent(new Event(events.LOCALIZATION_LOADED));
                 }
             );
-
-            eventProcessor.processEvent(new Event(events.LOCALIZATION_LOADED));
         }
     ));
 

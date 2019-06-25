@@ -31,7 +31,7 @@
             dao.sendRequestAsync(request);
 
             function createRequest(body){
-                if(!pageData.itemId){
+                if(!pageData.itemId.length){
                      const request = new Request(HttpMethod.PUT, Mapping.CREATE_ITEM, body);
                         request.processValidResponse = function(){
                             sessionStorage.successMessage = MessageCode.getMessage("item-created");
