@@ -27,12 +27,26 @@
                 newLabels: newLabels
             };
 
-            const request = new Request(HttpMethod.PUT, Mapping.CREATE_ITEM, body);
-                request.processValidResponse = function(){
-                    sessionStorage.successMessage = MessageCode.getMessage("item-created");
-                    window.location.href = "/";
-                }
+            const request = createRequest(body);
             dao.sendRequestAsync(request);
+
+            function createRequest(body){
+                if(!pageData.itemId){
+                     const request = new Request(HttpMethod.PUT, Mapping.CREATE_ITEM, body);
+                        request.processValidResponse = function(){
+                            sessionStorage.successMessage = MessageCode.getMessage("item-created");
+                            window.location.href = "/";
+                        }
+                    return request;
+                } else{
+                    const request = new Request(HttpMethod.POST, Mapping.concat(Mapping.UPDATE_ITEM, pageData.itemId), body);
+                        request.processValidResponse = function(){
+                            sessionStorage.successMessage = MessageCode.getMessage("item-updated");
+                            window.location.href = "/";
+                        }
+                    return request;
+                }
+            }
 
             function mapAddedKeys(addedKeys){
                 const result = {};

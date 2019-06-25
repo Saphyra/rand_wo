@@ -9,7 +9,7 @@
 
     let loadedKeys;
     let keysCanBeAdd = [];
-    const addedKeys = [];
+    const addedKeys = Object.keys(pageData.keys);
     const newKeys = {};
 
     window.keyController = new function(){
@@ -82,15 +82,32 @@
         }
     ));
 
-    function loadKeys(){
+    function loadKeys(addKeys){
         const request = new Request(HttpMethod.GET, Mapping.GET_KEYS);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(keys){
                 loadedKeys = mapKeys(keys);
-                keysCanBeAdd = Object.keys(loadedKeys);
+                keysCanBeAdd = Object.keys(loadedKeys)
+                    .filter(function(keyId){
+                        return addedKeys.indexOf(keyId) == -1;
+                    });
                 displayKeys();
+                if(addedKeys){
+                    for(let kIndex in addedKeys){
+                        const keyId = addedKeys[kIndex];
+                        eventProcessor.processEvent(new Event(
+                            events.ADD_COLUMN,
+                            {
+                                id: keyId,
+                                value: loadedKeys[keyId],
+                                type: KEY_TYPE_EXISTING,
+                                keyValue: pageData.keys[keyId]
+                            }
+                        ));
+                    }
+                }
             }
         dao.sendRequestAsync(request);
 
@@ -141,7 +158,7 @@
     }
 
     function init(){
-        loadKeys();
+        loadKeys(true);
         document.getElementById("new-key-value").onkeyup = function(e){
             if(e.which == 13){
                 eventProcessor.processEvent(new Event(events.ADD_NEW_KEY));

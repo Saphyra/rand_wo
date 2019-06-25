@@ -6,7 +6,7 @@
 
     let loadedLabels;
     let labelsCanBeAdd = [];
-    const addedLabels = [];
+    const addedLabels = pageData.labels;
     const newLabels = [];
 
     window.labelController = new function(){
@@ -64,17 +64,27 @@
             labelsCanBeAdd.splice(labelsCanBeAdd.indexOf(labelId), 1);
             displayLabels();
 
-            addToLabels(
-                loadedLabels[labelId],
-                addedLabels,
-                function(){
-                    labelsCanBeAdd.push(labelId);
-                    displayLabels();
-                    addedLabels.splice(addedLabels.indexOf(labelId), 1);
-                }
-            );
+            addExistingLabelCall(labelId);
         }
     ));
+
+    function addSavedLabels(){
+        for(let lIndex in addedLabels){
+            addExistingLabelCall(addedLabels[lIndex]);
+        }
+    }
+
+    function addExistingLabelCall(labelId){
+        addToLabels(
+            loadedLabels[labelId],
+            addedLabels,
+            function(){
+                labelsCanBeAdd.push(labelId);
+                displayLabels();
+                addedLabels.splice(addedLabels.indexOf(labelId), 1);
+            }
+        );
+    }
 
     function addToLabels(labelValue, labelArray, callBack){
         const container = document.getElementById("current-labels");
@@ -96,15 +106,22 @@
         $("#no-current-labels").hide();
     }
 
-    function loadLabels(){
+    function loadLabels(addLabels){
         const request = new Request(HttpMethod.GET, Mapping.GET_LABELS);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(labels){
                 loadedLabels = mapLabels(labels);
-                labelsCanBeAdd = Object.keys(loadedLabels);
+                labelsCanBeAdd = Object.keys(loadedLabels)
+                    .filter(function(labelId){
+                            return addedLabels.indexOf(labelId) == -1;
+                        }
+                    );
                 displayLabels();
+                if(addLabels){
+                    addSavedLabels();
+                }
             }
         dao.sendRequestAsync(request);
 
@@ -144,7 +161,8 @@
     }
 
     function init(){
-        loadLabels();
+        loadLabels(true);
+
         document.getElementById("new-label-value").onkeyup = function(e){
             if(e.which == 13){
                 eventProcessor.processEvent(new Event(events.ADD_NEW_LABEL));
