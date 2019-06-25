@@ -225,8 +225,6 @@ Api
                 - <String> value
 
 FrontEnd
-    - view items
-        - Auto-fill search field based on query param //TODO implement
     - delete_items_by_label
         - select labels //TODO implement
         - select method //TODO implement
