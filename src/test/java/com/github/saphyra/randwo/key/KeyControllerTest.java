@@ -15,9 +15,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.randwo.key.domain.Key;
+import com.github.saphyra.randwo.key.domain.KeyView;
 import com.github.saphyra.randwo.key.service.KeyQueryService;
 import com.github.saphyra.randwo.key.service.delete.DeleteKeyService;
 import com.github.saphyra.randwo.key.service.update.UpdateKeyService;
+import com.github.saphyra.randwo.key.service.view.KeyViewQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KeyControllerTest {
@@ -32,6 +34,9 @@ public class KeyControllerTest {
     private KeyQueryService keyQueryService;
 
     @Mock
+    private KeyViewQueryService keyViewQueryService;
+
+    @Mock
     private UpdateKeyService updateKeyService;
 
     @InjectMocks
@@ -39,6 +44,9 @@ public class KeyControllerTest {
 
     @Mock
     private Key key;
+
+    @Mock
+    private KeyView keyView;
 
     @Test
     public void deleteKeys() {
@@ -63,11 +71,11 @@ public class KeyControllerTest {
     @Test
     public void getKeys() {
         //GIVEN
-        given(keyQueryService.getAll()).willReturn(Arrays.asList(key));
+        given(keyViewQueryService.getAll()).willReturn(Arrays.asList(keyView));
         //WHEN
-        List<Key> result = underTest.getKeys();
+        List<KeyView> result = underTest.getKeys();
         //THEN
-        assertThat(result).containsOnly(key);
+        assertThat(result).containsOnly(keyView);
     }
 
     @Test

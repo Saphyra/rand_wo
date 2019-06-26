@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.saphyra.randwo.key.domain.Key;
+import com.github.saphyra.randwo.key.domain.KeyView;
 import com.github.saphyra.randwo.key.service.KeyQueryService;
 import com.github.saphyra.randwo.key.service.delete.DeleteKeyService;
 import com.github.saphyra.randwo.key.service.update.UpdateKeyService;
+import com.github.saphyra.randwo.key.service.view.KeyViewQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +31,7 @@ public class KeyController {
 
     private final DeleteKeyService deleteKeyService;
     private final KeyQueryService keyQueryService;
+    private final KeyViewQueryService keyViewQueryService;
     private final UpdateKeyService updateKeyService;
 
     @DeleteMapping(DELETE_KEYS_MAPPING)
@@ -44,9 +47,9 @@ public class KeyController {
     }
 
     @GetMapping(GET_KEYS_MAPPING)
-    public List<Key> getKeys() {
+    public List<KeyView> getKeys() {
         log.info("Querying all keys");
-        return keyQueryService.getAll();
+        return keyViewQueryService.getAll();
     }
 
     @PostMapping(GET_KEYS_FOR_LABELS_MAPPING)

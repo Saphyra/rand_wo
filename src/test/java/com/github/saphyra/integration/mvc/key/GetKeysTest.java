@@ -22,6 +22,7 @@ import com.github.saphyra.common.testcomponent.MockMvcWrapper;
 import com.github.saphyra.randwo.common.ObjectMapperDelegator;
 import com.github.saphyra.randwo.key.KeyController;
 import com.github.saphyra.randwo.key.domain.Key;
+import com.github.saphyra.randwo.key.domain.KeyView;
 import com.github.saphyra.randwo.key.repository.KeyDao;
 
 @RunWith(SpringRunner.class)
@@ -65,10 +66,12 @@ public class GetKeysTest {
         //THEN
         assertThat(result.getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        List<Key> resultKeys = objectMapperDelegator.readArrayValue(result.getContentAsString(), Key[].class);
+        List<KeyView> resultKeys = objectMapperDelegator.readArrayValue(result.getContentAsString(), KeyView[].class);
         assertThat(resultKeys).hasSize(1);
-        Key resultKey = resultKeys.get(0);
+        KeyView resultKey = resultKeys.get(0);
         assertThat(resultKey.getKeyId()).isEqualTo(KEY_ID);
         assertThat(resultKey.getKeyValue()).isEqualTo(KEY_VALUE);
+        assertThat(resultKey.getItems()).isEqualTo(0);
+        assertThat(resultKey.isDeletable()).isTrue();
     }
 }

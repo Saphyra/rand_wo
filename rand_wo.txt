@@ -132,7 +132,7 @@ Api
                 - uri: /key
                 - method: GET
                 - description: returns all the saved keys.
-                - response: <<Key> key> keys
+                - response: <<KeyView> key> keys
             - getKeysForLabels
                 - uri: /key/label
                 - method: POST
@@ -219,6 +219,12 @@ Api
             - fields
                 - <UUID> keyId
                 - <String> keyValue
+        - KeyView
+            - fields
+            - <UUID> keyId
+            - <String> keyValue
+            - <Integer> items: number of items assigned to this key
+            - <Boolean> deletable
         - StoredObject
             - fields
                 - <String> key
