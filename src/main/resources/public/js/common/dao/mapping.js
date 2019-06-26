@@ -13,6 +13,7 @@ window.Mapping = {
     GET_RANDOM_ITEM: "/item/random",
     SAVE_TO_OBJECT_STORE: "/stored-object",
     UPDATE_ITEM: "/item/*",
+    UPDATE_LABEL: "/label/*",
 
     concat: function(path, id){
         return path.replace("*", id);

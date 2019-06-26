@@ -85,7 +85,7 @@
                                 editButton.classList.add("display-block");
                                 editButton.innerHTML = Localization.getAdditionalContent("edit-button");
                                 editButton.onclick = function(){
-                                    window.location.href = "/label/edit/" + labelData.labelId;
+                                    window.location.href = "/labels/edit/" + labelData.labelId;
                                 }
                         operationsCell.appendChild(editButton);
 

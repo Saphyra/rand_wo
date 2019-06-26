@@ -228,7 +228,6 @@ FrontEnd
     - delete_items_by_label
         - select labels //TODO implement
         - select method //TODO implement
-    - edit_label //TODO implement
     - view_keys
         - display number of items containing //TODO implement
         - link to view items of key (given key at first) //TODO implement

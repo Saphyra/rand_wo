@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class LabelsController {
-    private static final String LABELS_MAPPING = "/labels";
+    static final String LABELS_MAPPING = "/labels";
 
     private final ModelAndViewFactory modelAndViewFactory;
 

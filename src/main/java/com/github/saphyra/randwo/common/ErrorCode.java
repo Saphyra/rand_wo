@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
+    ARGUMENT_MISMATCH("argument-mismatch"),
     EMPTY_ITEM_IDS("empty-item-ids"),
     EMPTY_KEY_VALUE("empty-key-value"),
     EMPTY_LABEL_VALUE("empty-label-value"),

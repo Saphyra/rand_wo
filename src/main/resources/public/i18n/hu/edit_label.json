@@ -1,0 +1,31 @@
+{
+  "title": "Címke módosítása",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Címke módosítása"
+      }
+    ],
+    "back-button": [
+      {
+        "key": "innerHTML",
+        "message": "Vissza"
+      }
+    ],
+    "label-value": [
+      {
+        "key": "placeholder",
+        "message": "Új érték"
+      }
+    ],
+    "save-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}

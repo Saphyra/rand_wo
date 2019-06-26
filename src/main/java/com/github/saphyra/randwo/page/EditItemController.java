@@ -31,7 +31,7 @@ public class EditItemController {
     private final ModelAndViewFactory modelAndViewFactory;
 
     @GetMapping(EDIT_ITEM_MAPPING)
-    public ModelAndView createItem(@PathVariable UUID itemId) {
+    public ModelAndView createItem(@PathVariable("itemId") UUID itemId) {
         log.info("Request arrived to {}", EDIT_ITEM_MAPPING);
 
         return modelAndViewFactory.create(

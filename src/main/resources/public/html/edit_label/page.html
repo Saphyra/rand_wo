@@ -1,0 +1,17 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD th:fragment="head">
+    <LINK rel="stylesheet" href="/css/edit_label.css">
+</HEAD>
+<BODY>
+<MAIN th:fragment="main">
+    <DIV id="input-container">
+        <INPUT id="label-value" th:value="${labelValue}">
+        <BUTTON id="save-button" onclick="eventProcessor.processEvent(new Event(events.SAVE_CHANGES))"></BUTTON>
+    </DIV>
+</MAIN>
+
+<SPAN th:fragment="footer">
+    <BUTTON id="back-button" onclick="window.location.href = '/labels'"></BUTTON>
+</SPAN>
+</BODY>
+</HTML>
