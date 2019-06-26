@@ -1,19 +1,22 @@
 package com.github.saphyra.randwo.storedobject;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
+import com.github.saphyra.randwo.storedobject.domain.StoreObjectRequest;
+import com.github.saphyra.randwo.storedobject.domain.StoredObject;
+import com.github.saphyra.randwo.storedobject.repository.StoredObjectDao;
+import com.github.saphyra.randwo.storedobject.service.save.SaveObjectService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import com.github.saphyra.randwo.storedobject.domain.StoreObjectRequest;
-import com.github.saphyra.randwo.storedobject.domain.StoredObject;
-import com.github.saphyra.randwo.storedobject.service.StoredObjectQueryService;
-import com.github.saphyra.randwo.storedobject.service.save.SaveObjectService;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StoredObjectControllerTest {
@@ -23,7 +26,7 @@ public class StoredObjectControllerTest {
     private SaveObjectService saveObjectService;
 
     @Mock
-    private StoredObjectQueryService storedObjectQueryService;
+    private StoredObjectDao storedObjectDao;
 
     @InjectMocks
     private StoredObjectController underTest;
@@ -35,13 +38,24 @@ public class StoredObjectControllerTest {
     private StoreObjectRequest storeObjectRequest;
 
     @Test
-    public void getObject() {
+    public void getObject_found() {
         //GIVEN
-        given(storedObjectQueryService.findByObjectKeyValidated(OBJECT_KEY)).willReturn(storedObject);
+        given(storedObjectDao.findById(OBJECT_KEY)).willReturn(Optional.of(storedObject));
         //WHEN
-        StoredObject result = underTest.getObject(OBJECT_KEY);
+        ResponseEntity<StoredObject> result = underTest.getObject(OBJECT_KEY);
         //THEN
-        assertThat(result).isEqualTo(storedObject);
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(result.getBody()).isEqualTo(storedObject);
+    }
+
+    @Test
+    public void getObject_notFound() {
+        //GIVEN
+        given(storedObjectDao.findById(OBJECT_KEY)).willReturn(Optional.empty());
+        //WHEN
+        ResponseEntity<StoredObject> result = underTest.getObject(OBJECT_KEY);
+        //THEN
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 
     @Test

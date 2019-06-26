@@ -1,11 +1,15 @@
 package com.github.saphyra.integration.mvc.storedobject;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.nio.charset.Charset;
-import java.util.Optional;
-import java.util.Random;
-
+import com.github.saphyra.common.configuration.MvcConfiguration;
+import com.github.saphyra.common.testcomponent.DatabaseCleanup;
+import com.github.saphyra.common.testcomponent.MockMvcWrapper;
+import com.github.saphyra.common.testcomponent.ResponseValidator;
+import com.github.saphyra.randwo.common.ErrorCode;
+import com.github.saphyra.randwo.common.ObjectMapperDelegator;
+import com.github.saphyra.randwo.storedobject.StoredObjectController;
+import com.github.saphyra.randwo.storedobject.domain.StoreObjectRequest;
+import com.github.saphyra.randwo.storedobject.domain.StoredObject;
+import com.github.saphyra.randwo.storedobject.repository.StoredObjectDao;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,16 +21,11 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.github.saphyra.common.configuration.MvcConfiguration;
-import com.github.saphyra.common.testcomponent.DatabaseCleanup;
-import com.github.saphyra.common.testcomponent.MockMvcWrapper;
-import com.github.saphyra.common.testcomponent.ResponseValidator;
-import com.github.saphyra.randwo.common.ErrorCode;
-import com.github.saphyra.randwo.common.ObjectMapperDelegator;
-import com.github.saphyra.randwo.storedobject.StoredObjectController;
-import com.github.saphyra.randwo.storedobject.domain.StoreObjectRequest;
-import com.github.saphyra.randwo.storedobject.domain.StoredObject;
-import com.github.saphyra.randwo.storedobject.repository.StoredObjectDao;
+import java.nio.charset.Charset;
+import java.util.Optional;
+import java.util.Random;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -65,7 +64,7 @@ public class StoredObjectApiTest {
         //WHEN
         MockHttpServletResponse result = mockMvcWrapper.getRequest(StoredObjectController.GET_OBJECT_MAPPING, KEY);
         //THEN
-        responseValidator.verifyNotFoundRequest(result, ErrorCode.OBJECT_NOT_FOUND);
+        assertThat(result.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
     }
 
     @Test
