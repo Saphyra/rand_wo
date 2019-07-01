@@ -58,6 +58,7 @@
   },
   "additionalContent": {
     "confirm-delete-items": "Biztosan törli a kiválasztott bejegyzéseket?",
+    "delete-button": "Törlés",
     "edit-button": "Szerkesztés",
     "items-deleted": "bejegyzések törölve",
     "labels-header": "Címkék",

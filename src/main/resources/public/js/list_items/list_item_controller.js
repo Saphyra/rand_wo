@@ -20,16 +20,20 @@
                 return;
             }
 
-            if(confirm(Localization.getAdditionalContent("confirm-delete-items"))){
-                const request = new Request(HttpMethod.DELETE, Mapping.DELETE_ITEMS, selectedItems);
-                    request.processValidResponse = function(){
-                        notificationService.showSuccess(Localization.getAdditionalContent("items-deleted"));
-                        loadItems();
-                    }
-                dao.sendRequestAsync(request);
-            }
+            deleteItems(selectedItems);
         }
     ));
+
+    function deleteItems(itemIds){
+        if(confirm(Localization.getAdditionalContent("confirm-delete-items"))){
+            const request = new Request(HttpMethod.DELETE, Mapping.DELETE_ITEMS, itemIds);
+                request.processValidResponse = function(){
+                    notificationService.showSuccess(Localization.getAdditionalContent("items-deleted"));
+                    loadItems();
+                }
+            dao.sendRequestAsync(request);
+        }
+    }
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.SEARCH_ITEMS},
@@ -149,6 +153,13 @@
                             window.location.href = "items/edit/" + item.itemId;
                         }
                 operationsColumn.appendChild(editButton);
+
+                    const deleteButton = document.createElement("BUTTON");
+                        deleteButton.innerHTML = Localization.getAdditionalContent("delete-button");
+                        deleteButton.onclick = function(){
+                            deleteItems([item.itemId]);
+                        }
+                operationsColumn.appendChild(deleteButton);
             row.appendChild(operationsColumn);
             container.appendChild(row);
         }
