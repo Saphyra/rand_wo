@@ -1,0 +1,31 @@
+{
+  "title": "Oszlop módosítása",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Oszlop módosítása"
+      }
+    ],
+    "back-button": [
+      {
+        "key": "innerHTML",
+        "message": "Vissza"
+      }
+    ],
+    "key-value": [
+      {
+        "key": "placeholder",
+        "message": "Új érték"
+      }
+    ],
+    "save-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}

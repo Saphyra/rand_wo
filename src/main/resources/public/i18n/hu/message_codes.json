@@ -1,8 +1,10 @@
 {
+  "empty-key-value": "Az oszlop értéke üres!",
   "empty-label-value": "A címke értéke üres!",
   "item-created": "Bejegyzés mentve.",
   "item-updated": "Módosítások mentve.",
   "items-deleted": "Bejegyzés(ek) törölve.",
+  "key-updated": "Módosítások mentve.",
   "key-value-already-exists": "Már van oszlop a megadott szöveggel.",
   "label-updated": "Módosítások mentve.",
   "label-value-already-exists": "Már van címke a megadott szöveggel.",

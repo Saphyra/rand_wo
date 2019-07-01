@@ -2,7 +2,7 @@ package com.github.saphyra.randwo.page;
 
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.randwo.common.ErrorCode;
-import com.github.saphyra.randwo.label.service.LabelQueryService;
+import com.github.saphyra.randwo.key.service.KeyQueryService;
 import com.github.saphyra.randwo.page.component.ModelAndViewFactory;
 import com.github.saphyra.randwo.page.domain.ModelAttribute;
 import lombok.RequiredArgsConstructor;
@@ -15,33 +15,33 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Arrays;
 import java.util.UUID;
 
-import static com.github.saphyra.randwo.page.LabelsController.LABELS_MAPPING;
+import static com.github.saphyra.randwo.page.KeysController.KEYS_MAPPING;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class EditLabelController {
-    private static final String EDIT_LABEL_MAPPING = "labels/edit/{labelId}";
+public class EditKeyController {
+    private static final String EDIT_KEY_MAPPING = "keys/edit/{keyId}";
 
-    private final LabelQueryService labelQueryService;
+    private final KeyQueryService keyQueryService;
     private final ModelAndViewFactory modelAndViewFactory;
 
-    @GetMapping(EDIT_LABEL_MAPPING)
-    public ModelAndView editLabel(@PathVariable("labelId") UUID labelId) {
-        log.info("Request arrived to {} with labelId {}", EDIT_LABEL_MAPPING, labelId);
+    @GetMapping(EDIT_KEY_MAPPING)
+    public ModelAndView editKey(@PathVariable("keyId") UUID keyId) {
+        log.info("Request arrived to {} with keyId {}", EDIT_KEY_MAPPING, keyId);
 
         try {
             return modelAndViewFactory.create(
-                "edit_label",
+                "edit_key",
                 Arrays.asList(
-                    new ModelAttribute("labelId", labelId)
+                    new ModelAttribute("keyId", keyId)
                 ),
-                new ModelAttribute("labelValue", labelQueryService.findByLabelIdValidated(labelId).getLabelValue())
+                new ModelAttribute("keyValue", keyQueryService.findByKeyIdValidated(keyId).getKeyValue())
             );
         } catch (NotFoundException e) {
-            if (e.getErrorMessage().getErrorCode().equals(ErrorCode.LABEL_NOT_FOUND.getErrorCode())) {
-                log.warn("Label not found. Redirecting...");
-                return new ModelAndView("forward:" + LABELS_MAPPING);
+            if (e.getErrorMessage().getErrorCode().equals(ErrorCode.KEY_NOT_FOUND.getErrorCode())) {
+                log.warn("Key not found. Redirecting...");
+                return new ModelAndView("forward:" + KEYS_MAPPING);
             }
 
             throw e;
