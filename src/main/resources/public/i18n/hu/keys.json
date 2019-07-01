@@ -1,0 +1,48 @@
+{
+  "title": "Oszlopok",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Oszlopok"
+      }
+    ],
+    "key-value": [
+      {
+        "key": "placeholder",
+        "message": "Keresés"
+      }
+    ],
+    "search-button": [
+      {
+        "key": "innerHTML",
+        "message": "Keresés"
+      }
+    ],
+    "select-all-span": [
+      {
+        "key": "innerHTML",
+        "message": "Mindet kijelöl"
+      }
+    ],
+    "delete-selected-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelöltek törlése"
+      }
+    ],
+    "no-keys": [
+      {
+        "key": "innerHTML",
+        "message": "Nem található oszlop"
+      }
+    ]
+  },
+  "additionalContent": {
+    "confirm-deletion": "Biztosan törli a kiválasztott oszlopo(ka)t?",
+    "edit-button": "Módosítás",
+    "delete-button": "Törlés",
+    "keys-deleted": "Törlés sikeres.",
+    "no-selected-keys": "Válassza ki az oszlopokat!"
+  }
+}

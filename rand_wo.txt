@@ -235,8 +235,6 @@ FrontEnd
         - select labels //TODO implement
         - select method //TODO implement
     - view_keys
-        - display number of items containing //TODO implement
-        - link to view items of key (given key at first) //TODO implement
         - filter by
             - keyValue //TODO implement
         - link to edit key //TODO implement

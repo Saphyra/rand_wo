@@ -1,0 +1,34 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD th:fragment="head">
+    <LINK rel="stylesheet" href="/css/keys.css">
+</HEAD>
+<BODY>
+
+<MAIN th:fragment="main">
+    <DIV id="operations-container">
+        <TABLE>
+            <TR>
+                <TD>
+                    <INPUT type="text" id="key-value">
+                    <BUTTON id="search-button" onclick="eventProcessor.processEvent(new Event(events.DISPLAY_KEYS))"></BUTTON>
+                </TD>
+                <TD>
+                    <LABEL>
+                        <INPUT type="checkbox" id="select-all-checkbox">
+                        <SPAN id="select-all-span"></SPAN>
+                    </LABEL>
+                    <BUTTON id="delete-selected-button" onclick="eventProcessor.processEvent(new Event(events.DELETE_SELECTED))"></BUTTON>
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <DIV id="keys-container">
+        <DIV id="no-keys"></DIV>
+        <DIV id="keys"></DIV>
+    </DIV>
+</MAIN>
+
+<SPAN th:fragment="footer">
+</SPAN>
+</BODY>
+</HTML>

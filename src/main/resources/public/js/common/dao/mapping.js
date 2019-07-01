@@ -1,6 +1,7 @@
 window.Mapping = {
     CREATE_ITEM: "/item",
     DELETE_ITEMS: "/item/id",
+    DELETE_KEYS: "/key",
     DELETE_LABELS: "/label",
     GET_ITEMS: "/item",
     GET_KEY: "/key/*",
