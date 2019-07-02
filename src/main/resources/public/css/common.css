@@ -202,3 +202,7 @@ footer span:nth-child(2){
 .display-block{
     display: block;
 }
+
+.text-align-center{
+    text-align: center;
+}
