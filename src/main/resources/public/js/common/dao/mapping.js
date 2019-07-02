@@ -13,6 +13,7 @@ window.Mapping = {
     GET_OBJECT_FROM_STORE: "/stored-object/*",
     GET_RANDOM_ITEM: "/item/random",
     SAVE_TO_OBJECT_STORE: "/stored-object",
+    SPEAK_VALUE: "/value/play",
     UPDATE_ITEM: "/item/*",
     UPDATE_KEY: "/key/*",
     UPDATE_LABEL: "/label/*",

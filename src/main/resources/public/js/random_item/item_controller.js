@@ -70,6 +70,7 @@
             headRow.appendChild(headCell);
 
             const valueCell = document.createElement("TD");
+                valueCell.classList.add("text-align-center");
                 const value = columns[keyId];
                 if(value == undefined){
                     valueCell.innerHTML = Localization.getAdditionalContent("no-value");
@@ -80,8 +81,19 @@
                         valueArea.readOnly = true;
                     valueCell.appendChild(valueArea);
 
+                    const speakButton = document.createElement("DIV");
+                        speakButton.classList.add("button");
+                        speakButton.classList.add("text-align-center");
+                        speakButton.innerHTML = Localization.getAdditionalContent("speak");
+                        speakButton.onclick = function(){
+                            speak(item.itemId, keyId);
+                        };
+                    valueCell.appendChild(speakButton);
+
                     if(storedSetting.isHidden()){
                         valueArea.style.display = "none";
+                        speakButton.style.display = "none";
+
 
                         const revealButton = document.createElement("BUTTON");
                             revealButton.innerHTML = Localization.getAdditionalContent("reveal");
@@ -89,6 +101,7 @@
 
                         revealButton.onclick = function(){
                             valueArea.style.display = "block";
+                            speakButton.style.display = "block";
                             valueCell.removeChild(revealButton);
                         }
                     }
@@ -136,5 +149,11 @@
     function loadKey(keyId){
         const response = dao.sendRequest(HttpMethod.GET, Mapping.concat(Mapping.GET_KEY, keyId));
         return JSON.parse(response.body).keyValue;
+    }
+
+    function speak(itemId, keyId){
+        const request = new Request(HttpMethod.POST, Mapping.SPEAK_VALUE, {itemId: itemId, keyId: keyId});
+            request.processValidResponse = function(){};
+        dao.sendRequestAsync(request);
     }
 })();
