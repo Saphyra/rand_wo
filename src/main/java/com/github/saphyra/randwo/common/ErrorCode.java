@@ -15,6 +15,7 @@ public enum ErrorCode {
     ITEM_LABEL_MAPPING_ALREADY_EXISTS("item-label-mapping-already-exists"),
     ITEM_NOT_FOUND("item-not-found"),
     ITEM_VALUE_MAPPING_ALREADY_EXISTS("item-value-mapping-already-exists"),
+    ITEM_VALUE_MAPPING_NOT_FOUND("item-value-mapping-not-found"),
     KEY_NOT_FOUND("key-not-found"),
     KEY_VALUE_ALREADY_EXISTS("key-value-already-exists"),
     LABEL_NOT_FOUND("label-not-found"),

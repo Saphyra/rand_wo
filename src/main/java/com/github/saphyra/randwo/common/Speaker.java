@@ -43,7 +43,7 @@ public class Speaker {
         }
     }
 
-    public void playScript(String text) {
+    public void speakValue(String text) {
         log.info("Speaking text {}", text);
         String command = String.format("wscript " + path + " \"%s\"", text);
         try {
