@@ -8,7 +8,7 @@
         <artifactId>rand-wo</artifactId>
         <projectName>RandWo</projectName>
         <projectDescription>Easy-to-use dictionary helping language learning</projectDescription>
-        <springVersion>2.1.5.RELEASE</springVersion>
+        <springVersion>2.5.12</springVersion>
     </properties>
 
     <groupId>com.github.saphyra</groupId>
